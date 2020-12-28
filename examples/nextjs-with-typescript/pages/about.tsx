@@ -9,9 +9,9 @@ import Copyright from '../src/Copyright';
 export default function About() {
   return (
     <Container maxWidth="sm">
-      <Box my={4}>
+      <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Next.js with TypeScript example
+          Next.js v5-alpha with TypeScript example
         </Typography>
         <Link href="/">Go to the main page</Link>
         <ProTip />

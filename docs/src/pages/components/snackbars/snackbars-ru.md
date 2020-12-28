@@ -1,8 +1,7 @@
 ---
-title: Всплывающее уведомление
+title: Компонент React Snackbar
 components: Snackbar, SnackbarContent
-githubLabel:
-  component: Snackbar
+githubLabel: 'component: Snackbar'
 materialDesign: https://material.io/components/snackbars
 waiAria: 'https://www.w3.org/TR/wai-aria-1.1/#alert'
 ---
@@ -29,7 +28,7 @@ A basic snackbar that aims to reproduce Google Keep's snackbar behavior.
 
 ## Customized snackbars
 
-Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/snackbars/CustomizedSnackbars.js"}}
 
@@ -61,7 +60,7 @@ Snackbars should appear above FABs (on mobile).
 
 ### Изменение анимации
 
-[Увеличение](/components/transitions/#grow)  - это анимация, которая используется по умолчанию, но вы можете использовать другую анимацию.
+[Увеличение](/components/transitions/#grow) - это анимация, которая используется по умолчанию, но вы можете использовать другую анимацию.
 
 {{"demo": "pages/components/snackbars/TransitionsSnackbar.js"}}
 

@@ -1,8 +1,7 @@
 ---
-title: React-компонент Аватар
+title: Компонент React Avatar
 components: Avatar, AvatarGroup, Badge
-githubLabel:
-  component: Avatar
+githubLabel: 'component: Avatar'
 ---
 
 # Avatar
@@ -41,9 +40,9 @@ githubLabel:
 
 {{"demo": "pages/components/avatars/VariantAvatars.js"}}
 
-## Fallbacks
+## Запасные варианты
 
-If there is an error loading the avatar image, the component falls back to an alternative in the following order:
+Если при загрузке изображения аватара возникает ошибка, компонент возвращается к альтернативному варианту в следующем порядке:
 
 - the provided children
 - the first letter of the `alt` text

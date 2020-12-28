@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
@@ -38,10 +38,7 @@ function useResetCache(data) {
 }
 
 // Adapter for react-window
-const ListboxComponent = React.forwardRef(function ListboxComponent(
-  props,
-  ref,
-) {
+const ListboxComponent = React.forwardRef(function ListboxComponent(props, ref) {
   const { children, ...other } = props;
   const itemData = React.Children.toArray(children);
   const theme = useTheme();
@@ -140,9 +137,7 @@ export default function Virtualize() {
       renderGroup={renderGroup}
       options={OPTIONS}
       groupBy={(option) => option[0].toUpperCase()}
-      renderInput={(params) => (
-        <TextField {...params} variant="outlined" label="10,000 options" />
-      )}
+      renderInput={(params) => <TextField {...params} label="10,000 options" />}
       renderOption={(props, option) => (
         <li {...props}>
           <Typography noWrap>{option}</Typography>

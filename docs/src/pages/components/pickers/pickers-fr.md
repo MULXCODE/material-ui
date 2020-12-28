@@ -1,8 +1,7 @@
 ---
 title: Date picker, Time picker React components
 components: TextField
-githubLabel:
-  component: DatePicker
+githubLabel: 'component: DatePicker'
 materialDesign: https://material.io/components/date-pickers
 waiAria: https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/datepicker-dialog.html
 packageName: '@material-ui/lab'
@@ -17,17 +16,13 @@ packageName: '@material-ui/lab'
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
-## @material-ui/pickers
-
-![stars](https://img.shields.io/github/stars/mui-org/material-ui-pickers.svg?style=social&label=Stars) ![npm downloads](https://img.shields.io/npm/dm/@material-ui/pickers.svg)
-
-[@material-ui/pickers](https://material-ui-pickers.dev/) provides date picker and time picker controls.
+## React components
 
 {{"demo": "pages/components/pickers/MaterialUIPickers.js"}}
 
 ## Native pickers
 
-⚠️ La prise en charge des sélecteurs natifs par les navigateurs [n'est pas parfaite](https://caniuse.com/#feat=input-datetime). Have a look at [@material-ui/pickers](https://material-ui-pickers.dev/) for a richer solution.
+⚠️ La prise en charge des sélecteurs natifs par les navigateurs [n'est pas parfaite](https://caniuse.com/#feat=input-datetime).
 
 ### Datepickers
 

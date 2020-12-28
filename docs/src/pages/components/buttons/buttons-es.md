@@ -1,9 +1,8 @@
 ---
-title: Componente de React Button
+title: React Button component
 components: Button, IconButton, ButtonBase
 materialDesign: https://material.io/components/buttons
-githubLabel:
-  component: Button (Botón)
+githubLabel: 'component: Button'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 ---
 
@@ -50,7 +49,7 @@ Los botones delineados también son una alternativa de menos énfasis que los bo
 
 {{"demo": "pages/components/buttons/OutlinedButtons.js"}}
 
-## Handling clicks
+## Controlador del click
 
 Todos los componentes aceptan un controlador `onClick` el cual se aplica al elemento raíz en el DOM.
 
@@ -86,7 +85,7 @@ Los iconos son también apropiados para botones toggle que permiten marcar o des
 
 ## Botones Personalizados
 
-Here are some examples of customizing the component. You can learn more about this in the [overrides documentation page](/customization/components/).
+Here are some examples of customizing the component. Puedes aprender más sobre esto en la [sección Personalizando Componentes de la documentación](/customization/how-to-customize/).
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 
@@ -112,11 +111,11 @@ Los Botones de Texto, los Botones Contenidos, los Botones de Acción Flotantes y
 
 Un caso de uso común es emplear el botón para iniciar la navegación hacia una nueva página. Un caso de uso común es emplear el botón para iniciar la navegación hacia una nueva página. Sin embargo, para ciertos rellenos `ButtonBase` requiere el nodo DOM del componente proporcionado. Esto se logra adjuntando una referencia al componente y esperando que el componente reenvíe esta referencia al nodo DOM subyacente. Given that many of the interactive components rely on `ButtonBase`, you should be able to take advantage of it everywhere.
 
-Here is an [integration example with react-router](/guides/composition/#button).
+Aquí hay un ejemplo de integración con [react-router](/guides/composition/#button).
 
 ## Limitaciones
 
-### Cursor not-allowed
+### Cursor no permitido
 
 El componente ButtonBase define `pointer-events: none;` en los botones deshabilitados, lo que previene la aparición del cursor desactivado.
 
@@ -131,12 +130,12 @@ Si deseas usar `not-allowed`, tienes dos opciones:
   }
 ```
 
-However:
+Sin embargo:
 
-- You should add `pointer-events: none;` back when you need to display [tooltips on disabled elements](/components/tooltips/#disabled-elements).
+- Debería añadir `pointer-events: none` cuando necesite mostrar [tooltips en elemento deshabilitados](/components/tooltips/#disabled-elements).
 - The cursor won't change if you render something other than a button element, for instance, a link `<a>` element.
 
-2. **DOM change**. You can wrap the button:
+2. **Cambio en el DOM**. Puede encapsular el botón:
 
 ```jsx
 <span style={{ cursor: 'not-allowed' }}>

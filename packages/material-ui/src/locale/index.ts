@@ -1,8 +1,10 @@
-import * as React from 'react';
 import { ComponentsPropsList } from '../styles/props';
 
 export interface Localization {
   components?: {
+    MuiAlert?: {
+      defaultProps: Pick<ComponentsPropsList['MuiAlert'], 'closeText'>;
+    };
     MuiBreadcrumbs?: { defaultProps: Pick<ComponentsPropsList['MuiBreadcrumbs'], 'expandText'> };
     MuiTablePagination?: {
       defaultProps: Pick<
@@ -10,36 +12,93 @@ export interface Localization {
         'labelRowsPerPage' | 'labelDisplayedRows' | 'getItemAriaLabel'
       >;
     };
-    // The core package has no dependencies on the @material-ui/lab components.
-    // We can't use ComponentsPropsList, we have to duplicate and inline the definitions.
     MuiRating?: {
-      defaultProps: {
-        emptyLabelText?: string;
-        getLabelText?: (value: number) => string;
-      };
+      defaultProps: Pick<ComponentsPropsList['MuiRating'], 'emptyLabelText' | 'getLabelText'>;
     };
     MuiAutocomplete?: {
-      defaultProps: {
-        clearText?: string;
-        closeText?: string;
-        loadingText?: React.ReactNode;
-        noOptionsText?: React.ReactNode;
-        openText?: string;
-      };
+      defaultProps: Pick<
+        ComponentsPropsList['MuiAutocomplete'],
+        'clearText' | 'closeText' | 'loadingText' | 'noOptionsText' | 'openText'
+      >;
     };
-    MuiAlert?: {
-      defaultProps: {
-        closeText?: string;
-      };
-    };
+    // The core package has no dependencies on the @material-ui/lab components.
+    // We can't use ComponentsPropsList, we have to duplicate and inline the definitions.
     MuiPagination?: {
-      defaultProps: {
-        'aria-label'?: string;
-        getItemAriaLabel?: (type: string, page: number, selected: boolean) => string;
-      };
+      defaultProps: Pick<ComponentsPropsList['MuiPagination'], 'aria-label' | 'getItemAriaLabel'>;
     };
   };
 }
+
+export const arEG: Localization = {
+  components: {
+    MuiBreadcrumbs: {
+      defaultProps: {
+        expandText: 'إظهر العنوان',
+      },
+    },
+    MuiTablePagination: {
+      defaultProps: {
+        getItemAriaLabel: (type) => {
+          if (type === 'first') {
+            return 'إذهب الى الصفحة الأولى';
+          }
+          if (type === 'last') {
+            return 'إذهب الي الصفحة الأخيرة';
+          }
+          if (type === 'next') {
+            return 'إذهب الى الصفحة التالية';
+          }
+          // if (type === 'previous') {
+          return 'إذهب الى الصفحة السابقة';
+        },
+        labelRowsPerPage: 'عدد الصفوف في الصفحة:',
+        labelDisplayedRows: ({ from, to, count }) =>
+          `${from}-${to} من ${count !== -1 ? count : ` أكثر من${to}`}`,
+      },
+    },
+    MuiRating: {
+      defaultProps: {
+        getLabelText: (value) => `${value} ${value !== 1 ? 'نجوم' : 'نجمة'}`,
+        emptyLabelText: 'فارغ',
+      },
+    },
+    MuiAutocomplete: {
+      defaultProps: {
+        clearText: 'مسح',
+        closeText: 'إغلاق',
+        loadingText: 'يتم التحميل…',
+        noOptionsText: 'لا يوجد خيارات',
+        openText: 'فتح',
+      },
+    },
+    MuiAlert: {
+      defaultProps: {
+        closeText: 'إغلاق',
+      },
+    },
+    MuiPagination: {
+      defaultProps: {
+        'aria-label': 'التنقل عبر الصفحات',
+        getItemAriaLabel: (type, page, selected) => {
+          if (type === 'page') {
+            return `${selected ? '' : 'إذهب إلى '} صفحة ${page}`;
+          }
+          if (type === 'first') {
+            return 'إذهب الى الصفحة الأولى';
+          }
+          if (type === 'last') {
+            return 'إذهب الي الصفحة الأخيرة';
+          }
+          if (type === 'next') {
+            return 'إذهب الى الصفحة التالية';
+          }
+          // if (type === 'previous') {
+          return 'إذهب الى الصفحة السابقة';
+        },
+      },
+    },
+  },
+};
 
 export const azAZ: Localization = {
   components: {
@@ -1478,35 +1537,35 @@ export const jaJP: Localization = {
 
 export const koKR: Localization = {
   components: {
-    // MuiBreadcrumbs: {
-    //   defaultProps: {
-    //     expandText: 'Show path',
-    //   },
-    // },
+    MuiBreadcrumbs: {
+      defaultProps: {
+        expandText: '경로 보기',
+      },
+    },
     MuiTablePagination: {
       defaultProps: {
-        // getItemAriaLabel: (type) => {
-        //   if (type === 'first') {
-        //     return 'Go to first page';
-        //   }
-        //   if (type === 'last') {
-        //     return 'Go to last page';
-        //   }
-        //   if (type === 'next') {
-        //     return 'Go to next page';
-        //   }
-        //   // if (type === 'previous') {
-        //   return 'Go to previous page';
-        // },
+        getItemAriaLabel: (type) => {
+          if (type === 'first') {
+            return '첫 번째 페이지로 이동';
+          }
+          if (type === 'last') {
+            return '마지막 페이지로 이동';
+          }
+          if (type === 'next') {
+            return '다음 페이지로 이동';
+          }
+          // if (type === 'previous') {
+          return '이전 페이지로 이동';
+        },
         labelRowsPerPage: '페이지 당 행:',
         labelDisplayedRows: ({ from, to, count }) =>
-          `${from}-${to} / ${count !== -1 ? count : `more than ${to}`}`,
+          `${from}-${to} / ${count !== -1 ? count : `${to}개 이상`}`,
       },
     },
     MuiRating: {
       defaultProps: {
         getLabelText: (value) => `${value} 점`,
-        // emptyLabelText: 'Empty',
+        emptyLabelText: '빈 텍스트',
       },
     },
     MuiAutocomplete: {
@@ -1518,32 +1577,104 @@ export const koKR: Localization = {
         openText: '열기',
       },
     },
-    // MuiAlert: {
-    //   defaultProps: {
-    //     closeText: 'Close',
-    //   },
-    // },
-    // MuiPagination: {
-    //   defaultProps: {
-    //     'aria-label': 'Pagination navigation',
-    //     getItemAriaLabel: (type, page, selected) => {
-    //       if (type === 'page') {
-    //         return `${selected ? '' : 'Go to '}page ${page}`;
-    //       }
-    //       if (type === 'first') {
-    //         return 'Go to first page';
-    //       }
-    //       if (type === 'last') {
-    //         return 'Go to last page';
-    //       }
-    //       if (type === 'next') {
-    //         return 'Go to next page';
-    //       }
-    //       // if (type === 'previous') {
-    //       return 'Go to previous page';
-    //     },
-    //   },
-    // },
+    MuiAlert: {
+      defaultProps: {
+        closeText: '닫기',
+      },
+    },
+    MuiPagination: {
+      defaultProps: {
+        'aria-label': '페이지네이션 네비게이션',
+        getItemAriaLabel: (type, page, selected) => {
+          if (type === 'page') {
+            return `${page} 번째 페이지${selected ? '' : '로 이동'}`;
+          }
+          if (type === 'first') {
+            return '첫 번째 페이지로 이동';
+          }
+          if (type === 'last') {
+            return '마지막 페이지로 이동';
+          }
+          if (type === 'next') {
+            return '다음 페이지로 이동';
+          }
+          // if (type === 'previous') {
+          return '이전 페이지로 이동';
+        },
+      },
+    },
+  },
+};
+
+export const kzKZ: Localization = {
+  components: {
+    MuiBreadcrumbs: {
+      defaultProps: {
+        expandText: 'Толық жолды көрсету',
+      },
+    },
+    MuiTablePagination: {
+      defaultProps: {
+        getItemAriaLabel: (type) => {
+          if (type === 'first') {
+            return 'Бірінші бетке өту';
+          }
+          if (type === 'last') {
+            return 'Соңғы бетке өту';
+          }
+          if (type === 'next') {
+            return 'Келесі бетке өту';
+          }
+          // if (type === 'previous') {
+          return 'Алдыңғы бетке өту';
+        },
+        labelRowsPerPage: 'Беттегі қатарлар:',
+        labelDisplayedRows: ({ from, to, count }) =>
+          `${count !== -1 ? count : `+${to}`} қатардың ішінен ${from}-${to}`,
+      },
+    },
+    MuiRating: {
+      defaultProps: {
+        getLabelText: (value) => `${value} жұлдыз`,
+        emptyLabelText: 'Рейтинг жоқ',
+      },
+    },
+    MuiAutocomplete: {
+      defaultProps: {
+        clearText: 'Тазарту',
+        closeText: 'Жабу',
+        loadingText: 'Жүктелуде…',
+        noOptionsText: 'Қол жетімді нұсқалар жоқ',
+        openText: 'Ашу',
+      },
+    },
+    MuiAlert: {
+      defaultProps: {
+        closeText: 'Жабу',
+      },
+    },
+    MuiPagination: {
+      defaultProps: {
+        'aria-label': 'Беттерді шарлау',
+        getItemAriaLabel: (type, page, selected) => {
+          if (type === 'page') {
+            if (selected) return `${page} — бет`;
+            return `${page} — бетке өту`;
+          }
+          if (type === 'first') {
+            return 'Бірінші бетке өту';
+          }
+          if (type === 'last') {
+            return 'Соңғы бетке өту';
+          }
+          if (type === 'next') {
+            return 'Келесі бетке өту';
+          }
+          // if (type === 'previous') {
+          return 'Алдыңғы бетке өту';
+        },
+      },
+    },
   },
 };
 
@@ -1724,7 +1855,7 @@ export const ptBR: Localization = {
         },
         labelRowsPerPage: 'Linhas por página:',
         labelDisplayedRows: ({ from, to, count }) =>
-          `${from}-${to} de ${count !== -1 ? count : `more than ${to}`}`,
+          `${from}-${to} de ${count !== -1 ? count : `mais de ${to}`}`,
       },
     },
     MuiRating: {
@@ -1795,7 +1926,7 @@ export const ptPT: Localization = {
         },
         labelRowsPerPage: 'Linhas por página:',
         labelDisplayedRows: ({ from, to, count }) =>
-          `${from}-${to} de ${count !== -1 ? count : `more than ${to}`}`,
+          `${from}-${to} de ${count !== -1 ? count : `mais de ${to}`}`,
       },
     },
     MuiRating: {

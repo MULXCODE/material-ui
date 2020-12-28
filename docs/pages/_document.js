@@ -1,9 +1,14 @@
 import React from 'react';
 import { ServerStyleSheets } from '@material-ui/styles';
+import { ServerStyleSheet } from 'styled-components';
+import createEmotionServer from '@emotion/server/create-instance';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { LANGUAGES_SSR } from 'docs/src/modules/constants';
 import { pathnameToLanguage } from 'docs/src/modules/utils/helpers';
 import { themeColor } from 'docs/src/modules/components/ThemeContext';
+import { cacheLtr } from 'docs/pages/_app';
+
+const { extractCritical } = createEmotionServer(cacheLtr);
 
 // You can find a benchmark of the available CSS minifiers under
 // https://github.com/GoalSmashers/css-minification-benchmark
@@ -48,7 +53,7 @@ export default class MyDocument extends Document {
           <link
             rel="canonical"
             href={`https://material-ui.com${
-              userLanguage === 'en' ? '/' : `/${userLanguage}`
+              userLanguage === 'en' ? '' : `/${userLanguage}`
             }${canonical}`}
           />
           <link rel="alternate" href={`https://material-ui.com${canonical}`} hrefLang="x-default" />
@@ -57,7 +62,7 @@ export default class MyDocument extends Document {
               key={userLanguage2}
               rel="alternate"
               href={`https://material-ui.com${
-                userLanguage2 === 'en' ? '/' : `/${userLanguage2}`
+                userLanguage2 === 'en' ? '' : `/${userLanguage2}`
               }${canonical}`}
               hrefLang={userLanguage2}
             />
@@ -68,11 +73,6 @@ export default class MyDocument extends Document {
             This includes DNS lookups, TLS negotiations, TCP handshakes.
           */}
           <link href="https://fonts.gstatic.com" rel="preconnect" crossOrigin="anonymous" />
-          <style id="material-icon-font" />
-          <style id="font-awesome-css" />
-          <style id="app-search" />
-          <style id="prismjs" />
-          <style id="insertion-point-jss" />
         </Head>
         <body>
           <Main />
@@ -92,55 +92,90 @@ export default class MyDocument extends Document {
   }
 }
 
+// `getInitialProps` belongs to `_document` (instead of `_app`),
+// it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:
-  // 1. page.getInitialProps
-  // 2. document.getInitialProps
-  // 3. page.render
-  // 4. document.render
+  // 1. app.getInitialProps
+  // 2. page.getInitialProps
+  // 3. document.getInitialProps
+  // 4. app.render
+  // 5. page.render
+  // 6. document.render
   //
   // On the server with error:
-  // 2. document.getInitialProps
+  // 1. document.getInitialProps
+  // 2. app.render
   // 3. page.render
   // 4. document.render
   //
   // On the client
-  // 1. page.getInitialProps
-  // 3. page.render
+  // 1. app.getInitialProps
+  // 2. page.getInitialProps
+  // 3. app.render
+  // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
+  const materialSheets = new ServerStyleSheets();
+  const styledComponentsSheet = new ServerStyleSheet();
   const originalRenderPage = ctx.renderPage;
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-    });
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) =>
+          styledComponentsSheet.collectStyles(materialSheets.collect(<App {...props} />)),
+      });
 
-  const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(ctx);
+    const emotionStyles = extractCritical(initialProps.html);
 
-  let css = sheets.toString();
-  // It might be undefined, e.g. after an error.
-  if (css && process.env.NODE_ENV === 'production') {
-    const result1 = await prefixer.process(css, { from: undefined });
-    css = result1.css;
-    css = cleanCSS.minify(css).styles;
+    let css = materialSheets.toString();
+    // It might be undefined, e.g. after an error.
+    if (css && process.env.NODE_ENV === 'production') {
+      const result1 = await prefixer.process(css, { from: undefined });
+      css = result1.css;
+      css = cleanCSS.minify(css).styles;
+    }
+
+    // All the URLs should have a leading /.
+    // This is missing in the Next.js static export.
+    let url = ctx.req.url;
+    if (url[url.length - 1] !== '/') {
+      url += '/';
+    }
+
+    return {
+      ...initialProps,
+      canonical: pathnameToLanguage(url).canonical,
+      userLanguage: ctx.query.userLanguage || 'en',
+      // Styles fragment is rendered after the app and page rendering finish.
+      styles: [
+        styledComponentsSheet.getStyleElement(),
+        <style
+          id="emotion-server-side"
+          key="emotion-server-side"
+          data-emotion={`css ${emotionStyles.ids.join(' ')}`}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: emotionStyles.css }}
+        />,
+        <style
+          id="jss-server-side"
+          key="jss-server-side"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: css }}
+        />,
+        <style id="material-icon-font" key="material-icon-font" />,
+        <style id="font-awesome-css" key="font-awesome-css" />,
+        <style id="app-search" key="app-search" />,
+        <style id="prismjs" key="prismjs" />,
+        <style id="insertion-point-jss" key="insertion-point-jss" />,
+        ...React.Children.toArray(initialProps.styles),
+      ],
+    };
+  } finally {
+    styledComponentsSheet.seal();
   }
-
-  return {
-    ...initialProps,
-    canonical: pathnameToLanguage(ctx.req.url).canonical,
-    userLanguage: ctx.query.userLanguage || 'en',
-    styles: [
-      ...React.Children.toArray(initialProps.styles),
-      <style
-        id="jss-server-side"
-        key="jss-server-side"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: css }}
-      />,
-    ],
-  };
 };

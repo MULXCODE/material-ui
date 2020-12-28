@@ -1,8 +1,7 @@
 import * as React from 'react';
 import TablePagination from '@material-ui/core/TablePagination';
-import Pagination from '@material-ui/lab/Pagination';
-import Rating from '@material-ui/lab/Rating';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import * as locales from '@material-ui/core/locale';
@@ -13,15 +12,13 @@ export default function Locales() {
   const [locale, setLocale] = React.useState<SupportedLocales>('zhCN');
 
   return (
-    <div>
+    <Box sx={{ width: '100%' }}>
       <ThemeProvider
         theme={(outerTheme) => createMuiTheme(outerTheme, locales[locale])}
       >
         <Autocomplete
           options={Object.keys(locales)}
-          getOptionLabel={(key) =>
-            `${key.substring(0, 2)}-${key.substring(2, 4)}`
-          }
+          getOptionLabel={(key) => `${key.substring(0, 2)}-${key.substring(2, 4)}`}
           style={{ width: 300 }}
           value={locale}
           disableClearable
@@ -29,12 +26,7 @@ export default function Locales() {
             setLocale(newValue as SupportedLocales);
           }}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label="自动完成"
-              variant="outlined"
-              fullWidth
-            />
+            <TextField {...params} label="Locale" fullWidth />
           )}
         />
         <TablePagination
@@ -42,11 +34,9 @@ export default function Locales() {
           rowsPerPage={10}
           page={1}
           component="div"
-          onChangePage={() => {}}
+          onPageChange={() => {}}
         />
-        <Pagination count={2000} color="primary" />
-        <Rating defaultValue={4} name="locales" />
       </ThemeProvider>
-    </div>
+    </Box>
   );
 }

@@ -1,8 +1,7 @@
 ---
-title: Typography React component
+title: React Typography component
 components: Tipografía
-githubLabel:
-  component: Tipografía
+githubLabel: 'component: Typography'
 materialDesign: https://material.io/design/typography/the-type-system.html
 ---
 
@@ -16,7 +15,7 @@ Too many type sizes and styles at once can spoil any layout. A [typographic scal
 
 ## General
 
-The *Roboto* font will **not** be automatically loaded by Material-UI. El desarrollador es responsable de cargar todas las fuentes utilizadas en su aplicación. Roboto tiene algunas maneras fáciles de empezar. For more advanced configuration, check out [the theme customization section](/customization/typography/).
+The *Roboto* font will **not** be automatically loaded by Material-UI. You are responsible for loading any fonts used in your application. Roboto tiene algunas maneras fáciles de empezar. For more advanced configuration, check out [the theme customization section](/customization/typography/).
 
 ## Roboto Font CDN
 
@@ -28,14 +27,17 @@ Shown below is a sample link markup used to load the Roboto font from a CDN:
 
 ## Instalar con npm
 
-Puede [instalarlo](https://www.npmjs.com/package/fontsource-roboto) escribiendo el siguiente comando en su terminal:
+Puede [instalarlo](https://www.npmjs.com/package/@fontsource/roboto) escribiendo el siguiente comando en su terminal:
 
-`npm install fontsource-roboto`
+`npm install @fontsource/roboto`
 
 Entonces, puede importarlo en su punto de entrada.
 
 ```js
-import 'fontsource-roboto';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 ```
 
 For more info check out [Fontsource](https://github.com/DecliningLotus/fontsource/blob/master/packages/roboto/README.md).
@@ -43,6 +45,8 @@ For more info check out [Fontsource](https://github.com/DecliningLotus/fontsourc
 Fontsource can be configured to load specific subsets, weights and styles. Material-UI default typography configuration only relies on 300, 400, 500, and 700 font weights.
 
 ## Componente
+
+The Typography component makes it easy to apply a default set of font weights and sizes in your application.
 
 {{"demo": "pages/components/typography/Types.js"}}
 
@@ -65,7 +69,7 @@ The Typography component uses the `variantMapping` property to associate a UI va
 </Typography>
 ```
 
-- You can change the mapping [globally using the theme](/customization/globals/#default-props):
+- You can change the mapping [globally using the theme](/customization/theme-components/#default-props):
 
 ```js
 const theme = createMuiTheme({
@@ -87,6 +91,10 @@ const theme = createMuiTheme({
   },
 });
 ```
+
+## Adding & disabling variants
+
+In addition to using the default typography variants, you can add custom ones, or disable any you don't need. See the [Adding & disabling variants](/customization/typography/#adding-amp-disabling-variants) example for more info.
 
 ## Accesibilidad
 

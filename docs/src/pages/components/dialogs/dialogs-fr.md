@@ -1,8 +1,7 @@
 ---
-title: Composant React Dialogue
+title: React Dialog component
 components: Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Slide
-githubLabel:
-  component: Dialog
+githubLabel: 'component: Dialog'
 materialDesign: https://material.io/components/dialogs
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#dialog_modal'
 ---
@@ -60,7 +59,7 @@ Les boîtes de dialogue de formulaire permettent aux utilisateurs de remplir des
 
 ## Dialogues personnalisés
 
-Voici un exemple de personnalisation du composant. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/components/).
+Voici un exemple de personnalisation du composant. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/how-to-customize/).
 
 La boîte de dialogue a un bouton de fermeture ajouté pour faciliter l'utilisation.
 
@@ -117,6 +116,10 @@ Lorsque les boîtes de dialogue deviennent trop longues pour la fenêtre ou le p
 Essayez la démo ci-dessous pour voir ce que nous voulons dire:
 
 {{"demo": "pages/components/dialogs/ScrollDialog.js"}}
+
+## Performances
+
+Suivez la [section de performance de la Modal](/components/modal/#performance).
 
 ## Limites
 

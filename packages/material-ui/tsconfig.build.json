@@ -3,13 +3,13 @@
   // Actual .ts source files are transpiled via babel
   "extends": "./tsconfig",
   "compilerOptions": {
+    "composite": true,
     "declaration": true,
     "noEmit": false,
     "emitDeclarationOnly": true,
     "outDir": "build",
-    "rootDir": "./src",
-    "types": ["react"]
+    "rootDir": "./src"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

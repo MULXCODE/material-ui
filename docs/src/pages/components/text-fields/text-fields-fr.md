@@ -1,8 +1,7 @@
 ---
 title: Composant React de champ de texte
 components: FilledInput, FormControl, FormHelperText, Input, InputAdornment, InputBase, InputLabel, OutlinedInput, TextField
-githubLabel:
-  component: TextField
+githubLabel: 'component: TextField'
 materialDesign: https://material.io/components/text-fields
 ---
 
@@ -66,6 +65,10 @@ Fancy smaller inputs? Use the `size` prop.
 
 {{"demo": "pages/components/text-fields/TextFieldSizes.js"}}
 
+The `filled` variant input height can be further reduced by rendering the label outside of it.
+
+{{"demo": "pages/components/text-fields/TextFieldHiddenLabel.js"}}
+
 ## Disposition
 
 `dense` and `normal` alter other styles to meet the specification. `margin` prop can be used to alter the vertical spacing of inputs. Using `none` (default) will not apply margins to the `FormControl`, whereas `dense` and `normal` will.
@@ -100,7 +103,7 @@ The `color` prop changes the highlight color of the text field when focused.
 
 ## Inputs personnalisées
 
-Here are some examples of customizing the component. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/components/).
+Here are some examples of customizing the component. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/how-to-customize/).
 
 {{"demo": "pages/components/text-fields/CustomizedInputs.js"}}
 
@@ -138,7 +141,7 @@ The floating label is absolutely positioned, it won't impact the layout of the p
 
 Inputs of type="number" have potential usability issues:
 
-- Allowing certain non-numeric characters ('e', '+', '-', '.') and silently discarding others
+- Allowing certain non-numeric characters ('e', '+', '-', '.') and silently discarding others and silently discarding others
 - Si vous composez le composant:
 
 and more - see [this article](https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/) by the GOV.UK Design System team for a more detailed explanation.
@@ -169,7 +172,7 @@ La démo suivante utilise les bibliothèques [react-text-mask](https://github.co
 
 {{"demo": "pages/components/text-fields/FormattedInputs.js"}}
 
-Le composantinput fourni doit gérer la propriété `inputRef`. The property should be called with a value that implements the following interface:
+The provided input component should expose a ref with a value that implements the following interface:
 
 ```ts
 interface InputElement {
@@ -179,11 +182,11 @@ interface InputElement {
 ```
 
 ```jsx
-function MyInputComponent(props) {
-  const { component: Component, inputRef, ...other } = props;
+const MyInputComponent = React.forwardRef((props, ref) => {
+  const { component: Component, ...other } = props;
 
   // implement `InputElement` interface
-  React.useImperativeHandle(inputRef, () => ({
+  React.useImperativeHandle(ref, () => ({
     focus: () => {
       // logic to focus the rendered component from 3rd party belongs here
     },
@@ -192,13 +195,15 @@ function MyInputComponent(props) {
 
   // `Component` will be your `SomeThirdPartyComponent` from below
   return <Component {...other} />;
-}
+});
 
 // usage
 <TextField
   InputProps={{
     inputComponent: MyInputComponent,
-    inputProps: { component: SomeThirdPartyComponent },
+    inputProps: {
+      component: SomeThirdPartyComponent,
+    },
   }}
 />;
 ```
@@ -222,9 +227,7 @@ In order for the text field to be accessible, **the input should be linked to th
 <FormControl>
   <InputLabel htmlFor="my-input">Email address</InputLabel>
   <Input id="my-input" aria-describedby="my-helper-text" />
-  <FormHelperText id="my-helper-text">
-    We'll never share your email.
-  </FormHelperText>
+  <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
 </FormControl>
 ```
 

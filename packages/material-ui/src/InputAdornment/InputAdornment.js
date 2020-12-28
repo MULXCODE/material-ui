@@ -9,7 +9,7 @@ export const styles = {
   /* Styles applied to the root element. */
   root: {
     display: 'flex',
-    height: '0.01em', // Fix IE 11 flexbox alignment. To remove at some point.
+    height: '0.01em', // Fix IE11 flexbox alignment. To remove at some point.
     maxHeight: '2em',
     alignItems: 'center',
     whiteSpace: 'nowrap',
@@ -34,8 +34,8 @@ export const styles = {
   },
   /* Styles applied if the adornment is used inside <FormControl hiddenLabel />. */
   hiddenLabel: {},
-  /* Styles applied if the adornment is used inside <FormControl margin="dense" />. */
-  marginDense: {},
+  /* Styles applied if the adornment is used inside <FormControl size="small" />. */
+  sizeSmall: {},
 };
 
 const InputAdornment = React.forwardRef(function InputAdornment(props, ref) {
@@ -79,7 +79,7 @@ const InputAdornment = React.forwardRef(function InputAdornment(props, ref) {
             [classes.positionStart]: position === 'start',
             [classes.positionEnd]: position === 'end',
             [classes.disablePointerEvents]: disablePointerEvents,
-            [classes.marginDense]: muiFormControl.margin === 'dense',
+            [classes.sizeSmall]: muiFormControl.size === 'small',
             [classes.hiddenLabel]: muiFormControl.hiddenLabel,
           },
           className,
@@ -121,7 +121,7 @@ InputAdornment.propTypes = {
   component: PropTypes.elementType,
   /**
    * Disable pointer events on the root.
-   * This allows for the content of the adornment to focus the input on click.
+   * This allows for the content of the adornment to focus the `input` on click.
    * @default false
    */
   disablePointerEvents: PropTypes.bool,

@@ -1,8 +1,7 @@
 ---
-title: Liste des composants React
+title: React List component
 components: Collapse, Divider, List, ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText, ListSubheader
-githubLabel:
-  component: List (Liste)
+githubLabel: 'component: List'
 materialDesign: https://material.io/components/lists
 ---
 
@@ -88,7 +87,9 @@ This feature relies on CSS sticky positioning. Unfortunately it's [not implement
 
 {{"demo": "pages/components/lists/PinnedSubheaderList.js", "bg": true}}
 
-## Liste Insets
+## Inset List Item
+
+The `inset` prop enables a list item that does not have a leading icon or avatar to align correctly with items that do.
 
 {{"demo": "pages/components/lists/InsetList.js", "bg": true}}
 
@@ -108,4 +109,4 @@ If this library doesn't cover your use case, you should consider using [react-vi
 
 ## Personnalisation
 
-🎨 If you are looking for inspiration, you can check [MUI Treasury's customization examples](https://mui-treasury.com/styles/list-item).
+🎨 Si vous cherchez de l'inspiration, vous pouvez consulter les [exemples de personnalisation de MUI Treasury](https://mui-treasury.com/styles/list-item).

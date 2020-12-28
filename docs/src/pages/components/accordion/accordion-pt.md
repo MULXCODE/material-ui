@@ -1,8 +1,7 @@
 ---
-title: Componente React para Acordeão
+title: Componente de Acordeão React
 components: Accordion, AccordionActions, AccordionDetails, AccordionSummary
-githubLabel:
-  component: Acordeão
+githubLabel: 'component: Accordion'
 materialDesign: https://material.io/archive/guidelines/components/expansion-panels.html
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#accordion'
 ---
@@ -29,15 +28,9 @@ Estenda o comportamento padrão para criar um acordeão customizado com o compon
 
 ## Painéis de Expansão Customizados
 
-Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/accordion/CustomizedAccordions.js"}}
-
-## Ações adicionais
-
-Para colocar uma ação como um `Checkbox` ou um botão dentro do `AccordionSummary`, você precisa parar a propogação do foco e eventos de clique para previnir o painel de expandir/colapsar quando usar a ação. Você deve fornecer também um `aria-label` para a ação, caso contrário, o rótulo da ação aninhada será incluído no rótulo do botão pai que controla a expansão do acordeão.
-
-{{"demo": "pages/components/accordion/ActionsInAccordionSummary.js", "bg": true}}
 
 ## Performance
 
@@ -48,12 +41,6 @@ O conteúdo dos acordeões é montado por padrão, mesmo que o acordeão não es
 ```
 
 Como acontece com qualquer otimização de desempenho, isso não é uma bala de prata. Certifique-se de identificar gargalos primeiro e, em seguida, experimente essas estratégias de otimização.
-
-## Cabeçalho secundário e colunas
-
-Várias colunas podem ser usadas para estruturar o conteúdo, e um texto auxiliar pode ser adicionado ao acordeão para ajudar o usuário.
-
-{{"demo": "pages/components/accordion/DetailedAccordion.js", "bg": true}}
 
 ## Acessibilidade
 

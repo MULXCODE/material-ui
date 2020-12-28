@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
@@ -30,12 +30,7 @@ export default function CheckboxesTags() {
       )}
       style={{ width: 500 }}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          variant="outlined"
-          label="Checkboxes"
-          placeholder="Favorites"
-        />
+        <TextField {...params} label="Checkboxes" placeholder="Favorites" />
       )}
     />
   );

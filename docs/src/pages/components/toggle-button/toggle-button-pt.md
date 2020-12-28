@@ -1,10 +1,8 @@
 ---
 title: Componente React para Botões de Alternância
 components: ToggleButton, ToggleButtonGroup
-githubLabel:
-  component: ToggleButton
+githubLabel: 'component: ToggleButton'
 materialDesign: 'https://material.io/components/buttons#toggle-button'
-packageName: '@material-ui/lab'
 ---
 
 # Botões de alternância
@@ -17,13 +15,15 @@ Para enfatizar grupos de [botões de alternância](https://material.io/component
 
 ## Seleção exclusiva
 
-Botões de alternância para justificação ou alinhamento de texto apresentam opções como esquerda, direita, centro, distribuído e justificado, com apenas um item disponível para seleção por vez. Selecionar uma opção irá desmarcar qualquer outra.
+Com seleção exclusiva, selecionar uma opção desseleciona qualquer outra.
+
+Neste exemplo de justificativa de texto, temos opções de alternar os botões para a esquerda, centralizada, direita e texto totalmente justificado (desativado), com apenas um item disponível para seleção de cada vez.
 
 {{"demo": "pages/components/toggle-button/ToggleButtons.js"}}
 
 ## Seleção múltipla
 
-Opções lógicas agrupadas, como negrito, itálico e sublinhado, permitem a seleção de múltiplas opções.
+Múltipla seleção permite que opções logicamente agrupadas, como negrito, itálico e sublinhado, tenham várias opções selecionadas.
 
 {{"demo": "pages/components/toggle-button/ToggleButtonsMultiple.js"}}
 
@@ -35,11 +35,13 @@ Gosta de botões maiores ou menores? Use a propriedade `size`.
 
 ## Botões verticais
 
+Os botões podem ser empilhados verticalmente com a propriedade `orientation` definida para "vertical".
+
 {{"demo": "pages/components/toggle-button/VerticalToggleButtons.js"}}
 
 ## Forçar valor definido
 
-Se você deseja forçar para pelo menos um botão estar ativo, você pode adaptar sua função handleChange.
+Se você deseja forçar que pelo menos um botão esteja ativo, você pode adaptar sua função handleChange.
 
 ```jsx
 const handleFormat = (event, newFormats) => {
@@ -63,11 +65,17 @@ const handleAlignment = (event, newAlignment) => {
 
 ## Botão de alternância customizado
 
-Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/toggle-button/CustomizedDividers.js", "bg": true}}
 
 ## Acessibilidade
 
+### ARIA
+
 - ToggleButtonGroup possui `role="group"`. Você deve fornecer um rótulo acessível com `aria-label="label"`, `aria-labelledby="id"` ou `<label>`.
 - ToggleButton define `aria-pressed="<bool>"` de acordo com o estado do botão. Você deve rotular cada botão com `aria-label`.
+
+### Teclado
+
+Até o momento, os botões de alternância estão na ordem DOM. Navegue entre eles com a tecla tab. O comportamento dos botões segue a semântica padrão do teclado.

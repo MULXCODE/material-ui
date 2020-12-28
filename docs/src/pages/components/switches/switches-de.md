@@ -1,8 +1,7 @@
 ---
-title: Switch React Komponente
+title: React Switch component
 components: Switch, FormControl, FormGroup, FormLabel, FormControlLabel
-githubLabel:
-  component: Switch
+githubLabel: 'component: Switch'
 materialDesign: 'https://material.io/components/selection-controls#switches'
 ---
 
@@ -32,7 +31,7 @@ materialDesign: 'https://material.io/components/selection-controls#switches'
 
 ## Anpasster Schalter
 
-Hier einige Beispiele zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/components/).
+Hier einige Beispiele zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/how-to-customize/).
 
 {{"demo": "pages/components/switches/CustomizedSwitches.js"}}
 

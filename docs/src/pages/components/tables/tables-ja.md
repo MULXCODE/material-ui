@@ -1,8 +1,8 @@
 ---
-title: Tableコンポーネント
+title: React Table component
 components: Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel
-githubLabel:
-  component: テーブル
+githubLabel: 'component: Table'
+waiAria: 'https://www.w3.org/TR/wai-aria-practices/#table'
 materialDesign: https://material.io/components/data-tables
 ---
 
@@ -10,39 +10,33 @@ materialDesign: https://material.io/components/data-tables
 
 <p class="description">Tables display sets of data. それらは完全にカスタマイズできます。</p>
 
-[Tables](https://material.io/design/components/data-tables.html) display information in a way that’s easy to scan, so that users can look for patterns and insights. Cardなどの他のプライマリーコンテンツを埋め込むことができます。
-
-Tables can include:
+[Tables](https://material.io/design/components/data-tables.html) display information in a way that’s easy to scan, so that users can look for patterns and insights. Cardなどの他のプライマリーコンテンツを埋め込むことができます。 They can include:
 
 - 対応の可視化
 - ナビゲーション
 - データを照会および操作するためのツール
 
-ツールを含めるときは、ツールをテーブルの真上または真下に配置します。
-
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## Structure
 
+飾り気のないシンプルな例です。
+
 Data tableの上部には、列名をリストするヘッダー行があり、その後にデータ用の行が続きます。
 
-ユーザーがデータを選択または操作する必要がある場合は、チェックボックスを各行に付ける必要があります。
+## Sorting & Selecting
 
-It utilizes the [`Collapse`](/api/collapse/) component. これにより、スクリーンリーダーは行と列の名前でセルの値を識別できます。
+The `Table` component has a close mapping to the native `<table>` elements. This constraint makes building rich data tables challenging.
+
+The [`DataGrid` component](/components/data-grid/) is designed for use-cases that are focused around handling a large amounts of tabular data. While it comes with a more rigid structure, in exchange, you gain more powerful features.
 
 ## Simple Table
 
-飾り気のないシンプルな例です。
-
-{{"demo": "pages/components/tables/SimpleTable.js", "bg": true}}
-
-## Dense Table
-
-簡単な例ではの緻密なテーブル詳細
+ユーザーがデータを選択または操作する必要がある場合は、チェックボックスを各行に付ける必要があります。
 
 {{"demo": "pages/components/tables/DenseTable.js", "bg": true}}
 
-## Sorting & Selecting
+## Dense Table
 
 An example of a table with expandable rows, revealing more information. It utilizes the [`Collapse`](/api/collapse/) component.
 
@@ -52,7 +46,7 @@ An example of a table with expandable rows, revealing more information. It utili
 
 ## Customized tables
 
-コンポーネントのカスタマイズ例を次に示します。 コンポーネントのカスタマイズ例を次に示します。 詳細については、 [オーバーライドのドキュメントページ](/customization/components/)を参照してください。
+コンポーネントのカスタマイズ例を次に示します。 コンポーネントのカスタマイズ例を次に示します。 コンポーネントのカスタマイズ例を次に示します。 詳細については、 [overrides documentation page](/customization/how-to-customize/)を参照してください。
 
 {{"demo": "pages/components/tables/CustomizedTables.js", "bg": true}}
 
@@ -80,9 +74,22 @@ It's possible to customise the options shown in the "Rows per page" select using
 
 ## 固定ヘッダー
 
-An example of a table with scrollable rows and fixed column headers. It leverages the `stickyHeader` prop (⚠️ no IE 11 support).
+An example of a table with scrollable rows and fixed column headers. It leverages the `stickyHeader` prop.<br /> (⚠️ no IE11 support)
 
 {{"demo": "pages/components/tables/StickyHeadTable.js", "bg": true}}
+
+## Column grouping
+
+You can group column headers by rendering multiple table rows inside a table head:
+
+```jsx
+<TableHead>
+  <TableRow />
+  <TableRow />
+</TableHead>
+```
+
+{{"demo": "pages/components/tables/ColumnGroupingTable.js", "bg": true}}
 
 ## Collapsible table
 
@@ -98,27 +105,9 @@ An example of a table with expandable rows, revealing more information. It utili
 
 ## Virtualized Table
 
-次の例では、 `Table` コンポーネントで [react-virtualized](https://github.com/bvaughn/react-virtualized) を使用する方法を示します。 これは200行をレンダリングし、より多くを簡単に処理できます。 仮想化はパフォーマンスの問題に役立ちます。 これは200行をレンダリングし、より多くを簡単に処理できます。 仮想化はパフォーマンスの問題に役立ちます。 これは200行をレンダリングし、より多くを簡単に処理できます。 仮想化はパフォーマンスの問題に役立ちます。
+次の例では、 `Table` コンポーネントで [react-virtualized](https://github.com/bvaughn/react-virtualized) を使用する方法を示します。 これは200行をレンダリングし、より多くを簡単に処理できます。 仮想化はパフォーマンスの問題に役立ちます。
 
 {{"demo": "pages/components/tables/ReactVirtualizedTable.js", "bg": true}}
-
-## 補完プロジェクト
-
-より高度な使用例では、以下を利用できます。
-
-### material-table
-
-![Stars](https://img.shields.io/github/stars/mbrn/material-table.svg?style=social&label=Stars) ![npmダウンロード](https://img.shields.io/npm/dm/material-table.svg)
-
-[material-table](https://github.com/mbrn/material-table) は、いくつかの追加機能を備えたMaterial-UI Tableを基にしたシンプルで強力なReact用データテーブルです。 それらは多くの異なるユースケース（編集可能、フィルタリング、グループ化、ソート、選択、i18n、ツリーデータなど）をサポートします。 参照するといいでしょう。 それらは多くの異なるユースケース（編集可能、フィルタリング、グループ化、ソート、選択、i18n、ツリーデータなど）をサポートします。 参照するといいでしょう。 それらは多くの異なるユースケース（編集可能、フィルタリング、グループ化、ソート、選択、i18n、ツリーデータなど）をサポートします。 参照するといいでしょう。
-
-{{"demo": "pages/components/tables/MaterialTableDemo.js", "bg": true}}
-
-### その他
-
-- [dx-react-grid-material-ui](https://devexpress.github.io/devextreme-reactive/react/grid/): A data grid for Material-UI with paging, sorting, filtering, grouping and editing features ([paid license](https://js.devexpress.com/licensing/)).
-- [mui-datatables](https://github.com/gregnb/mui-datatables): Responsive data tables for Material-UI with filtering, sorting, search and more.
-- [tubular-react](https://github.com/unosquare/tubular-react): A Material-UI table with local or remote data-source. Featuring filtering, sorting, free-text search, export to CSV locally, and aggregations.
 
 ## アクセシビリティ
 

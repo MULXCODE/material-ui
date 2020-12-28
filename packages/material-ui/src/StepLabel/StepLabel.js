@@ -28,6 +28,9 @@ export const styles = (theme) => ({
   },
   /* Styles applied to the `Typography` component which wraps `children`. */
   label: {
+    transition: theme.transitions.create('color', {
+      duration: theme.transitions.duration.shortest,
+    }),
     '&$active': {
       color: theme.palette.text.primary,
       fontWeight: 500,
@@ -54,7 +57,7 @@ export const styles = (theme) => ({
   disabled: {},
   /* Styles applied to the `icon` container element. */
   iconContainer: {
-    flexShrink: 0, // Fix IE 11 issue
+    flexShrink: 0, // Fix IE11 issue
     display: 'flex',
     paddingRight: 8,
     '&$alternativeLabel': {
@@ -76,6 +79,7 @@ const StepLabel = React.forwardRef(function StepLabel(props, ref) {
     classes,
     className,
     error = false,
+    icon: iconProp,
     optional,
     StepIconComponent: StepIconComponentProp,
     StepIconProps,
@@ -83,7 +87,8 @@ const StepLabel = React.forwardRef(function StepLabel(props, ref) {
   } = props;
 
   const { alternativeLabel, orientation } = React.useContext(StepperContext);
-  const { active, disabled, completed, icon } = React.useContext(StepContext);
+  const { active, disabled, completed, icon: iconContext } = React.useContext(StepContext);
+  const icon = iconProp || iconContext;
 
   let StepIconComponent = StepIconComponentProp;
 

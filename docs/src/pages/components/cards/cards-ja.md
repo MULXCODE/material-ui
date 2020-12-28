@@ -1,8 +1,7 @@
 ---
-title: Card コンポーネント
+title: React Card component
 components: Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Collapse, Paper
-githubLabel:
-  component: Card (カード)
+githubLabel: 'component: Card'
 materialDesign: https://material.io/components/cards
 ---
 
@@ -44,7 +43,17 @@ Set `variant="outlined"` to render an outlined card.
 
 {{"demo": "pages/components/cards/ImgMediaCard.js", "bg": true}}
 
-> `component="img"`の場合、CardMediaはイメージのセンタリングを`object-fit`に依存します。 IE 11ではサポートされていません。
+> `component="img"`の場合、CardMediaはイメージのセンタリングを`object-fit`に依存します。 It's not supported by IE11.
+
+## Primary action
+
+Often a card allow users to interact with the entirety of its surface to trigger its main action, be it an expansion, a link to another screen or some other behavior. The action area of the card can be specified by wrapping its contents in a `CardActionArea` component.
+
+{{"demo": "pages/components/cards/ActionAreaCard.js", "bg": true}}
+
+A card can also offer supplemental actions which should stand detached from the main action area in order to avoid event overlap.
+
+{{"demo": "pages/components/cards/MultiActionAreaCard.js", "bg": true}}
 
 ## UIコントロール
 
@@ -56,4 +65,4 @@ Card内の補足的なアクションは、通常はカードの下部に配置�
 
 ## カスタマイズ
 
-🎨 If you are looking for inspiration, you can check [MUI Treasury's customization examples](https://mui-treasury.com/components/card).
+🎨 インスピレーションを求めている場合は、 [MUI Treasury's customization examples](https://mui-treasury.com/components/card) を確認すると良いでしょう。

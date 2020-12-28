@@ -60,7 +60,7 @@ export default function CircularIntegration() {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      timer.current = setTimeout(() => {
+      timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
       }, 2000);
@@ -78,9 +78,7 @@ export default function CircularIntegration() {
         >
           {success ? <CheckIcon /> : <SaveIcon />}
         </Fab>
-        {loading && (
-          <CircularProgress size={68} className={classes.fabProgress} />
-        )}
+        {loading && <CircularProgress size={68} className={classes.fabProgress} />}
       </div>
       <div className={classes.wrapper}>
         <Button

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {
-  fade,
+  alpha,
   ThemeProvider,
+  useTheme,
   withStyles,
   makeStyles,
   createMuiTheme,
@@ -43,12 +44,16 @@ const BootstrapInput = withStyles((theme) => ({
   input: {
     borderRadius: 4,
     position: 'relative',
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
     border: '1px solid #ced4da',
     fontSize: 16,
     width: 'auto',
     padding: '10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
       '-apple-system',
@@ -63,7 +68,7 @@ const BootstrapInput = withStyles((theme) => ({
       '"Segoe UI Symbol"',
     ].join(','),
     '&:focus': {
-      boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
       borderColor: theme.palette.primary.main,
     },
   },
@@ -74,14 +79,18 @@ const useStylesReddit = makeStyles((theme) => ({
     border: '1px solid #e2e2e1',
     overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: '#fcfcfb',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
     '&:hover': {
-      backgroundColor: '#fff',
+      backgroundColor: 'transparent',
     },
     '&$focused': {
-      backgroundColor: '#fff',
-      boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
+      backgroundColor: 'transparent',
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
       borderColor: theme.palette.primary.main,
     },
   },
@@ -91,9 +100,7 @@ const useStylesReddit = makeStyles((theme) => ({
 function RedditTextField(props) {
   const classes = useStylesReddit();
 
-  return (
-    <TextField InputProps={{ classes, disableUnderline: true }} {...props} />
-  );
+  return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -123,14 +130,16 @@ const ValidationTextField = withStyles({
   },
 })(TextField);
 
-const theme = createMuiTheme({
-  palette: {
-    primary: green,
-  },
-});
-
 export default function CustomizedInputs() {
   const classes = useStyles();
+  const theme = useTheme();
+
+  const newTheme = createMuiTheme({
+    palette: {
+      mode: theme.palette.mode,
+      primary: green,
+    },
+  });
 
   return (
     <form className={classes.root} noValidate>
@@ -138,23 +147,23 @@ export default function CustomizedInputs() {
         className={classes.margin}
         id="custom-css-standard-input"
         label="Custom CSS"
+        variant="standard"
       />
       <CssTextField
         className={classes.margin}
         label="Custom CSS"
-        variant="outlined"
         id="custom-css-outlined-input"
       />
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={newTheme}>
         <TextField
           className={classes.margin}
           label="ThemeProvider"
           id="mui-theme-provider-standard-input"
+          variant="standard"
         />
         <TextField
           className={classes.margin}
           label="ThemeProvider"
-          variant="outlined"
           id="mui-theme-provider-outlined-input"
         />
       </ThemeProvider>

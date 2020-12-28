@@ -53,7 +53,10 @@ const LANGUAGES_LABEL = [
   },
 ];
 
-const SOURCE_CODE_ROOT_URL = 'https://github.com/mui-org/material-ui/blob/next';
+// #default-branch-switch
+const SOURCE_CODE_ROOT_URL =
+  process.env.SOURCE_CODE_ROOT_URL || 'https://github.com/mui-org/material-ui/blob/next';
+const SOURCE_CODE_REPO = process.env.SOURCE_CODE_REPO || 'https://github.com/mui-org/material-ui';
 
 module.exports = {
   CODE_VARIANTS,
@@ -63,4 +66,5 @@ module.exports = {
   LANGUAGES_LABEL,
   LANGUAGES_IN_PROGRESS,
   SOURCE_CODE_ROOT_URL,
+  SOURCE_CODE_REPO,
 };

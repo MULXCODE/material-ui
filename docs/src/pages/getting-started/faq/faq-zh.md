@@ -82,14 +82,16 @@ const theme = createMuiTheme({
 import { createMuiTheme } from '@material-ui/core';
 
 const theme = createMuiTheme({
-  overrides: {
-    // Name of the component ⚛️
+  components: {
+    // 组件名 ⚛️
     MuiCssBaseline: {
-      // Name of the rule
-      '@global': {
-        '*, *::before, *::after': {
-          transition: 'none !important',
-          animation: 'none !important',
+      styleOverrides: {
+        // 规则名
+        '@global': {
+          '*, *::before, *::after': {
+            transition: 'none !important',
+            animation: 'none !important',
+          },
         },
       },
     },
@@ -150,7 +152,7 @@ const element = ref.current;
 
 如果您在控制台中看到类似下面的警告消息，那么您可能已经在页面上初始化了多个 `@material-ui/styles` 实例。
 
-> It looks like there are several instances of `@material-ui/styles` initialized in this application. This may cause theme propagation issues, broken class names, specificity issues, and make your application bigger without a good reason.
+> 看起来在这个应用程序中初始化了多个 `@material-ui/styles` 实例。 这可能会导致主题传播问题、类名称损坏、专一性问题，并使你的应用程序尺寸无端变大。
 
 ### 可能的原因
 
@@ -180,7 +182,7 @@ const element = ref.current;
   }
 ```
 
-### 和 Learn 一起使用
+### 与 Lerna 一起使用
 
 如果您想要让 @material-ui/styles 在 Lerna monorepo 中跨包运行，一个可行的修复方法是 [提升（hoist）](https://github.com/lerna/lerna/blob/master/doc/hoist.md)共享的依赖包到 monorepo 文件的根部。 您可以尝试使用 --hoist 标识运行引导的选项。
 
@@ -249,18 +251,10 @@ CSS 只在页面第一次加载时生成。 那么，若连续地请求服务器
 ```diff
 -// 创建一个 sheets 实例
 
--// Create a sheets instance.
 -const sheets = new ServerStyleSheets();
 
 function handleRender(req, res) {
-
-+ // Create a sheets instance.
-+ const sheets = new ServerStyleSheets();
-
-  //…
-
-  // Render the component to a string.
-  const html = ReactDOMServer.renderToString(
++ // 创建一个 sheets 实例。
 + const sheets = new ServerStyleSheets();
 
   //…
@@ -277,7 +271,7 @@ function handleRender(req, res) {
 
 #### 要运行的操作
 
-类名值依赖于 [类名生成器](/styles/advanced/#class-names) 的概念。 整个页面需要用 **一个类名生成器** 来渲染。 这个生成器需要在服务端和客户端上的行为一致。 就像这样：
+类名值依赖于 [类名生成器](/styles/advanced/#class-names) 的概念。 类名值依赖于 [类名生成器](/styles/advanced/#class-names) 的概念。 这个生成器需要在服务端和客户端上的行为一致。 就像这样：
 
 - 您需要为每个请求提供一个新的类名生成器。 但是您不应该在不同的请求之间共享 `createGenerateClassName()`：
 
@@ -287,14 +281,11 @@ function handleRender(req, res) {
   -  // 创建一个新的类名生成器。
   -const generateClassName = createGenerateClassName();
 
-function handleRender(req, res) {
-
-+ // 创建一个新的类名生成器。
+  function handleRender(req, res) {
+  + // 创建一个新的类名生成器。
   + const generateClassName = createGenerateClassName();
 
-  //…
-
-  // 将组件渲染为字符串。
+    //…
 
     // 将组件渲染为字符串。
     const html = ReactDOMServer.renderToString(
@@ -371,7 +362,7 @@ function App() {
   return (
     <div className="App">
       <Portal container={container}>
-        <span>Portaled</span>
+        <span>传送门</span>
       </Portal>
       <div ref={handleRef} />
     </div>

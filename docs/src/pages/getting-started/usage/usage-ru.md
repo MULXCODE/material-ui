@@ -39,10 +39,7 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 Чтобы обеспечить правильный рендеринг и масштабирование касанием для всех устройств, добавьте метатег реагирующего окна просмотра в элемент `<head>`. Чтобы обеспечить правильный рендеринг и масштабирование касанием для всех устройств, добавьте метатег реагирующего окна просмотра в элемент `<head>`.
 
 ```html
-<meta
-  name="viewport"
-  content="minimum-scale=1, initial-scale=1, width=device-width"
-/>
+<meta name="viewport" content="initial-scale=1, width=device-width" />
 ```
 
 ### CssBaseline
@@ -59,4 +56,4 @@ Material-UI предоставляет опциональный компонен
 
 - Как предоставить [шрифт и оформление Material Design](/components/typography/).
 - Как воспользоваться [механизмом тем](/customization/theming/).
-- Как [переопределить](/customization/components/) внешний вид компонентов.
+- Как [переопределить](/customization/how-to-customize/) внешний вид компонентов.

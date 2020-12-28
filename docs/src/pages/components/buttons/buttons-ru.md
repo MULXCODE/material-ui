@@ -1,9 +1,8 @@
 ---
-title: React-компонент Кнопка
+title: Компонент React Button
 components: Button, IconButton, ButtonBase
 materialDesign: https://material.io/components/buttons
-githubLabel:
-  component: Button
+githubLabel: 'component: Button'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 ---
 
@@ -86,7 +85,7 @@ Fancy larger or smaller buttons? Use the `size` property.
 
 ## Настраиваемые кнопки
 
-Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@material-ui/core/Skeleton';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -19,8 +19,8 @@ function SkeletonChildrenDemo(props) {
 
   return (
     <div>
-      <Box display="flex" alignItems="center">
-        <Box margin={1}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ margin: 1 }}>
           {loading ? (
             <Skeleton variant="circular">
               <Avatar />
@@ -29,7 +29,7 @@ function SkeletonChildrenDemo(props) {
             <Avatar src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg" />
           )}
         </Box>
-        <Box width="100%">
+        <Box sx={{ width: '100%' }}>
           {loading ? (
             <Skeleton width="100%">
               <Typography>.</Typography>

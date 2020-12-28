@@ -1,8 +1,7 @@
 ---
-title: React 自适应文本框组件
+title: React Textarea Autosize（自适应文本框）组件
 components: TextareaAutosize
-githubLabel:
-  component: TextareaAutosize
+githubLabel: 'component: TextareaAutosize'
 ---
 
 # Textarea Autosize 自适应文本框
@@ -13,7 +12,7 @@ githubLabel:
 
 当触发键盘和窗口大小事件的时候，`TextareaAutosize` 组件将自动调整的文本框的高度。
 
-查看[调色板](/system/palette/)样式功能。
+{{"component": "modules/components/ComponentLinkHeader.js", "design": false}}
 
 ## 空白的文本框
 

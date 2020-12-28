@@ -9,9 +9,9 @@ import Copyright from '../components/Copyright';
 export default function About() {
   return (
     <Container maxWidth="sm">
-      <Box my={4}>
+      <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Gatsby v4-beta example
+          Gatsby v5-alpha example
         </Typography>
         <Link to="/">Go to the main page</Link>
         <ProTip />

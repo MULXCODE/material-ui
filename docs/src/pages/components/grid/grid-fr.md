@@ -1,8 +1,7 @@
 ---
-title: Composant React Grid
+title: React Grid component
 components: Grid
-githubLabel:
-  component: Grid
+githubLabel: 'component: Grid'
 materialDesign: https://material.io/design/layout/understanding-layout.html
 ---
 
@@ -13,6 +12,8 @@ materialDesign: https://material.io/design/layout/understanding-layout.html
 [Grid](https://material.io/design/layout/responsive-layout-grid.html) créé une cohérence visuelle entre les agencements tout en permettant une certaine flexibilité à travers une grande variété de modèles. L’UI responsive de Material Design est basée sur une grille de 12 colonnes.
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
+
+> ⚠️ The `Grid` component shouldn't be confused with a data grid; it is closer to a layout grid. For a data grid head to [the `DataGrid` component](/components/data-grid/).
 
 ## Comment ça marche
 
@@ -83,6 +84,14 @@ https://www.w3.org/TR/css-flexbox-1/#box-model
 
 {{"demo": "pages/components/grid/NestedGrid.js", "bg": true}}
 
+⚠️ Defining an explicit width to a Grid element that is flex container, flex item, and has spacing at the same time lead to unexpected behavior, avoid doing it:
+
+```jsx
+<Grid spacing={1} container item xs={12}>
+```
+
+If you need to do such, remove one of the props.
+
 ## Limites
 
 ### Marge négative
@@ -106,7 +115,7 @@ Il existe une limitation à la marge négative utilisée pour mettre en œuvre l
 
 ### white-space: nowrap;
 
-The initial setting on flex items is `min-width: auto`. It's causing a positioning conflict when the children is using `white-space: nowrap;`. You can experience the issue with:
+La configuration initiale sur les éléments flex est `min-width: auto`. Cela provoque un conflit de positionnement lorsque les enfants utilisent `white-space : nowrap;`. Vous pouvez rencontrer le problème avec :
 
 ```jsx
 <Grid item xs>
@@ -124,7 +133,9 @@ In order for the item to stay within the container you need to set `min-width: 0
 
 ### direction: column | column-reverse
 
-Bien que le composant `Grid` ait une propriété `direction` qui autorise les valeurs de `rows`, `row-reverse`, `column` et `column-reverse`, certaines fonctionnalités ne sont pas prises en charge dans les containers `rows` et `column-reverse`. Les propriétés qui définissent le nombre de grilles que le composant utilisera pour un point d' arrêt donné (`xs`, `sm`, `md`, `lg`et `xl`) sont centrées sur le contrôle de la largeur et n'ont **pas** d'effets similaires sur la hauteur dans les conteneurs `column` et `column-reverse`. Si elle est utilisée à l'intérieur des containers `column` ou `column-reverse` , ces propriétés peuvent avoir des effets indésirables sur la largeur des éléments `Grid` .
+The `xs`, `sm`, `md`, `lg`, and `xl` props are **not supported** within `direction="column"` and `direction="column-reverse"` containers.
+
+They define the number of grids the component will use for a given breakpoint. They are intended to control **width** using `flex-basis` in `row` containers but they will impact height in `column` containers. If used, these props may have undesirable effects on the height of the `Grid` item elements.
 
 ## CSS Grid Layout
 

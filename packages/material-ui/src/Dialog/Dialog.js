@@ -49,7 +49,7 @@ export const styles = (theme) => ({
   paper: {
     margin: 32,
     position: 'relative',
-    overflowY: 'auto', // Fix IE 11 issue, to remove at some point.
+    overflowY: 'auto', // Fix IE11 issue, to remove at some point.
     '@media print': {
       overflowY: 'visible',
       boxShadow: 'none',
@@ -65,7 +65,7 @@ export const styles = (theme) => ({
   paperScrollBody: {
     display: 'inline-block',
     verticalAlign: 'middle',
-    textAlign: 'left', // 'initial' doesn't work on IE 11
+    textAlign: 'left', // 'initial' doesn't work on IE11
   },
   /* Styles applied to the `Paper` component if `maxWidth=false`. */
   paperWidthFalse: {
@@ -145,14 +145,12 @@ const Dialog = React.forwardRef(function Dialog(props, ref) {
     children,
     classes,
     className,
-    disableBackdropClick = false,
     disableEscapeKeyDown = false,
     fullScreen = false,
     fullWidth = false,
     maxWidth = 'sm',
     onBackdropClick,
     onClose,
-    onEscapeKeyDown,
     open,
     PaperComponent = Paper,
     PaperProps = {},
@@ -183,7 +181,7 @@ const Dialog = React.forwardRef(function Dialog(props, ref) {
       onBackdropClick(event);
     }
 
-    if (!disableBackdropClick && onClose) {
+    if (onClose) {
       onClose(event, 'backdropClick');
     }
   };
@@ -197,9 +195,7 @@ const Dialog = React.forwardRef(function Dialog(props, ref) {
         ...BackdropProps,
       }}
       closeAfterTransition
-      disableBackdropClick={disableBackdropClick}
       disableEscapeKeyDown={disableEscapeKeyDown}
-      onEscapeKeyDown={onEscapeKeyDown}
       onClose={onClose}
       open={open}
       ref={ref}
@@ -219,7 +215,6 @@ const Dialog = React.forwardRef(function Dialog(props, ref) {
         <div
           className={clsx(classes.container, classes[`scroll${capitalize(scroll)}`])}
           onMouseDown={handleMouseDown}
-          data-mui-test="FakeBackdrop"
         >
           <PaperComponent
             elevation={24}
@@ -276,17 +271,12 @@ Dialog.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * If `true`, clicking the backdrop will not fire the `onClose` callback.
-   * @default false
-   */
-  disableBackdropClick: PropTypes.bool,
-  /**
    * If `true`, hitting escape will not fire the `onClose` callback.
    * @default false
    */
   disableEscapeKeyDown: PropTypes.bool,
   /**
-   * If `true`, the dialog will be full-screen
+   * If `true`, the dialog is full-screen.
    * @default false
    */
   fullScreen: PropTypes.bool,
@@ -315,11 +305,6 @@ Dialog.propTypes = {
    * @param {string} reason Can be: `"escapeKeyDown"`, `"backdropClick"`.
    */
   onClose: PropTypes.func,
-  /**
-   * Callback fired when the escape key is pressed,
-   * `disableKeyboard` is false and the modal is in focus.
-   */
-  onEscapeKeyDown: PropTypes.func,
   /**
    * If `true`, the Dialog is open.
    */

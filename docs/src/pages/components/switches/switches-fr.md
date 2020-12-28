@@ -1,8 +1,7 @@
 ---
-title: Switch React component
+title: React Switch component
 components: Switch, FormControl, FormGroup, FormLabel, FormControlLabel
-githubLabel:
-  component: Interrupteur (switch)
+githubLabel: 'component: Switch'
 materialDesign: 'https://material.io/components/selection-controls#switches'
 ---
 
@@ -32,11 +31,11 @@ materialDesign: 'https://material.io/components/selection-controls#switches'
 
 ## Customized switches
 
-Here are some examples of customizing the component. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/components/).
+Here are some examples of customizing the component. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/how-to-customize/).
 
 {{"demo": "pages/components/switches/CustomizedSwitches.js"}}
 
-🎨 If you are looking for inspiration, you can check [MUI Treasury's customization examples](https://mui-treasury.com/styles/switch).
+🎨 Si vous cherchez de l'inspiration, vous pouvez consulter les [exemples de personnalisation de MUI Treasury](https://mui-treasury.com/styles/switch).
 
 ## Tailles
 

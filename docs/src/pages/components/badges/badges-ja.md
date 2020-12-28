@@ -1,8 +1,7 @@
 ---
-title: バッジReactコンポーネント
-components: Badge
-githubLabel:
-  component: Badge
+title: React バッジコンポーネント
+components: Badge, BadgeUnstyled
+githubLabel: 'component: Badge'
 ---
 
 # Badge
@@ -11,7 +10,7 @@ githubLabel:
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
-## Basic badges
+## 基本的なバッジ
 
 プライマリー色とセカンダリーを使用した、テキストを含むバッジの例。 バッジが子要素に適用されます。
 
@@ -19,7 +18,7 @@ githubLabel:
 
 ## Customized badges （カスタマイズされたバッジ）
 
-コンポーネントのカスタマイズ例を次に示します。 コンポーネントのカスタマイズ例を次に示します。 詳細については、 [オーバーライドドキュメントページ](/customization/components/)ご覧ください。
+コンポーネントのカスタマイズ例を次に示します。 コンポーネントのカスタマイズ例を次に示します。 コンポーネントのカスタマイズ例を次に示します。 詳細については、 [オーバーライドドキュメントページ](/customization/how-to-customize/)ご覧ください。
 
 {{"demo": "pages/components/badges/CustomizedBadges.js"}}
 
@@ -56,3 +55,7 @@ BadgeContentが0の場合、バッジは自動的に非表示になります。 
 `anchorOrigin` プロパティを使用して、バッジをラップされた要素の隅に移動できます。
 
 {{"demo": "pages/components/badges/BadgeAlignment.js", "hideToolbar": true}}
+
+## Unstyled badge
+
+{{"demo": "pages/components/badges/UnstyledBadge.js"}}

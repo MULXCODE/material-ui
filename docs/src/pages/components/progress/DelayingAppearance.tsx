@@ -39,7 +39,9 @@ export default function DelayingAppearance() {
   };
 
   const handleClickQuery = () => {
-    clearTimeout(timerRef.current);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
 
     if (query !== 'idle') {
       setQuery('idle');
@@ -47,7 +49,7 @@ export default function DelayingAppearance() {
     }
 
     setQuery('progress');
-    timerRef.current = setTimeout(() => {
+    timerRef.current = window.setTimeout(() => {
       setQuery('success');
     }, 2000);
   };

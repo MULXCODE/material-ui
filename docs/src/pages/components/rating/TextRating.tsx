@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Rating from '@material-ui/lab/Rating';
+import Rating from '@material-ui/core/Rating';
 import Box from '@material-ui/core/Box';
 import StarIcon from '@material-ui/icons/Star';
 
@@ -38,7 +38,7 @@ export default function TextRating() {
         precision={0.5}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
-      <Box ml={2}>{labels[value]}</Box>
+      <Box sx={{ ml: 2 }}>{labels[value]}</Box>
     </div>
   );
 }

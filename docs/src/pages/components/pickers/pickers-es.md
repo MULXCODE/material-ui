@@ -1,8 +1,7 @@
 ---
 title: Componentes de React de Selectores de Fecha y Selectores de Hora
 components: TextField
-githubLabel:
-  component: DatePicker
+githubLabel: 'component: DatePicker'
 materialDesign: https://material.io/components/date-pickers
 waiAria: https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/datepicker-dialog.html
 packageName: '@material-ui/lab'
@@ -17,17 +16,13 @@ packageName: '@material-ui/lab'
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
-## @material-ui/pickers
-
-![estrellas](https://img.shields.io/github/stars/mui-org/material-ui-pickers.svg?style=social&label=Stars) ![descargas npm](https://img.shields.io/npm/dm/@material-ui/pickers.svg)
-
-[@material-ui/pickers](https://material-ui-pickers.dev/) proporcionan controles de selectores de fecha y hora.
+## React components
 
 {{"demo": "pages/components/pickers/MaterialUIPickers.js"}}
 
 ## Selectores nativos
 
-⚠️ Los controles de entrada nativos compatibles con los navegadores [no son perfectos](https://caniuse.com/#feat=input-datetime). Heche un vistazo a [@material-ui/pickers](https://material-ui-pickers.dev/) para una mejor solución.
+⚠️ Los controles de entrada nativos compatibles con los navegadores [no son perfectos](https://caniuse.com/#feat=input-datetime).
 
 ### Selectores de fecha
 

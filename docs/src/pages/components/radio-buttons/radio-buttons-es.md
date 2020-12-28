@@ -1,8 +1,7 @@
 ---
 title: Radio buttons React component
 components: Radio, RadioGroup, FormControl, FormLabel, FormControlLabel
-githubLabel:
-  component: Radio
+githubLabel: 'component: Radio'
 materialDesign: 'https://material.io/components/selection-controls#radio-buttons'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#radiobutton'
 ---
@@ -45,7 +44,7 @@ In general, radio buttons should have a value selected by default. If this is no
 
 ## Customized radios
 
-He aquí un ejemplo de personalización del componente. You can learn more about this in the [overrides documentation page](/customization/components/).
+He aquí un ejemplo de personalización del componente. Puedes aprender más sobre esto en la [sección Personalizando Componentes de la documentación](/customization/how-to-customize/).
 
 {{"demo": "pages/components/radio-buttons/CustomizedRadios.js"}}
 

@@ -1,106 +1,67 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { useThemeVariants } from '@material-ui/styles';
-import withStyles from '../styles/withStyles';
+import experimentalStyled from '../styles/experimentalStyled';
+import useThemeProps from '../styles/useThemeProps';
 import capitalize from '../utils/capitalize';
+import typographyClasses, { getTypographyUtilityClass } from './typographyClasses';
 
-export const styles = (theme) => ({
-  /* Styles applied to the root element. */
-  root: {
-    margin: 0,
-  },
-  /* Styles applied to the root element if `variant="body2"`. */
-  body2: theme.typography.body2,
-  /* Styles applied to the root element if `variant="body1"`. */
-  body1: theme.typography.body1,
-  /* Styles applied to the root element if `variant="caption"`. */
-  caption: theme.typography.caption,
-  /* Styles applied to the root element if `variant="button"`. */
-  button: theme.typography.button,
-  /* Styles applied to the root element if `variant="h1"`. */
-  h1: theme.typography.h1,
-  /* Styles applied to the root element if `variant="h2"`. */
-  h2: theme.typography.h2,
-  /* Styles applied to the root element if `variant="h3"`. */
-  h3: theme.typography.h3,
-  /* Styles applied to the root element if `variant="h4"`. */
-  h4: theme.typography.h4,
-  /* Styles applied to the root element if `variant="h5"`. */
-  h5: theme.typography.h5,
-  /* Styles applied to the root element if `variant="h6"`. */
-  h6: theme.typography.h6,
-  /* Styles applied to the root element if `variant="subtitle1"`. */
-  subtitle1: theme.typography.subtitle1,
-  /* Styles applied to the root element if `variant="subtitle2"`. */
-  subtitle2: theme.typography.subtitle2,
-  /* Styles applied to the root element if `variant="overline"`. */
-  overline: theme.typography.overline,
-  /* Styles applied to the root element if `variant="inherit"`. */
-  inherit: {},
-  /* Styles applied to the root element if `align="left"`. */
-  alignLeft: {
-    textAlign: 'left',
-  },
-  /* Styles applied to the root element if `align="center"`. */
-  alignCenter: {
-    textAlign: 'center',
-  },
-  /* Styles applied to the root element if `align="right"`. */
-  alignRight: {
-    textAlign: 'right',
-  },
-  /* Styles applied to the root element if `align="justify"`. */
-  alignJustify: {
-    textAlign: 'justify',
-  },
-  /* Styles applied to the root element if `nowrap={true}`. */
-  noWrap: {
+const getTextColor = (color, palette) => {
+  if (color.indexOf('text') === 0) {
+    return palette.text[color.split('text').pop().toLowerCase()];
+  }
+
+  if (color === 'inherit' || color === 'initial') {
+    return color;
+  }
+
+  return palette[color].main;
+};
+
+const overridesResolver = (props, styles) => {
+  const { styleProps = {} } = props;
+
+  return {
+    ...styles.root,
+    ...(styleProps.variant && styles[styleProps.variant]),
+    ...(styleProps.color && styles[`color${capitalize(styleProps.color)}`]),
+    ...(styleProps.align && styles[`align${capitalize(styleProps.align)}`]),
+    ...(styleProps.display && styles[`display${capitalize(styleProps.display)}`]),
+    ...(styleProps.noWrap && styles.noWrap),
+    ...(styleProps.gutterBottom && styles.gutterBottom),
+    ...(styleProps.paragraph && styles.paragraph),
+  };
+};
+
+export const TypographyRoot = experimentalStyled(
+  'span',
+  {},
+  { name: 'Typography', slot: 'Root', overridesResolver },
+)(({ theme, styleProps }) => ({
+  margin: 0,
+  ...(styleProps.variant && theme.typography[styleProps.variant]),
+  ...(styleProps.align !== 'inherit' && {
+    textAlign: styleProps.align,
+  }),
+  ...(styleProps.noWrap && {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-  },
-  /* Styles applied to the root element if `gutterBottom={true}`. */
-  gutterBottom: {
+  }),
+  ...(styleProps.gutterBottom && {
     marginBottom: '0.35em',
-  },
-  /* Styles applied to the root element if `paragraph={true}`. */
-  paragraph: {
+  }),
+  ...(styleProps.paragraph && {
     marginBottom: 16,
-  },
-  /* Styles applied to the root element if `color="inherit"`. */
-  colorInherit: {
-    color: 'inherit',
-  },
-  /* Styles applied to the root element if `color="primary"`. */
-  colorPrimary: {
-    color: theme.palette.primary.main,
-  },
-  /* Styles applied to the root element if `color="secondary"`. */
-  colorSecondary: {
-    color: theme.palette.secondary.main,
-  },
-  /* Styles applied to the root element if `color="textPrimary"`. */
-  colorTextPrimary: {
-    color: theme.palette.text.primary,
-  },
-  /* Styles applied to the root element if `color="textSecondary"`. */
-  colorTextSecondary: {
-    color: theme.palette.text.secondary,
-  },
-  /* Styles applied to the root element if `color="error"`. */
-  colorError: {
-    color: theme.palette.error.main,
-  },
-  /* Styles applied to the root element if `display="inline"`. */
-  displayInline: {
-    display: 'inline',
-  },
-  /* Styles applied to the root element if `display="block"`. */
-  displayBlock: {
-    display: 'block',
-  },
-});
+  }),
+  ...(styleProps.color &&
+    styleProps.color !== 'initial' && {
+      color: getTextColor(styleProps.color, theme.palette),
+    }),
+  ...(styleProps.display !== 'initial' && {
+    display: styleProps.display,
+  }),
+}));
 
 const defaultVariantMapping = {
   h1: 'h1',
@@ -116,10 +77,47 @@ const defaultVariantMapping = {
   inherit: 'p',
 };
 
-const Typography = React.forwardRef(function Typography(props, ref) {
+const useUtilityClasses = (styleProps) => {
+  const {
+    align,
+    color,
+    display,
+    gutterBottom,
+    noWrap,
+    paragraph,
+    variant,
+    classes = {},
+  } = styleProps;
+
+  return {
+    root: clsx(
+      typographyClasses['root'],
+      classes['root'],
+      getTypographyUtilityClass(`color${capitalize(color)}`),
+      classes[`color${capitalize(color)}`],
+      typographyClasses[`align${capitalize(align)}`],
+      classes[`align${capitalize(align)}`],
+      typographyClasses[`display${capitalize(display)}`],
+      classes[`display${capitalize(display)}`],
+      getTypographyUtilityClass(variant),
+      classes[variant],
+      {
+        [typographyClasses['gutterBottom']]: gutterBottom,
+        [classes['gutterBottom']]: gutterBottom,
+        [typographyClasses['noWrap']]: noWrap,
+        [classes['noWrap']]: noWrap,
+        [typographyClasses['paragraph']]: paragraph,
+        [classes['paragraph']]: paragraph,
+      },
+    ),
+  };
+};
+
+const Typography = React.forwardRef(function Typography(inProps, ref) {
+  const props = useThemeProps({ props: inProps, name: 'MuiTypography' });
+
   const {
     align = 'inherit',
-    classes,
     className,
     color = 'initial',
     component,
@@ -132,43 +130,33 @@ const Typography = React.forwardRef(function Typography(props, ref) {
     ...other
   } = props;
 
-  const themeVariantsClasses = useThemeVariants(
-    {
-      ...props,
-      align,
-      color,
-      display,
-      gutterBottom,
-      noWrap,
-      paragraph,
-      variant,
-      variantMapping,
-    },
-    'MuiTypography',
-  );
+  const styleProps = {
+    ...props,
+    align,
+    className,
+    color,
+    component,
+    display,
+    gutterBottom,
+    noWrap,
+    paragraph,
+    variant,
+    variantMapping,
+  };
 
   const Component =
     component ||
     (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) ||
     'span';
 
+  const classes = useUtilityClasses(styleProps);
+
   return (
-    <Component
-      className={clsx(
-        classes.root,
-        classes[variant],
-        {
-          [classes[`color${capitalize(color)}`]]: color !== 'initial',
-          [classes.noWrap]: noWrap,
-          [classes.gutterBottom]: gutterBottom,
-          [classes.paragraph]: paragraph,
-          [classes[`align${capitalize(align)}`]]: align !== 'inherit',
-          [classes[`display${capitalize(display)}`]]: display !== 'initial',
-        },
-        themeVariantsClasses,
-        className,
-      )}
+    <TypographyRoot
+      as={Component}
       ref={ref}
+      styleProps={styleProps}
+      className={clsx(classes.root, className)}
       {...other}
     />
   );
@@ -282,4 +270,4 @@ Typography.propTypes = {
   variantMapping: PropTypes /* @typescript-to-proptypes-ignore */.object,
 };
 
-export default withStyles(styles, { name: 'MuiTypography' })(Typography);
+export default Typography;

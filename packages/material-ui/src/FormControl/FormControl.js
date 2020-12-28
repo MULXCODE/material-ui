@@ -57,7 +57,8 @@ export const styles = {
  * </FormControl>
  * ```
  *
- * ⚠️Only one input can be used within a FormControl.
+ * ⚠️ Only one `InputBase` can be used within a FormControl because it create visual inconsistencies.
+ * For instance, only one input can be focused at the same time, the state shouldn't be shared.
  */
 const FormControl = React.forwardRef(function FormControl(props, ref) {
   const {
@@ -68,12 +69,12 @@ const FormControl = React.forwardRef(function FormControl(props, ref) {
     component: Component = 'div',
     disabled = false,
     error = false,
-    fullWidth = false,
     focused: visuallyFocused,
+    fullWidth = false,
     hiddenLabel = false,
     margin = 'none',
     required = false,
-    size,
+    size = 'medium',
     variant = 'standard',
     ...other
   } = props;
@@ -134,9 +135,8 @@ const FormControl = React.forwardRef(function FormControl(props, ref) {
       if (registeredInput.current) {
         console.error(
           [
-            'Material-UI: There are multiple InputBase components inside a FormControl.',
-            'This is not supported. It might cause infinite rendering loops.',
-            'Only use one InputBase.',
+            'Material-UI: There are multiple `InputBase` components inside a FormControl.',
+            'This creates visual inconsistencies, only use one `InputBase`.',
           ].join('\n'),
         );
       }
@@ -166,7 +166,7 @@ const FormControl = React.forwardRef(function FormControl(props, ref) {
     focused,
     fullWidth,
     hiddenLabel,
-    margin: (size === 'small' ? 'dense' : undefined) || margin,
+    size,
     onBlur: () => {
       setFocused(false);
     },
@@ -238,7 +238,7 @@ FormControl.propTypes = {
    */
   error: PropTypes.bool,
   /**
-   * If `true`, the component will be displayed in focused state.
+   * If `true`, the component is displayed in focused state.
    */
   focused: PropTypes.bool,
   /**
@@ -247,7 +247,7 @@ FormControl.propTypes = {
    */
   fullWidth: PropTypes.bool,
   /**
-   * If `true`, the label will be hidden.
+   * If `true`, the label is hidden.
    * This is used to increase density for a `FilledInput`.
    * Be sure to add `aria-label` to the `input` element.
    * @default false
@@ -259,12 +259,13 @@ FormControl.propTypes = {
    */
   margin: PropTypes.oneOf(['dense', 'none', 'normal']),
   /**
-   * If `true`, the label will indicate that the input is required.
+   * If `true`, the label will indicate that the `input` is required.
    * @default false
    */
   required: PropTypes.bool,
   /**
    * The size of the text field.
+   * @default 'medium'
    */
   size: PropTypes.oneOf(['medium', 'small']),
   /**

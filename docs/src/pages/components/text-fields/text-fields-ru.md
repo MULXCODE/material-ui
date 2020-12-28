@@ -1,8 +1,7 @@
 ---
 title: Текстовое Поле, компонент React
 components: FilledInput, FormControl, FormHelperText, Input, InputAdornment, InputBase, InputLabel, OutlinedInput, TextField
-githubLabel:
-  component: TextField
+githubLabel: 'component: TextField'
 materialDesign: https://material.io/components/text-fields
 ---
 
@@ -66,6 +65,10 @@ Fancy smaller inputs? Use the `size` prop.
 
 {{"demo": "pages/components/text-fields/TextFieldSizes.js"}}
 
+The `filled` variant input height can be further reduced by rendering the label outside of it.
+
+{{"demo": "pages/components/text-fields/TextFieldHiddenLabel.js"}}
+
 ## Расположение
 
 `dense` and `normal` alter other styles to meet the specification. `margin` prop can be used to alter the vertical spacing of inputs. Using `none` (default) will not apply margins to the `FormControl`, whereas `dense` and `normal` will.
@@ -100,7 +103,7 @@ The `color` prop changes the highlight color of the text field when focused.
 
 ## Кастомизированные поля ввода
 
-Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/text-fields/CustomizedInputs.js"}}
 
@@ -138,7 +141,7 @@ The `color` prop changes the highlight color of the text field when focused.
 
 Inputs of type="number" have potential usability issues:
 
-- Allowing certain non-numeric characters ('e', '+', '-', '.') and silently discarding others
+- Allowing certain non-numeric characters ('e', '+', '-', '.') and silently discarding others and silently discarding others
 - Если вы составляете компонент:
 
 and more - see [this article](https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/) by the GOV.UK Design System team for a more detailed explanation.
@@ -169,7 +172,7 @@ This can be fixed by passing a space character to the `helperText` prop:
 
 {{"demo": "pages/components/text-fields/FormattedInputs.js"}}
 
-Предоставленный компонент ввода должен обрабатывать свойство `inputRef`. Свойство должно вызываться со значением, которое реализует следующий интерфейс:
+The provided input component should expose a ref with a value that implements the following interface:
 
 ```ts
 interface InputElement {
@@ -179,11 +182,30 @@ interface InputElement {
 ```
 
 ```jsx
-<div class="form-control">
-  <label for="my-input">Адрес электронной почты</label>
-  <input id="my-input" aria-describedby="my-helper-text" />
-  <span id="my-helper-text">Мы никогда не распостраним ваш адрес.</span>
-</div>
+const MyInputComponent = React.forwardRef((props, ref) => {
+  const { component: Component, ...other } = props;
+
+  // implement `InputElement` interface
+  React.useImperativeHandle(ref, () => ({
+    focus: () => {
+      // logic to focus the rendered component from 3rd party belongs here
+    },
+    // hiding the value e.g. react-stripe-elements
+  }));
+
+  // `Component` will be your `SomeThirdPartyComponent` from below
+  return <Component {...other} />;
+});
+
+// usage
+<TextField
+  InputProps={{
+    inputComponent: MyInputComponent,
+    inputProps: {
+      component: SomeThirdPartyComponent,
+    },
+  }}
+/>;
 ```
 
 ## Доступность
@@ -203,11 +225,9 @@ In order for the text field to be accessible, **the input should be linked to th
 
 ```jsx
 <FormControl>
-  <InputLabel htmlFor="my-input">Email address</InputLabel>
+  <InputLabel htmlFor="my-input">Адрес электронной почты</InputLabel>
   <Input id="my-input" aria-describedby="my-helper-text" />
-  <FormHelperText id="my-helper-text">
-    We'll never share your email.
-  </FormHelperText>
+  <FormHelperText id="my-helper-text">Мы никогда не распостраним ваш адрес.</FormHelperText>
 </FormControl>
 ```
 

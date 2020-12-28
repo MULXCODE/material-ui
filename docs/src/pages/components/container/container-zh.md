@@ -1,17 +1,16 @@
 ---
-title: React 容器组件
+title: React Container（容器）组件
 components: Container
-githubLabel:
-  component: Container
+githubLabel: 'component: Container'
 ---
 
-# Container
+# Container 容器
 
 <p class="description">通过容器组件，您页面的内容会呈现水平居中。 这是最基本的布局元素。</p>
 
 虽然容器可以嵌套，但大多数布局不需要嵌套的容器。
 
-查看[调色板](/system/palette/)样式功能。
+{{"component": "modules/components/ComponentLinkHeader.js", "design": false}}
 
 ## Fluid 流体布局
 

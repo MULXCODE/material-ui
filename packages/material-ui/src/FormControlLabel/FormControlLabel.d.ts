@@ -29,7 +29,7 @@ export interface FormControlLabelProps
    */
   control: React.ReactElement<any, any>;
   /**
-   * If `true`, the control will be disabled.
+   * If `true`, the control is disabled.
    */
   disabled?: boolean;
   /**
@@ -52,7 +52,7 @@ export interface FormControlLabelProps
    * @param {object} event The event source of the callback.
    * You can pull out the new checked state by accessing `event.target.checked` (boolean).
    */
-  onChange?: (event: React.ChangeEvent<{}>, checked: boolean) => void;
+  onChange?: (event: React.SyntheticEvent, checked: boolean) => void;
   /**
    * The value of the component.
    */
@@ -62,7 +62,7 @@ export interface FormControlLabelProps
 export type FormControlLabelClassKey = keyof NonNullable<FormControlLabelProps['classes']>;
 
 /**
- * Drop in replacement of the `Radio`, `Switch` and `Checkbox` component.
+ * Drop-in replacement of the `Radio`, `Switch` and `Checkbox` component.
  * Use this component if you want to display an extra label.
  * Demos:
  *

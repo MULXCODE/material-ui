@@ -111,7 +111,7 @@ export const styles = (theme) => ({
   /* Styles applied to the root element if `item={true}`. */
   item: {
     boxSizing: 'border-box',
-    margin: '0', // For instance, it's useful when used with a `figure` element.
+    margin: 0, // For instance, it's useful when used with a `figure` element.
   },
   /* Styles applied to the root element if `zeroMinWidth={true}`. */
   zeroMinWidth: {
@@ -120,10 +120,16 @@ export const styles = (theme) => ({
   /* Styles applied to the root element if `direction="column"`. */
   'direction-xs-column': {
     flexDirection: 'column',
+    '& > $item': {
+      maxWidth: 'none',
+    },
   },
   /* Styles applied to the root element if `direction="column-reverse"`. */
   'direction-xs-column-reverse': {
     flexDirection: 'column-reverse',
+    '& > $item': {
+      maxWidth: 'none',
+    },
   },
   /* Styles applied to the root element if `direction="row-reverse"`. */
   'direction-xs-row-reverse': {

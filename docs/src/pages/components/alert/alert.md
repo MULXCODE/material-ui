@@ -1,8 +1,7 @@
 ---
-title: Alert React component
+title: React Alert component
 components: Alert, AlertTitle
 githubLabel: 'component: Alert'
-packageName: '@material-ui/lab'
 waiAria: https://www.w3.org/TR/wai-aria-practices/#alert
 ---
 
@@ -18,7 +17,7 @@ waiAria: https://www.w3.org/TR/wai-aria-practices/#alert
 
 The alert offers four severity levels that set a distinctive icon and color.
 
-{{"demo": "pages/components/alert/SimpleAlerts.js"}}
+{{"demo": "pages/components/alert/BasicAlerts.js"}}
 
 ## Description
 
@@ -46,7 +45,7 @@ You can use a [transition component](/components/transitions/) such as `Collapse
 The `icon` prop allows you to add an icon to the beginning of the alert component.
 This will override the default icon for the specified severity.
 
-You can change the default severity to icon mapping with the `iconMapping` prop. This can be defined globally using [theme customization](/customization/globals/#default-props).
+You can change the default severity to icon mapping with the `iconMapping` prop. This can be defined globally using [theme customization](/customization/theme-components/#default-props).
 
 Setting the icon prop to `false` will remove the icon altogether.
 

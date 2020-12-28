@@ -21,9 +21,9 @@ function Copyright() {
 export default function App() {
   return (
     <Container maxWidth="sm">
-      <Box my={4}>
+      <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Create React App v4-beta example
+          Create React App v5-alpha example
         </Typography>
         <ProTip />
         <Copyright />

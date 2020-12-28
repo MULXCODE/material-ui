@@ -1,8 +1,7 @@
 ---
-title: Панель, компонент React
+title: Компонент React Drawer
 components: Drawer, SwipeableDrawer
-githubLabel:
-  component: Панель
+githubLabel: 'component: Drawer'
 materialDesign: https://material.io/components/navigation-drawer
 ---
 
@@ -32,16 +31,32 @@ The Drawer can be cancelled by clicking the overlay or pressing the Esc key. It 
 
 {{"demo": "pages/components/drawers/SwipeableTemporaryDrawer.js"}}
 
-The following properties are used in this documentation website for optimal usability of the component:
+Для оптимальной удобства использования компонента используются следующие свойства:
 
 - iOS is hosted on high-end devices. The backdrop transition can be enabled without dropping frames. Производительность достаточно хороша.
 - iOS has a "swipe to go back" feature that interferes with the discovery feature, so discovery has to be disabled.
 
 ```jsx
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+const iOS =
+  typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-<SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} />
+<SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} />;
 ```
+
+### Keep mounted
+
+To ensure a temporary drawer is not unmounted, specify the `ModalProps` prop like:
+
+```jsx
+<Drawer
+  variant="temporary"
+  ModalProps={{
+    keepMounted: true,
+  }}
+/>
+```
+
+More details in the [Modal performance section](/components/modal/#performance).
 
 ## Приспосабливающаяся панель
 

@@ -1,11 +1,10 @@
 ---
-title: React 选择器组件
+title: React Select（选择器）组件
 components: Select, NativeSelect
-githubLabel:
-  component: 选择属性
+githubLabel: 'component: Select'
 ---
 
-# 选择属性
+# Select 选择属性
 
 <p class="description">选择器组件能从一个选项列表中去获得用户所提供的信息。</p>
 
@@ -15,7 +14,7 @@ githubLabel:
 
 我们通常将菜单（Menus）放置在其所点击的元素上，这样的话能够确保当前选定的菜单项显示在点击的元素之上。
 
-Select 组件的设计原理是和一个原生的 `<select>` 元素能够互相替代。
+{{"demo": "pages/components/selects/BasicSelect.js"}}
 
 ## 高级功能
 
@@ -45,7 +44,7 @@ Select 组件的设计原理是和一个原生的 `<select>` 元素能够互相�
 
 为了提高用户体验，对于在移动设备上使用平台的原生选择器这样的模式，我们是支持的。
 
-🎨如果你是在寻找灵感，你可以查看 [MUI Treasury's customization examples](https://mui-treasury.com/styles/select)。
+{{"demo": "pages/components/selects/NativeSelect.js"}}
 
 ## TextField
 
@@ -53,7 +52,7 @@ Select 组件的设计原理是和一个原生的 `<select>` 元素能够互相�
 
 ## 自定义选择器
 
-你可以参考以下一些例子来自定义组件。 您可以在[重写文档页](/customization/components/)中了解有关此内容的更多信息。
+你可以参考以下一些例子来自定义组件。 您可以在 [重写文档页面](/customization/how-to-customize/) 中了解更多有关此内容的信息。
 
 首先，需要设置 `InputBase` 组件的样式。 一旦设置好了样式，您就可以直接将其用作文本字段，也可以将其作为一个 `select` 字段提供给 select 组件的 `input` 属性。
 
@@ -63,7 +62,7 @@ Select 组件的设计原理是和一个原生的 `<select>` 元素能够互相�
 
 ## 多重选择
 
-`Select` 组件也支持多项选择。 你可以通过 `multiple` 属性来启用它。
+`Select` 组件也支持多项选择。 你可以通过使用 `multiple` 属性来启用它。
 
 与单项选择一样，您可以通过访问 `onChange` 的回调函数中的 `event.target.value ` 来提取新的值。 它总是以一个数组的形式出现。
 

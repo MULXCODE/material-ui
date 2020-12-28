@@ -17,14 +17,17 @@ import SwipeArea from './SwipeArea';
 // trigger a native scroll.
 const UNCERTAINTY_THRESHOLD = 3; // px
 
-// We can only have one node at the time claiming ownership for handling the swipe.
+// This is the part of the drawer displayed on touch start.
+const DRAG_STARTED_SIGNAL = 20; // px
+
+// We can only have one instance at the time claiming ownership for handling the swipe.
 // Otherwise, the UX would be confusing.
 // That's why we use a singleton here.
-let nodeThatClaimedTheSwipe = null;
+let claimedSwipeInstance = null;
 
 // Exported for test purposes.
 export function reset() {
-  nodeThatClaimedTheSwipe = null;
+  claimedSwipeInstance = null;
 }
 
 function calculateCurrentX(anchor, touches, doc) {
@@ -51,6 +54,10 @@ function getTranslate(currentTranslate, startLocation, open, maxTranslate) {
   );
 }
 
+/**
+ * @param {Element | null} element
+ * @param {Element} rootNode
+ */
 function getDomTreeShapes(element, rootNode) {
   // Adapted from https://github.com/oliviertassinari/react-swipeable-views/blob/7666de1dba253b896911adf2790ce51467670856/packages/react-swipeable-views/src/SwipeableViews.js#L129
   let domTreeShapes = [];
@@ -80,7 +87,11 @@ function getDomTreeShapes(element, rootNode) {
   return domTreeShapes;
 }
 
-function findNativeHandler({ domTreeShapes, start, current, anchor }) {
+/**
+ * @param {object} param0
+ * @param {ReturnType<getDomTreeShapes>} param0.domTreeShapes
+ */
+function computeHasNativeHandler({ domTreeShapes, start, current, anchor }) {
   // Adapted from https://github.com/oliviertassinari/react-swipeable-views/blob/7666de1dba253b896911adf2790ce51467670856/packages/react-swipeable-views/src/SwipeableViews.js#L175
   const axisProperties = {
     scrollPosition: {
@@ -112,10 +123,10 @@ function findNativeHandler({ domTreeShapes, start, current, anchor }) {
       shape[axisProperties.scrollLength[axis]];
 
     if ((goingForward && areNotAtEnd) || (!goingForward && areNotAtStart)) {
-      return shape;
+      return true;
     }
 
-    return null;
+    return false;
   });
 }
 
@@ -217,7 +228,7 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
     if (!touchDetected.current) {
       return;
     }
-    nodeThatClaimedTheSwipe = null;
+    claimedSwipeInstance = null;
     touchDetected.current = false;
     setMaybeSwiping(false);
 
@@ -287,7 +298,7 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
     }
 
     // We are not supposed to handle this touch move because the swipe was started in a scrollable container in the drawer
-    if (nodeThatClaimedTheSwipe != null && nodeThatClaimedTheSwipe !== swipeInstance.current) {
+    if (claimedSwipeInstance !== null && claimedSwipeInstance !== swipeInstance.current) {
       return;
     }
 
@@ -302,20 +313,20 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
 
     const currentY = calculateCurrentY(anchorRtl, event.touches, ownerWindow(event.currentTarget));
 
-    if (open && paperRef.current.contains(event.target) && nodeThatClaimedTheSwipe == null) {
+    if (open && paperRef.current.contains(event.target) && claimedSwipeInstance === null) {
       const domTreeShapes = getDomTreeShapes(event.target, paperRef.current);
-      const nativeHandler = findNativeHandler({
+      const hasNativeHandler = computeHasNativeHandler({
         domTreeShapes,
         start: horizontalSwipe ? swipeInstance.current.startX : swipeInstance.current.startY,
         current: horizontalSwipe ? currentX : currentY,
         anchor,
       });
 
-      if (nativeHandler) {
-        nodeThatClaimedTheSwipe = nativeHandler;
+      if (hasNativeHandler) {
+        claimedSwipeInstance = true;
         return;
       }
-      nodeThatClaimedTheSwipe = swipeInstance.current;
+      claimedSwipeInstance = swipeInstance.current;
     }
 
     // We don't know yet.
@@ -351,9 +362,9 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
         // Compensate for the part of the drawer displayed on touch start.
         if (!disableDiscovery && !open) {
           if (horizontalSwipe) {
-            swipeInstance.current.startX -= swipeAreaWidth;
+            swipeInstance.current.startX -= DRAG_STARTED_SIGNAL;
           } else {
-            swipeInstance.current.startY -= swipeAreaWidth;
+            swipeInstance.current.startY -= DRAG_STARTED_SIGNAL;
           }
         }
       }
@@ -426,7 +437,7 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
     }
 
     // We can only have one node at the time claiming ownership for handling the swipe.
-    if (event.muiHandled) {
+    if (event.defaultMuiPrevented) {
       return;
     }
 
@@ -463,8 +474,8 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
       }
     }
 
-    event.muiHandled = true;
-    nodeThatClaimedTheSwipe = null;
+    event.defaultMuiPrevented = true;
+    claimedSwipeInstance = null;
     swipeInstance.current.startX = currentX;
     swipeInstance.current.startY = currentY;
 
@@ -473,7 +484,7 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
       // The ref may be null when a parent component updates while swiping.
       setPosition(
         getMaxTranslate(horizontalSwipe, paperRef.current) +
-          (disableDiscovery ? 20 : -swipeAreaWidth),
+          (disableDiscovery ? 15 : -DRAG_STARTED_SIGNAL),
         {
           changeTransition: false,
         },
@@ -511,8 +522,8 @@ const SwipeableDrawer = React.forwardRef(function SwipeableDrawer(inProps, ref) 
   React.useEffect(
     () => () => {
       // We need to release the lock.
-      if (nodeThatClaimedTheSwipe === swipeInstance.current) {
-        nodeThatClaimedTheSwipe = null;
+      if (claimedSwipeInstance === swipeInstance.current) {
+        claimedSwipeInstance = null;
       }
     },
     [],
@@ -648,7 +659,7 @@ SwipeableDrawer.propTypes = {
    */
   SwipeAreaProps: PropTypes.object,
   /**
-   * The width of the left most (or right most) area in px that
+   * The width of the left most (or right most) area in `px` that
    * the drawer can be swiped open from.
    * @default 20
    */

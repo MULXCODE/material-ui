@@ -58,17 +58,17 @@ export interface TreeViewPropsBase extends StandardProps<React.HTMLAttributes<HT
   /**
    * Callback fired when tree items are focused.
    *
-   * @param {object} event The event source of the callback
+   * @param {object} event The event source of the callback **Warning**: This is a generic event not a focus event.
    * @param {string} value of the focused node.
    */
-  onNodeFocus?: (event: React.ChangeEvent<{}>, nodeId: string) => void;
+  onNodeFocus?: (event: React.SyntheticEvent, nodeId: string) => void;
   /**
    * Callback fired when tree items are expanded/collapsed.
    *
    * @param {object} event The event source of the callback.
    * @param {array} nodeIds The ids of the expanded nodes.
    */
-  onNodeToggle?: (event: React.ChangeEvent<{}>, nodeIds: string[]) => void;
+  onNodeToggle?: (event: React.SyntheticEvent, nodeIds: string[]) => void;
 }
 
 export interface MultiSelectTreeViewProps extends TreeViewPropsBase {
@@ -95,7 +95,7 @@ export interface MultiSelectTreeViewProps extends TreeViewPropsBase {
    * @param {(array|string)} value of the selected nodes. When `multiSelect` is true
    * this is an array of strings; when false (default) a string.
    */
-  onNodeSelect?: (event: React.ChangeEvent<{}>, nodeIds: string[]) => void;
+  onNodeSelect?: (event: React.SyntheticEvent, nodeIds: string[]) => void;
 }
 
 export interface SingleSelectTreeViewProps extends TreeViewPropsBase {
@@ -122,7 +122,7 @@ export interface SingleSelectTreeViewProps extends TreeViewPropsBase {
    * @param {(array|string)} value of the selected nodes. When `multiSelect` is true
    * this is an array of strings; when false (default) a string.
    */
-  onNodeSelect?: (event: React.ChangeEvent<{}>, nodeIds: string) => void;
+  onNodeSelect?: (event: React.SyntheticEvent, nodeIds: string) => void;
 }
 
 export type TreeViewProps = SingleSelectTreeViewProps | MultiSelectTreeViewProps;

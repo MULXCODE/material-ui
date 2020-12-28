@@ -1,8 +1,7 @@
 ---
-title: Dialog React-Komponente
+title: React Dialog component
 components: Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Slide
-githubLabel:
-  component: Dialog
+githubLabel: 'component: Dialog'
 materialDesign: https://material.io/components/dialogs
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#dialog_modal'
 ---
@@ -60,7 +59,7 @@ Formulardialoge ermöglichen Benutzern das Ausfüllen von Formularfeldern innerh
 
 ## Benutzerdefinierter Dialoge
 
-Hier ist ein Beispiel zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/components/).
+Hier ist ein Beispiel zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/how-to-customize/).
 
 Das Dialogfeld verfügt über eine Schaltfläche zum Schließen, um die Benutzerfreundlichkeit zu verbessern.
 
@@ -117,6 +116,10 @@ Wenn Dialoge für das Ansichtsfenster oder das Gerät des Benutzers zu lang werd
 Probieren Sie die Demo aus, um zu sehen, was wir meinen:
 
 {{"demo": "pages/components/dialogs/ScrollDialog.js"}}
+
+## Performance
+
+Folgen Sie den [Modal Zugänglichkeit Abschnitt](/components/modal/#performance).
 
 ## Einschränkungen
 

@@ -1,9 +1,8 @@
 ---
-title: Composant React Button
+title: React Button component
 components: Button, IconButton, ButtonBase
 materialDesign: https://material.io/components/buttons
-githubLabel:
-  component: Button
+githubLabel: 'component: Button'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 ---
 
@@ -27,7 +26,7 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 {{"demo": "pages/components/buttons/ContainedButtons.js"}}
 
-You can remove the elevation with the `disableElevation` prop.
+Vous pouvez supprimer l'élévation avec la propriété `disableElevation`.
 
 {{"demo": "pages/components/buttons/DisableElevation.js"}}
 
@@ -86,7 +85,7 @@ Les icônes sont également appropriées pour les boutons de bascule qui permett
 
 ## Boutons personnalisés
 
-Here are some examples of customizing the component. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/components/).
+Here are some examples of customizing the component. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/how-to-customize/).
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 
@@ -110,7 +109,7 @@ Les boutons texte, les boutons contained, les bouton d'action flottante et les b
 
 ## Bibliothèque de routage tierce
 
-Un cas d'utilisation courant est d'utiliser le bouton pour déclencher la navigation vers une nouvelle page. One common use case is to use the button to trigger navigation to a new page. Cependant, pour certains focus polyfills `ButtonBase` requiert le nœud DOM du composant fourni. Pour ce faire, associez une référence au composant et attendez-vous à ce que le composant transmette cette référence au noeud DOM sous-jacent. Given that many of the interactive components rely on `ButtonBase`, you should be able to take advantage of it everywhere.
+Un cas d'utilisation courant est d'utiliser le bouton pour déclencher la navigation vers une nouvelle page. Un cas d'utilisation courant est d'utiliser le bouton pour déclencher la navigation vers une nouvelle page. Cependant, pour certains focus polyfills `ButtonBase` requiert le nœud DOM du composant fourni. Pour ce faire, associez une référence au composant et attendez-vous à ce que le composant transmette cette référence au noeud DOM sous-jacent. Given that many of the interactive components rely on `ButtonBase`, you should be able to take advantage of it everywhere.
 
 Voici un exemple d'intégration [avec react-router](/guides/composition/#button).
 

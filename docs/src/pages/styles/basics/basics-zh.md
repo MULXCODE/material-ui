@@ -11,6 +11,9 @@ Material-UI 旨在为构建动态的 UI 提供扎实的基础。 Material-UI 旨
 Material-UI 的样式方案来自于许多其他 CSS-in-JS 库的启发，例如 [styled-components](https://www.styled-components.com/) 和 [emotion](https://emotion.sh/)。
 
 - 💅你可以期待和 styled-components [一样的优势](https://www.styled-components.com/docs/basics#motivation)。
+
+<!-- #default-branch-switch -->
+
 - 🚀它的运行[超快的](https://github.com/mui-org/material-ui/blob/next/packages/material-ui-benchmark/README.md#material-uistyles)。
 - 🧩你可以通过一个[插件](https://github.com/cssinjs/jss/blob/master/docs/plugins.md) API 来扩展。
 - ⚡️它使用 [JSS](https://github.com/cssinjs/jss) 为其核心 —— 一个 [高性能的](https://github.com/cssinjs/jss/blob/master/docs/performance.md) JavaScript 到 CSS 的编译器，它在运行时和服务器端编译。
@@ -132,9 +135,9 @@ const useStyles = makeStyles({
     '& p': {
       color: 'green',
       '& span': {
-        color: 'blue'
-      }
-    }
+        color: 'blue',
+      },
+    },
   },
 });
 ```
@@ -147,23 +150,26 @@ const useStyles = makeStyles({
 
 ```jsx
 const useStyles = makeStyles({
-  // style rule
-  foo: props => ({
+  // 样式规则
+  foo: (props) => ({
     backgroundColor: props.backgroundColor,
   }),
   bar: {
     // CSS property
-    color: props => props.color,
+    color: (props) => props.color,
   },
 });
 
 function MyComponent() {
-  // 为了示例，我们模拟了这个属性
-  const props = { backgroundColor: 'black', color: 'white' };
-  // 将 props 作为 useStyles() 的第一个属性传入
+  // 为了这个示例，我们模拟了一些属性
+  const props = {
+    backgroundColor: 'black',
+    color: 'white',
+  };
+  // 将 props 作为 useStyles() 的第一个参数传入
   const classes = useStyles(props);
 
-  return <div className={`${classes.foo} ${classes.bar}`} />
+  return <div className={`${classes.foo} ${classes.bar}`} />;
 }
 ```
 

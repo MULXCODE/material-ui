@@ -1,5 +1,5 @@
 ---
-title: Dialog React component
+title: React Dialog component
 components: Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Slide
 githubLabel: 'component: Dialog'
 materialDesign: https://material.io/components/dialogs
@@ -64,7 +64,7 @@ For example, if your site prompts for potential subscribers to fill in their ema
 ## Customized dialogs
 
 Here is an example of customizing the component. You can learn more about this in the
-[overrides documentation page](/customization/components/).
+[overrides documentation page](/customization/how-to-customize/).
 
 The dialog has a close button added to aide usability.
 
@@ -90,7 +90,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 function MyComponent() {
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return <Dialog fullScreen={fullScreen} />;
 }
@@ -125,6 +125,10 @@ When dialogs become too long for the user’s viewport or device, they scroll.
 Try the demo below to see what we mean:
 
 {{"demo": "pages/components/dialogs/ScrollDialog.js"}}
+
+## Performance
+
+Follow the [Modal performance section](/components/modal/#performance).
 
 ## Limitations
 

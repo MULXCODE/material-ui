@@ -1,5 +1,5 @@
 ---
-title: Accordion React component
+title: React Accordion component
 components: Accordion, AccordionActions, AccordionDetails, AccordionSummary
 githubLabel: 'component: Accordion'
 materialDesign: https://material.io/archive/guidelines/components/expansion-panels.html
@@ -29,18 +29,9 @@ Extend the default behavior to create an accordion with the `Accordion` componen
 ## Customized accordion
 
 Here is an example of customizing the component. You can learn more about this in the
-[overrides documentation page](/customization/components/).
+[overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/accordion/CustomizedAccordions.js"}}
-
-## Additional actions
-
-In order to put an action such as a `Checkbox` or a button inside of the `AccordionSummary`, you need to stop the propagation of the focus and click events to prevent the accordion from
-expanding/collapsing when using the action.
-You should also provide an `aria-label` for the action, otherwise the label of the nested action will be included in
-the label of the parent button that controls the accordion expansion.
-
-{{"demo": "pages/components/accordion/ActionsInAccordionSummary.js", "bg": true}}
 
 ## Performance
 
@@ -56,12 +47,6 @@ accordions it might be a good idea to change this default behavior by enabling t
 
 As with any performance optimization this is not a silver bullet. Be sure to identify
 bottlenecks first and then try out these optimization strategies.
-
-## Secondary heading and columns
-
-Multiple columns can be used to structure the content, and a helper text may be added to the accordion to assist the user.
-
-{{"demo": "pages/components/accordion/DetailedAccordion.js", "bg": true}}
 
 ## Accessibility
 

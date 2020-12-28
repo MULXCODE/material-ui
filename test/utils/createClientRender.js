@@ -5,13 +5,13 @@ import {
   act,
   buildQueries,
   cleanup,
-  createEvent,
   fireEvent as rtlFireEvent,
   queries,
   render as testingLibraryRender,
   prettyDOM,
   within,
 } from '@testing-library/react/pure';
+import userEvent from './user-event';
 
 // holes are *All* selectors which aren't necessary for id selectors
 const [queryDescriptionOf, , getDescriptionOf, , findDescriptionOf] = buildQueries(
@@ -132,9 +132,29 @@ function clientRender(element, options = {}) {
 export function createClientRender(globalOptions = {}) {
   const { strict: globalStrict } = globalOptions;
 
-  // save stack to re-use in async afterEach
+  // save stack to re-use in test-hooks
   const { stack: createClientRenderStack } = new Error();
-  afterEach(async () => {
+
+  /**
+   * Flag whether `createClientRender` was called in a suite i.e. describe() block.
+   * For legacy reasons `createClientRender` might accidentally be called in a before(Each) hook.
+   */
+  let wasCalledInSuite = false;
+  before(() => {
+    wasCalledInSuite = true;
+  });
+
+  beforeEach(() => {
+    if (!wasCalledInSuite) {
+      const error = new Error(
+        'Unable to run `before` hook for `createClientRender`. This usually indicates that `createClientRender` was called in a `before` hook instead of in a `describe()` block.',
+      );
+      error.stack = createClientRenderStack;
+      throw error;
+    }
+  });
+
+  afterEach(() => {
     if (setTimeout.hasOwnProperty('clock')) {
       const error = Error(
         "Can't cleanup before fake timers are restored.\n" +
@@ -157,10 +177,13 @@ export function createClientRender(globalOptions = {}) {
   };
 }
 
-const fireEvent = Object.assign(rtlFireEvent, {
-  // polyfill event.key(Code) for chrome 49 and edge 15 (supported in Material-UI v4)
-  // for user-interactions react does the polyfilling but manually created
-  // events don't have this luxury
+const originalFireEventKeyDown = rtlFireEvent.keyDown;
+const originalFireEventKeyUp = rtlFireEvent.keyUp;
+/**
+ * @type {typeof rtlFireEvent}
+ */
+const fireEvent = (...args) => rtlFireEvent(...args);
+Object.assign(fireEvent, rtlFireEvent, {
   keyDown(element, options = {}) {
     // `element` shouldn't be `document` but we catch this later anyway
     const document = element.ownerDocument || element;
@@ -182,21 +205,7 @@ const fireEvent = Object.assign(rtlFireEvent, {
       throw error;
     }
 
-    const event = createEvent.keyDown(element, options);
-    Object.defineProperty(event, 'key', {
-      get() {
-        return options.key || '';
-      },
-    });
-    if (options.keyCode !== undefined && event.keyCode === 0) {
-      Object.defineProperty(event, 'keyCode', {
-        get() {
-          return options.keyCode;
-        },
-      });
-    }
-
-    rtlFireEvent(element, event);
+    originalFireEventKeyDown(element, options);
   },
   keyUp(element, options = {}) {
     // `element` shouldn't be `document` but we catch this later anyway
@@ -218,26 +227,53 @@ const fireEvent = Object.assign(rtlFireEvent, {
         .join('\n');
       throw error;
     }
-    const event = createEvent.keyUp(element, options);
-    Object.defineProperty(event, 'key', {
-      get() {
-        return options.key || '';
-      },
-    });
-    if (options.keyCode !== undefined && event.keyCode === 0) {
-      Object.defineProperty(event, 'keyCode', {
-        get() {
-          return options.keyCode;
-        },
-      });
-    }
 
-    rtlFireEvent(element, event);
+    originalFireEventKeyUp(element, options);
   },
 });
 
+/**
+ *
+ * @param {Element} target
+ * @param {'touchmove' | 'touchend'} type
+ * @param {object} options
+ * @param {Array<Pick<TouchInit, 'clientX' | 'clientY'>} options.changedTouches
+ * @returns void
+ */
+export function fireTouchChangedEvent(target, type, options) {
+  const { changedTouches } = options;
+  const originalGetBoundingClientRect = target.getBoundingClientRect;
+  target.getBoundingClientRect = () => ({
+    x: 0,
+    y: 0,
+    bottom: 0,
+    height: 0,
+    left: 0,
+    right: 0,
+    top: 0,
+    width: 0,
+  });
+
+  const event = new window.TouchEvent(type, {
+    bubbles: true,
+    cancelable: true,
+    composed: true,
+    changedTouches: changedTouches.map(
+      (opts) =>
+        new window.Touch({
+          target,
+          identifier: 0,
+          ...opts,
+        }),
+    ),
+  });
+
+  fireEvent(target, event);
+  target.getBoundingClientRect = originalGetBoundingClientRect;
+}
+
 export * from '@testing-library/react/pure';
-export { act, cleanup, fireEvent };
+export { act, cleanup, fireEvent, userEvent };
 // We import from `@testing-library/react` and `@testing-library/dom` before creating a JSDOM.
 // At this point a global document isn't available yet. Now it is.
 export const screen = within(document.body);

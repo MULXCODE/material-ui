@@ -71,6 +71,10 @@ Fancy smaller inputs? Use the `size` prop.
 
 {{"demo": "pages/components/text-fields/TextFieldSizes.js"}}
 
+The `filled` variant input height can be further reduced by rendering the label outside of it.
+
+{{"demo": "pages/components/text-fields/TextFieldHiddenLabel.js"}}
+
 ## Layout
 
 `margin` prop can be used to alter the vertical spacing of inputs.
@@ -117,7 +121,7 @@ The `color` prop changes the highlight color of the text field when focused.
 ## Customized inputs
 
 Here are some examples of customizing the component. You can learn more about this in the
-[overrides documentation page](/customization/components/).
+[overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/text-fields/CustomizedInputs.js"}}
 
@@ -191,8 +195,7 @@ The following demo uses the [react-text-mask](https://github.com/text-mask/text-
 
 {{"demo": "pages/components/text-fields/FormattedInputs.js"}}
 
-The provided input component should handle the `inputRef` property.
-The property should be called with a value that implements the following interface:
+The provided input component should expose a ref with a value that implements the following interface:
 
 ```ts
 interface InputElement {
@@ -202,11 +205,11 @@ interface InputElement {
 ```
 
 ```jsx
-function MyInputComponent(props) {
-  const { component: Component, inputRef, ...other } = props;
+const MyInputComponent = React.forwardRef((props, ref) => {
+  const { component: Component, ...other } = props;
 
   // implement `InputElement` interface
-  React.useImperativeHandle(inputRef, () => ({
+  React.useImperativeHandle(ref, () => ({
     focus: () => {
       // logic to focus the rendered component from 3rd party belongs here
     },
@@ -215,7 +218,7 @@ function MyInputComponent(props) {
 
   // `Component` will be your `SomeThirdPartyComponent` from below
   return <Component {...other} />;
-}
+});
 
 // usage
 <TextField
@@ -247,9 +250,7 @@ In order for the text field to be accessible, **the input should be linked to th
 <FormControl>
   <InputLabel htmlFor="my-input">Email address</InputLabel>
   <Input id="my-input" aria-describedby="my-helper-text" />
-  <FormHelperText id="my-helper-text">
-    We'll never share your email.
-  </FormHelperText>
+  <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
 </FormControl>
 ```
 

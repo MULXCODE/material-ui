@@ -1,8 +1,7 @@
 ---
-title: Accordéon Composant React
+title: React Accordion component
 components: Accordion, AccordionActions, AccordionDetails, AccordionSummary
-githubLabel:
-  component: Accordéon (Panneau d'extension)
+githubLabel: 'component: Accordion'
 materialDesign: https://material.io/archive/guidelines/components/expansion-panels.html
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#accordion'
 ---
@@ -29,15 +28,9 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#accordion'
 
 ## Customized accordions
 
-Voici un exemple de personnalisation du composant. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/components/).
+Voici un exemple de personnalisation du composant. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/how-to-customize/).
 
 {{"demo": "pages/components/accordion/CustomizedAccordions.js"}}
-
-## Actions supplémentaires
-
-Pour pouvoir exécuter une action comme une  `Checkbox`  ou un bouton à l'intérieur du `AccordionSummary`, vous aurez besoin d'arrêter la propagation du focus et de l'évènement de clique sur l'accordéon à partir de l'expansion/réduction au moment de son utilisation. Vous devriez également fournir un `aria-label` pour l'action, autrement le label de l'action imbriquer sera inclus dans le label du bouton parent qui contrôle l'expansion de l'accordéon.
-
-{{"demo": "pages/components/accordion/ActionsInAccordionSummary.js", "bg": true}}
 
 ## Performances
 
@@ -48,12 +41,6 @@ Le contenu de l'accordéon est monter par défaut et se même si l'accordéon n'
 ```
 
 Se n'est tout de même pas une solution miracle. Soyez sure de d'abord identifier les goulot d'étranglement et ensuite de considérer ses stratégies d'optimisation.
-
-## Titres et colonnes secondaire
-
-Plusieurs colonnes peuvent être utilisées pour structurer le contenu et un texte d'assistance peut être ajouté a l'accordéon pour aider l'utilisateur.
-
-{{"demo": "pages/components/accordion/DetailedAccordion.js", "bg": true}}
 
 ## Accessibilité
 

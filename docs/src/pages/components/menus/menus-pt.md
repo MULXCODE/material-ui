@@ -1,23 +1,22 @@
 ---
-title: Componente React para Menu
+title: Componente React Menu
 components: Menu, MenuItem, MenuList, ClickAwayListener, Popover, Popper
-githubLabel:
-  component: Menu
+githubLabel: 'component: Menu'
 materialDesign: https://material.io/components/menus
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#menubutton'
 ---
 
-# Menus
+# Menu
 
 <p class="description">Os menus exibem uma lista de opções em superfícies temporárias.</p>
 
-O [Menu](https://material.io/design/components/menus.html) exibe uma lista de opções em uma superfície temporária. Aparece quando o usuário interage com um botão ou outro controle.
+O menu exibe uma lista de opções em uma superfície temporária. Aparece quando o usuário interage com um botão ou outro controle.
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
-## Menu simples
+## Menu básico
 
-Menus simples abrem sobre o elemento âncora por padrão (esta opção pode ser alterada via props). Quando estão perto de uma borda da tela, menus simples realinham verticalmente para garantir que todos os itens do menu fiquem completamente visíveis.
+Um menu básico abre sobre o elemento âncora por padrão (esta opção pode ser [alterada](#menu-positioning) através de propriedades). Quando estão perto de uma borda da tela, menus básicos realinham verticalmente para garantir que todos os itens do menu fiquem completamente visíveis.
 
 Escolhendo uma opção deve confirmar imediatamente a opção e fechar o menu.
 
@@ -25,11 +24,17 @@ Escolhendo uma opção deve confirmar imediatamente a opção e fechar o menu.
 
 {{"demo": "pages/components/menus/SimpleMenu.js"}}
 
-## Menus Selecionados
+## Menu selecionado
 
 Se usado para a seleção de itens, quando abertos, menus simples tentam alinhar verticalmente o item de menu atualmente selecionado com o elemento de âncora, e o foco inicial será colocado no item de menu selecionado. O item de menu atualmente selecionado é definido usando a propriedade`selected`(de [ListItem](/api/list-item/)). Para usar um item de menu selecionado sem afetar o foco inicial ou o posicionamento vertical do menu, defina a propriedade `variant` como `menu`.
 
 {{"demo": "pages/components/menus/SimpleListMenu.js"}}
+
+## Menu posicionado
+
+Devido ao componente `Menu` usar o componente `Popover` para se posicionar, você pode usar as mesmas [propriedades de posicionamento](/components/popover/#anchor-playground) para posicioná-lo. Por exemplo, você pode exibir o menu abaixo da âncora:
+
+{{"demo": "pages/components/menus/PositionedMenu.js"}}
 
 ## Composição de MenuList
 
@@ -39,9 +44,9 @@ A principal responsabilidade do componente `MenuList` é manipular o foco.
 
 {{"demo": "pages/components/menus/MenuListComposition.js", "bg": true}}
 
-## Menus customizados
+## Menu customizado
 
-Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/menus/CustomizedMenus.js"}}
 
@@ -49,7 +54,7 @@ O `MenuItem` é um encapsulador em torno de `ListItem` com alguns estilos adicio
 
 🎨 Se você está procurando inspiração, você pode verificar [os exemplos de customização de MUI Treasury](https://mui-treasury.com/styles/menu).
 
-## Altura máxima dos menus
+## Altura máxima dos menu
 
 Se a altura de um menu impede que todos os itens de menu sejam exibidos, o menu terá internamente a opção de rolagem.
 

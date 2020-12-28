@@ -47,7 +47,7 @@ export type InternalStandardProps<C, Removals extends keyof C = never> = Omit<
     style?: React.CSSProperties;
   };
 
-export type PaletteType = 'light' | 'dark';
+export type PaletteMode = 'light' | 'dark';
 export interface Color {
   50: string;
   100: string;
@@ -66,9 +66,7 @@ export interface Color {
 }
 
 export namespace PropTypes {
-  type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
   type Color = 'inherit' | 'primary' | 'secondary' | 'default';
-  type Margin = 'none' | 'dense' | 'normal';
 }
 
 // From index.js
@@ -92,11 +90,23 @@ export * from './AccordionDetails';
 export { default as AccordionSummary } from './AccordionSummary';
 export * from './AccordionSummary';
 
+export { default as Alert } from './Alert';
+export * from './Alert';
+
+export { default as AlertTitle } from './AlertTitle';
+export * from './AlertTitle';
+
 export { default as AppBar } from './AppBar';
 export * from './AppBar';
 
+export { default as Autocomplete } from './Autocomplete';
+export * from './Autocomplete';
+
 export { default as Avatar } from './Avatar';
 export * from './Avatar';
+
+export { default as AvatarGroup } from './AvatarGroup';
+export * from './AvatarGroup';
 
 export { default as Backdrop } from './Backdrop';
 export * from './Backdrop';
@@ -296,6 +306,12 @@ export * from './NoSsr';
 export { default as OutlinedInput } from './OutlinedInput';
 export * from './OutlinedInput';
 
+export { default as Pagination } from './Pagination';
+export * from './Pagination';
+
+export { default as PaginationItem } from './PaginationItem';
+export * from './PaginationItem';
+
 export { default as Paper } from './Paper';
 export * from './Paper';
 
@@ -314,11 +330,17 @@ export * from './Radio';
 export { default as RadioGroup } from './RadioGroup';
 export * from './RadioGroup';
 
+export { default as Rating } from './Rating';
+export * from './Rating';
+
 export { default as ScopedCssBaseline } from './ScopedCssBaseline';
 export * from './ScopedCssBaseline';
 
 export { default as Select } from './Select';
 export * from './Select';
+
+export { default as Skeleton } from './Skeleton';
+export * from './Skeleton';
 
 export { default as Slide } from './Slide';
 export * from './Slide';
@@ -331,6 +353,15 @@ export * from './Snackbar';
 
 export { default as SnackbarContent } from './SnackbarContent';
 export * from './SnackbarContent';
+
+export { default as SpeedDial } from './SpeedDial';
+export * from './SpeedDial';
+
+export { default as SpeedDialAction } from './SpeedDialAction';
+export * from './SpeedDialAction';
+
+export { default as SpeedDialIcon } from './SpeedDialIcon';
+export * from './SpeedDialIcon';
 
 export { default as Step } from './Step';
 export * from './Step';
@@ -404,6 +435,12 @@ export * from './TextField';
 export { default as TextareaAutosize } from './TextareaAutosize';
 export * from './TextareaAutosize';
 
+export { default as ToggleButton } from './ToggleButton';
+export * from './ToggleButton';
+
+export { default as ToggleButtonGroup } from './ToggleButtonGroup';
+export * from './ToggleButtonGroup';
+
 export { default as Toolbar } from './Toolbar';
 export * from './Toolbar';
 
@@ -422,11 +459,13 @@ export * from './useMediaQuery';
 export { default as useScrollTrigger } from './useScrollTrigger';
 export * from './useScrollTrigger';
 
-export { default as withMobileDialog } from './withMobileDialog';
-export * from './withMobileDialog';
-
 export { default as withWidth } from './withWidth';
 export * from './withWidth';
 
 export { default as Zoom } from './Zoom';
 export * from './Zoom';
+
+export { default as useAutocomplete } from './useAutocomplete';
+export * from './useAutocomplete';
+
+export { StylesProvider } from '@material-ui/styled-engine';

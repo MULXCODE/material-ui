@@ -1,10 +1,8 @@
 ---
-title: Componente de Autocompletado de React
+title: React Autocomplete component
 components: TextField, Popper, Autocomplete
-githubLabel:
-  component: Autocompletado
+githubLabel: 'component: Autocomplete'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#combobox'
-packageName: '@material-ui/lab'
 ---
 
 # Autocompletado
@@ -14,7 +12,7 @@ packageName: '@material-ui/lab'
 El widget es útil para establecer el valor de un cuadro de texto de una sola línea en uno de los dos tipos de escenarios:
 
 1. El valor para el cuadro de texto debe elegirse de un conjunto predefinido de valores permitidos, por ejemplo, un campo de ubicación debe contener un nombre de ubicación válido: [cuadro combinado](#combo-box).
-2. El cuadro de texto puede contener cualquier valor arbitrario, pero es ventajoso sugerir posibles valores al usuario, por ejemplo, un campo de búsqueda puede sugerir búsquedas similares o anteriores para ahorrarle tiempo al usuario: [gratis solo](#free-solo).
+2. El cuadro de texto puede contener cualquier valor arbitrario, pero es de gran ventaja sugerir posibles valores al usuario, por ejemplo, un campo de búsqueda puede sugerir búsquedas similares o anteriores para ahorrarle tiempo al usuario: [solo libre](#free-solo).
 
 Esto pretende ser una versión mejorada de los paquetes "react-select" y "downshift".
 
@@ -112,10 +110,10 @@ Puedes agrupar las opciones con el accesorio `groupBy`. Si lo haces, asegúrate 
 
 ## `useAutocomplete`
 
-Para la personalización avanzada de casos de uso, exponemos un hook `useAutocomplete()`. Acepta casi las mismas opciones que el componente Autocompletar menus las propiedades relacionadas al renderizado de JSX. El componente Autocompletar usa este hook internamente.
+For advanced customization use cases, we expose a headless `useAutocomplete()` hook. Acepta casi las mismas opciones que el componente Autocompletar menus las propiedades relacionadas al renderizado de JSX. El componente Autocompletar usa este hook internamente.
 
 ```jsx
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
+importar useAutocomplete de '@material-ui/core/useAutocomplete';
 ```
 
 - 📦 [4.5 kB comprimido](/size-snapshot).
@@ -196,9 +194,9 @@ Fancy smaller inputs? Use the `size` prop.
 
 ## Personalización
 
-### Custom input
+### Input personalizado
 
-The `renderInput` prop allows you to customize the rendered input. The first argument of this render prop contains props that you need to forward. Pay specific attention to the `ref` and `inputProps` keys.
+El apoyo `renderInput` te permite personalizar la entrada renderizada. El primer argumento de este apoyo renderizado contiene apoyos que necesitas para avanzar. Ponga atención específica a las claves `red` y `inputProps`.
 
 {{"demo": "pages/components/autocomplete/CustomInputAutocomplete.js"}}
 
@@ -221,7 +219,7 @@ La siguiente demostración se basa en [autosuggest-highlight](https://github.com
 El componente expone una factoría para crear un método de filtrado para proveer a la propiedad `filterOptions`. Puede usarse para cambiar el comportamiento de filtrado por defecto.
 
 ```js
-import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import { createFilterOptions } from '@material-ui/core/Autocomplete';
 ```
 
 ### `createFilterOptions(config) => filterOptions`
@@ -261,8 +259,7 @@ Para mecanismos de filtrado más completos, como la coincidencia aproximada, se 
 ```jsx
 import matchSorter from 'match-sorter';
 
-const filterOptions = (options, { inputValue }) =>
-  matchSorter(options, inputValue);
+const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue);
 
 <Autocomplete filterOptions={filterOptions} />;
 ```
@@ -273,19 +270,34 @@ Buscar entre 10.000 opciones generadas al azar. La lista está virtualizada grac
 
 {{"demo": "pages/components/autocomplete/Virtualize.js"}}
 
+## Events
+
+If you would like to prevent the default key handler behavior, you can set the event's `defaultMuiPrevented` property to `true`:
+
+```jsx
+<Autocomplete
+  onKeyDown={(event) => {
+    if (event.key === 'Enter') {
+      // Prevent's default 'Enter' behavior.
+      event.defaultMuiPrevented = false;
+      // your handler code
+    }
+  }}
+/>
+```
+
 ## Limitaciones
 
 ### autocompletar/autorellenar
 
 Los navegadores tienen heurísticos para ayudar a los usuarios a rellenar el formulario. Sin embargo, puede dañar la experiencia de usuario del componente.
 
-Dirígete a la sección [Autocompletar Personalizado](#customized-autocomplete) para un ejemplo de personalización con el componente `Autcompletar` en vez del hook.
+By default, the component disables the **autocomplete** feature (remembering what the user has typed for a given field in a previous session) with the `autoComplete="off"` attribute. Google Chrome does not currently support this attribute setting ([Issue 587466](https://bugs.chromium.org/p/chromium/issues/detail?id=587466)). A possible workaround is to remove the `id` to have the component generate a random one.
 
-Sin embargo, además de recordar el valor introducido anteriormente, el navegador también puede proponer sugerencias **autorellenadas** (inicio de sesión guardado, la dirección o detalles de pago). En el caso de que desees evitar el autorellenar, puedes intentar lo siguiente:
+In addition to remembering past entered values, the browser might also propose **autofill** suggestions (saved login, address, or payment details). En el caso de que desees evitar el autorellenar, puedes intentar lo siguiente:
 
 - Nombra la entrada sin filtrar ninguna información que el navegador pueda utilizar. p.e. `id="field1"` en vez de `id="country"`. Si dejas el id de vacío, el componente utiliza un identificador aleatorio.
-- Establecer `autoComplete="new-password"`: jsx Establecer `autoComplete="new-password": 
-        jsx`
+- Set `autoComplete="new-password"` (some browsers will suggest a strong password for inputs with this attribute setting):
 
   ```jsx
   inputProps={{
@@ -295,16 +307,18 @@ Sin embargo, además de recordar el valor introducido anteriormente, el navegado
       /&#062;
   ```
 
+Read [the guide on MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion) for more details.
+
 ### iOS VoiceOver
 
 VoiceOver en iOS Safari no soporta el atributo `aria-owns` especialmente bien. Puedes solucionar el problema con la propiedad `disablePortal`.
 
 ### ListboxComponent
 
-If you provide a custom `ListboxComponent` prop, you need to make sure that the intended scroll container has the `role` attribute set to `listbox`. This ensures the correct behavior of the scroll, for example when using the keyboard to navigate.
+Si proporciona un apoyo personalizado `ListboxComponent`, usted necesita asegurarse de que el contedenedor de desplazamiento destinado tiene el atributo `role` esta configurado `listbox`. Esto asegura el comportamiento correcto del desplazamiento, por ejemplo cuando usas el teclado para navegar.
 
 ## Accesibilidad
 
 (WAI-ARIA: https://www.w3.org/TR/wai-aria-practices/#combobox)
 
-We encourage the usage of a label for the textbox. The component implements the WAI-ARIA authoring practices.
+Animamos el uso de una etiqueta para el cuadro de texto. El componente implementa las prácticas de creación de WAI-ARIA.

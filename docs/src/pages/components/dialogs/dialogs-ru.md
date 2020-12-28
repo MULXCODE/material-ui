@@ -1,8 +1,7 @@
 ---
-title: Диалог, компонент React
+title: Компонент React Dialog
 components: Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Slide
-githubLabel:
-  component: Dialog
+githubLabel: 'component: Dialog'
 materialDesign: https://material.io/components/dialogs
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#dialog_modal'
 ---
@@ -60,7 +59,7 @@ Use title bar alerts only for high-risk situations, such as the potential loss o
 
 ## Индивидуальные диалоги
 
-Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 Данный диалог имеет кнопку закрытия, добавленную для удобства использования.
 
@@ -117,6 +116,10 @@ function MyComponent() {
 Попробуйте демо ниже, чтобы увидеть, что мы имеем в виду:
 
 {{"demo": "pages/components/dialogs/ScrollDialog.js"}}
+
+## Производительность
+
+Перейдите в раздел [Modal performance section](/components/modal/#performance).
 
 ## Ограничения
 

@@ -1,8 +1,7 @@
 ---
 title: Componente Barra de Aplicativos para React
 components: AppBar, Toolbar, Menu
-githubLabel:
-  component: Uma barra de aplicativos proeminente.
+githubLabel: 'component: AppBar'
 materialDesign: https://material.io/components/app-bars-top
 ---
 
@@ -54,7 +53,7 @@ Uma barra de aplicativos proeminente.
 
 Quando você renderiza a barra de aplicativos com um posicionamento fixo, a dimensão do elemento não afeta o resto da página. Isso pode fazer com que parte do seu conteúdo pareça estar invisível, atrás da barra de aplicativos. Aqui estão 3 soluções possíveis:
 
-1. Você pode usar `position="sticky"` ao invés de fixed. ⚠️ sticky não é suportado pelo IE 11.
+1. Você pode usar `position="sticky"` ao invés de fixed. ⚠️ sticky não é suportado pelo IE11.
 2. Você pode renderizar um segundo componente `<Toolbar />`:
 
 ```jsx
@@ -114,7 +113,7 @@ Um botão de ação flutuante aparece na rolagem para facilitar o retorno ao top
 
 #### Argumentos
 
-1. `options` (*Object* [opcional]):
+1. `options` (_Object_ [opcional]):
 
    - `options.disableHysteresis` (*Boolean* [opcional]): Padrão `false`. Desabilita a histerese. Ignora a direção de rolagem ao determinar o valor de `trigger`.
    - `options.target` (*Node* [opcional]): Padrão `window`.

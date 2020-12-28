@@ -1,5 +1,1421 @@
 ### [Versions](https://material-ui.com/versions/)
 
+## 5.0.0-alpha.20
+
+###### _Dec 21, 2020_
+
+Big thanks to the 13 contributors who made this release possible. Here are some highlights ✨:
+
+- 👩‍🎤 Migrate the Typography to emotion (#23841) @DanailH
+
+  This change allows to add typography variants in the theme and to use them directly:
+
+  ```jsx
+  const theme = createMuiTheme({
+    typography: {
+      poster: {
+        color: 'red',
+      },
+    },
+  });
+  <Typography variant="poster">poster</Typography>;
+  ```
+
+  [A full demo](https://codesandbox.io/s/fontsizetheme-material-demo-forked-l9u05?file=/demo.tsx:725-773)
+
+- 📚 Add a shortcut to open the Algolia search (#23959) @hmaddisb.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.20`/`@material-ui/unstyled@v5.0.0-alpha.20`
+
+#### Breaking changes
+
+- [CssBaseline] Change body font size to body1 (1rem) (#24018) @mbrookes
+
+  The new default matches the variant used by the Typography component. To return to the previous size, you can override it in the theme:
+
+  ```js
+  const theme = createMuiTheme({
+    typography: {
+      body1: {
+        fontSize: '0.875rem',
+      },
+    },
+  });
+  ```
+
+#### Changes
+
+- [Badge] Fix the classes description to reflect the correct component (#24035) @mnajdova
+- [Select] Fix aria-describedby attribute (#24027) @HVish
+- [Skeleton] Fix Circle border radius on Safari (#24054) @anatolzak
+- [Slider][badge] Fix classes prop not working (#24034) @mnajdova
+- [Typography] Migrate styles to emotion (#23841) @DanailH
+
+### `@material-ui/styled-engine@v5.0.0-alpha.20`/`@material-ui/styled-engine-sc@v5.0.0-alpha.20`
+
+- [styled-engine] Add name and slot options (#23964) @mnajdova
+- [styled-engine] Add StylesProvider with injectFirst option (#23934) @mnajdova
+
+### `@material-ui/system@v5.0.0-alpha.20`
+
+- [system] Fix transform not firing when theme provided (#24010) @ZovcIfzm
+
+### Docs
+
+- [docs] Add a shortcut to access the search bar (#23959) @hmaddisb
+- [docs] Animate component's mounting and unmounting (#24049) @cjoecker
+- [docs] Fix collapse API docs description of 'hidden' style condition (#24053) @jaiwanth-v
+- [docs] Improve color demo snippet spacing (#24009) @yukinoda
+- [docs] Improve displayed versions (#24051) @oliviertassinari
+- [docs] Show a better file on codesandbox (#24052) @oliviertassinari
+- [docs] Update customization/components and customization/global pages (#24016) @mnajdova
+- [docs] Update the CSS injection guide (#24020) @mnajdova
+
+### Core
+
+- [core] Batch small changes (#24038) @oliviertassinari
+- [core] Track size of /unstyled (#24021) @eps1lon
+- [core] Use consistent naming scheme for ttp annotations (#24022) @eps1lon
+## 5.0.0-alpha.19
+
+###### _Dec 13, 2020_
+
+Big thanks to the 24 contributors who made this release possible. Here are some highlights ✨:
+
+- 👩‍🎤 Migrate the Badge to emotion (#23745) @mnajdova.
+- 🌏 Add infrastructure to translate the API pages (#23852) @mbrookes.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.19`
+
+#### Breaking changes
+
+- [Icon][svgicon] Change default fontSize from default to medium (#23950) @mbrookes
+
+  The default value of `fontSize` was changed from `default` to `medium` for consistency.
+  In the unlikey event that you were using the value `default`, the prop can be removed:
+
+  ```diff
+  -<SvgIcon fontSize="default">{iconPath}</SvgIcon>
+  +<SvgIcon>{iconPath}</SvgIcon>
+  ```
+
+- [TextField] Add size prop for outlined and filled input (#23832) @mayralgr
+
+  Rename `marginDense` and `inputMarginDense` classes to `sizeSmall` and `inputSizeSmall` to match the prop.
+
+#### Changes
+
+- [Autocomplete] Document onChange last `details` param (#23942) @natac13
+- [Autocomplete] Fix useAutocomplete groupedOptions type (#23854) @ZachCMP
+- [Autocomplete] Improve DX/UX when getOptionLabel is not configured correctly (#23884) @marianayap
+- [Autocomplete] Improve getOptionSelected description (#23817) @smartshivkat
+- [Badge] Create unstyled component & move to emotion (#23745) @mnajdova
+- [Grid] Improve support for nested grid (#23913) @gbrochar
+- [Grid] Fix side effects when direction="column" and xs={} is used (#23900) @Kai-W
+- [Select] Fix description, value is not required (#23940) @natac13
+- [Slider] Remove color prop in unstyled (#23840) @mnajdova
+- [Slider] Replaced inlined isHostComponent with the utils (#23880) @mnajdova
+- [SwipeableDrawer] Refactor internals (#23944) @eps1lon
+- [TextField] Add documentation for hidden label (#23915) @Fredestrik
+- [TextField] Fix the color leak of the textbox (#23912) @szabgab
+- [useMediaQuery] Fix a false return at the first call (#23806) @marthaerm
+- [utils] Fix minified errors throwing with \_formatMuiErrorMessage (#23828) @eps1lon
+
+### `@material-ui/unstyled@v5.0.0-alpha.19`
+
+- [core] Use Lerna to publish (#23793) @oliviertassinari
+
+### `@material-ui/system@v5.0.0-alpha.19`
+
+#### Breaking changes
+
+- [system] Move visually hidden helper to utils (#23974) @eps1lon
+
+  Only applies if you've installed v5.0.0-alpha.1
+
+  ```diff
+  -import { visuallyHidden } from '@material-ui/system';
+  +import { visuallyHidden } from '@material-ui/utils';
+  ```
+
+#### Changes
+
+- [core] Use Lerna to publish (#23793) @oliviertassinari
+
+### `@material-ui/lab@v5.0.0-alpha.19`
+
+- [core] Use Lerna to publish (#23793) @oliviertassinari
+
+### `@material-ui/utils@v5.0.0-alpha.19`
+
+- [core] Use Lerna to publish (#23793) @oliviertassinari
+
+### `@material-ui/styles@v5.0.0-alpha.19`
+
+- [core] Use Lerna to publish (#23793) @oliviertassinari
+
+### Docs
+
+- [example] Change Box to new sx prop (#23937) @natac13
+- [example] Explain package choice (#23938, #23958) @mnajdova
+- [example] Update nextjs examples to fix hydration (#23936) @mnajdova
+- [docs] Add API tradeoff section for the sx prop (#23962) @mnajdova
+- [docs] Add ELEVATOR to backers (#23977) @mbrookes
+- [docs] Add eslint rule to docs (#23843) @jens-ox
+- [docs] Add infrastructure to translate API pages (#23852) @mbrookes
+- [docs] Add link to the sx docs page in the API description (#23967) @mnajdova
+- [docs] Add prepend option on emotion caches to allow JSS style overrides (#23892) @mnajdova
+- [docs] Add Vercel deploy config (#23910) @eps1lon
+- [docs] Allow codesandbox deploy for demos in X (#23644) @oliviertassinari
+- [docs] Copy icons to clipboard (#23850) @CodeWithGuruji
+- [docs] Fix breakpoints typos (#23893) @mnajdova
+- [docs] Fix color contrast of code within links (#23819) @eps1lon
+- [docs] Fix duplicated styles generated from emotion (#23809) @mnajdova
+- [docs] Fix icon alignment in /components/breadcrumbs (#23818) @eps1lon
+- [docs] Fix production deploy (#23963) @eps1lon
+- [docs] Fix source on Github links (#23821) @praveenkumar-kalidass
+- [docs] Fix StickyHeaderTable round borders (#23882) @antoniopacheco
+- [docs] Fix typo in date picker dayjs adapter name (#23935) @andresmrm
+- [docs] Improve system properties page (#23961) @mnajdova
+- [docs] Link module augmentation in TypeScript @oliviertassinari
+- [docs] Make stable width of localization example (#23820) @sujinleeme
+- [docs] Mention Adobe XD (#23978) @oliviertassinari
+- [docs] Prefer system shorthands (#23970) @oliviertassinari
+- [docs] Remove 'TODO' comment from buildApi script (#23973) @mbrookes
+- [docs] Sync translations (#23742, #23842) @l10nbot
+- [docs] Update Badge examples to use Box instead of makeStyles (#23927) @mnajdova
+
+### Core
+
+- [test] Add conformance tests for testing the `theme.components` options for the v5 components (#23896) @mnajdova
+- [test] Include type path mappings in language server (#23905) @eps1lon
+- [test] Make Popper tests StrictMode agnostic (#23838) @eps1lon
+- [test] Run benchmarks in Azure Pipelines when approved (#23895) @eps1lon
+- [test] Skip tests with cascading network requests (#23823) @eps1lon
+- [core] All packages are published from /build (#23886) @oliviertassinari
+- [core] Batch small changes (#23853) @oliviertassinari
+- [core] Fix failing CI on HEAD (#23947) @oliviertassinari
+- [core] Force LF for text files (#23932) @eps1lon
+- [core] Improve envinfo instructions (#23918) @eps1lon
+- [core] Replace fs-extra deprecated function (exists) (#23848) @leonardopliski
+- [core] Use Lerna to publish (#23793) @oliviertassinari
+- [core] Use playwright instead of puppeteer (#23906) @eps1lon
+- [core] Add envinfo --json flag (#23883) @eps1lon
+- [core] Ask for output from envinfo in issues (#23881) @eps1lon
+
+## 5.0.0-alpha.18
+
+###### _Dec 3, 2020_
+
+Big thanks to the 17 contributors who made this release possible. Here are some highlights ✨:
+
+- Fix most of the issues with the system (#23716, #23635, #23737, #23733, #23700, #23688) @mnajdova.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.18`
+
+#### Breaking changes
+
+- [Box] Remove deprecated props (#23716) @mnajdova
+  All props are now available under the `sx` prop. A deprecation will be landing in v4.
+  Thanks to @mbrookes developers can automate the migration with a [codemod](https://github.com/mui-org/material-ui/blob/next/packages/material-ui-codemod/README.md#box-sx-prop).
+
+  ```diff
+  -<Box p={2} bgColor="primary.main">
+  +<Box sx={{ p: 2, bgColor: 'primary.main' }}>
+  ```
+
+#### Changes
+
+- [Autocomplete] Add ability to override key down events handlers (#23487) @hessaam
+- [Autocomplete] Better isolate test case (#23704) @oliviertassinari
+- [Autocomplete] Fix highlight change event (#23718) @TakumaKira
+- [Box] Fix TypeScript issue when component prop is used (#23686) @mnajdova
+- [experimentalStyled] Make sx style fn optional (#23714) @mnajdova
+- [l10n] Improve Brazilian (pt-BR) locale (#23707) @m4rcelofs
+- [l10n] Improve Korean (ko-KR) locale (#23794) @sujinleeme
+- [Select] Add disabled attribute in input element when disabled (#23778) @praveenkumar-kalidass
+- [Switch] Add preventDefault check for state change (#23786) @praveenkumar-kalidass
+- [Tabs] Remove duplicate styles (#23561) @cmfcmf
+
+### `@material-ui/system@v5.0.0-alpha.18`
+
+- [system] Allow values to use shorter string when the prop name is contained in the value (#23635) @mnajdova
+- [system] Another round of perf improvements (#23737) @mnajdova
+- [system] Fix transform return value to support CSSObject (#23733) @mnajdova
+- [system] Make borderRadius multiply a theme's design token (#23700) @mnajdova
+- [system] Various perf gain experiments (#23688) @mnajdova
+
+### `@material-ui/styles@v5.0.0-alpha.18`
+
+- [styles] Small performance gain (#23749) @oliviertassinari
+- [styles] Update mergeClasses types to more closely match its implementation (#23705) @etrepum
+
+### `@material-ui/utils@v5.0.0-alpha.18`
+
+- [system] Another round of perf improvements (#23737) @mnajdova
+
+### `@material-ui/lab@v5.0.0-alpha.18`
+
+- [DatePicker] Found one prop that was renamed (#23676) @oliviertassinari
+- [DateRangePicker] Allow same date selection (#23701) @hmaddisb
+
+### `@material-ui/styled-engine@v5.0.0-alpha.18`/`@material-ui/styled-engine-sc@v5.0.0-alpha.18`
+
+- [styled-engine] Fix tagged template syntax with multiple expressions (#23269) @eps1lon
+
+### Docs
+
+- [docs] Add settings panel to allow system mode (#23722) @mbrookes
+- [docs] Add v5 peer dependencies in README (#23751) @johnrichardrinehart
+- [docs] Document using codesandbox-ci (#23800) @brorlarsnicklas
+- [docs] Fix link name for canadacasino (#23799) @eps1lon
+- [docs] Fix various a11y issues reported by lighthouse (#23791) @eps1lon
+- [docs] Improve prop descriptions (#23723) @oliviertassinari
+- [docs] Improve SEO structure (#23748) @oliviertassinari
+- [docs] Improve settings toggle button styling (#23754) @mbrookes
+- [docs] Misc fixes (#23756) @mbrookes
+- [docs] Move instructions for starting the docs earlier in the file (#23801) @brorlarsnicklas
+- [docs] Prepare v5.0.0-alpha.17 (#23680) @oliviertassinari
+- [docs] Remove unused abstraction (#23724) @oliviertassinari
+- [docs] Sync translations (#23682) @l10nbot
+
+### Core
+
+- [benchmark] Improve printed results (#23729) @oliviertassinari
+- [benchmark] Test styleFunctionSx vs. @styled-system/css (#23702) @mnajdova
+- [benchmark] Update with latest (#23694) @oliviertassinari
+- [core] Batch small changes (#23678) @oliviertassinari
+- [core] Fix ci @oliviertassinari
+- [core] Fix error handling on upload (#23734) @eps1lon
+- [core] Fully clear composite TypeScript project state (#23805) @eps1lon
+- [core] Remove unused classes (#23473) @jens-ox
+- [test] Add conformance test suite for v5 (#23798) @mnajdova
+- [test] Cleanup skipped tests (#23732) @eps1lon
+- [test] Misc improvements to experimental and browser test runner (#23699) @eps1lon
+- [test] Stay busy until document.fonts is ready (#23736) @eps1lon
+
+## 5.0.0-alpha.17
+
+###### _Nov 23, 2020_
+
+Big thanks to the 18 contributors who made this release possible. Here are some highlights ✨:
+
+- 📚 Improve the IntelliSense support for the `sx` prop (#23599) @mnajdova.
+  You should now get a description for each property of the system. For instance with `mx`:
+
+  ![system TypeScript](https://user-images.githubusercontent.com/3165635/99920493-20f60a00-2d24-11eb-8748-c5dd7fe85cbd.png)
+
+- 💅 Migrate the first core component to the v5 styling architecture (#23308) @mnajdova.
+  We have spent the last few months iterating on the new styling approach in the lab, and are confident enough in the new approach to move it to the core, so we have migrated the Slider. We will wait a week or two to collect feedback on it, before scaling it to the rest of the codebase.
+- 📅 Fix the first few issues on the date picker components since the migration in the lab.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.17`
+
+#### Breaking changes
+
+- [Autocomplete] Rename `closeIcon` prop with `clearIcon` to avoid confusion (#23617) @akhilmhdh.
+
+  ```diff
+  -<Autocomplete closeIcon={icon} />
+  +<Autocomplete clearIcon={icon} />
+  ```
+
+- [Dialog] Remove the `disableBackdropClick` prop. It's redundant with the `reason` argument (#23607) @eps1lon.
+
+  ```diff
+  <Dialog
+  - disableBackdropClick
+  - onClose={handleClose}
+  + onClose={(event, reason) => {
+  +   if (reason !== 'backdropClick') {
+  +     onClose(event, reason);
+  +   }
+  + }}
+  />
+  ```
+
+- [Modal] Remove the `disableBackdropClick` prop. It's redundant with the `reason` argument (#23607) @eps1lon.
+
+  ```diff
+  <Modal
+  - disableBackdropClick
+  - onClose={handleClose}
+  + onClose={(event, reason) => {
+  +   if (reason !== 'backdropClick') {
+  +     onClose(event, reason);
+  +   }
+  + }}
+  />
+  ```
+
+- [Modal] Remove the `onEscapeKeyDown` prop. It's redundant with the `reason` argument. (#23571) @eps1lon
+
+  ```diff
+  <Modal
+  -  onEscapeKeyDown={handleEscapeKeyDown}
+  +  onClose={(event, reason) => {
+  +    if (reason === "escapeKeyDown") {
+  +      handleEscapeKeyDown(event);
+  +    }
+  +  }}
+  />;
+  ```
+
+#### Changes
+
+- [CircularProgress][linearprogress] Change components from div to span (#23587) @bruno-azzi
+- [Grid] Improve warning when a prop is missing (#23630) @udayRedI
+- [Icon] Allow customizing the 'material-icons' base class name (#23613) @rart
+- [Select] Fix focus() call on ref (#23302) @reedanders
+- [Slider] Add test case for triggering a specific value (#23642) @Thehambalamba
+- [Slider] Replace core Slider with SliderStyled (#23308) @mnajdova
+- [Slider] General cleanup and add classes prop for unstyled (#23569) @mnajdova
+- [styles] Add support for TypeScript 4.1 (#23633) @eps1lon
+
+### `@material-ui/codemod@v5.0.0-alpha.17`
+
+- [codemod] Add moved-lab-modules (#23588) @eps1lon
+  This codemod is part of our effort to make the migration from v4 to v5 as painless as possible.
+
+### `@material-ui/utils@v5.0.0-alpha.17`
+
+- [Grid] Improve warning when a prop is missing (#23630) @udayRedI
+
+### `@material-ui/system@v5.0.0-alpha.17`
+
+- [system] Improve the `sx` prop IntelliSense (#23599) @mnajdova
+
+### `@material-ui/unstyled@v5.0.0-alpha.17`
+
+- [Slider] Replace core Slider with SliderStyled (#23308) @mnajdova
+
+### `@material-ui/lab@v5.0.0-alpha.17`
+
+#### Breaking changes
+
+- [DatePicker] Change the import path of the date adapters (#23568) @eps1lon.
+  It better fits with the current import convention.
+
+  ```diff
+  -import AdapterDateFns from '@material-ui/lab/dateAdapter/date-fns';
+  +import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+  ```
+
+#### Changes
+
+- [DatePicker] Add missing exports (#23621) @havgry
+- [DatePicker] Add missing TypeScript definitions (#23560) @mbrookes
+- [DatePicker] Fix false-positive when validating mask in Safari (#23602) @eps1lon
+- [DatePicker] Fix missing manifest for typescript packages (#23564) @eps1lon
+- [TimePicker] Prevent scroll when interacting with the clock (#23563) @knightss27
+
+### Docs
+
+- [docs] Add advanced page for the system (#23596) @mnajdova
+- [docs] Add docs for typography in system (#23510) @oliviertassinari
+- [docs] API pages i18n (#23214) @mbrookes
+- [docs] Create pickers migration guide (#23605) @dmtrKovalenko
+- [docs] Enable TS language service for docs/src (#23576) @eps1lon
+- [docs] Explain the information listed on the system properties page (#23566) @mnajdova
+- [docs] Fix /api client-side routing (#23586) @eps1lon
+- [docs] Fix the Box section title on migration-v4 guide (#23679) @claudioldf
+- [docs] Generate default values for docs from the unstyled components (#23614) @mnajdova
+- [docs] Increase printWidth from 80 to 85(#23512) @eps1lon
+- [docs] Prevent layout jumps from img loading in system demo (#23504) @eps1lon
+- [docs] Remove controlled Tooltip example in Slider (#23625) @micsidoruk
+- [docs] Remove dead demos in the system basics page (#23565) @mnajdova
+- [docs] Replace emotion-server packages with @emotion/server (#23557) @numToStr
+- [docs] Sync translations (#23648) @l10nbot
+
+### Core
+
+- [core] Add support for TypeScript 4.1 (#23633) @eps1lon
+- [core] Batch small changes (#23554) @oliviertassinari
+- [core] Cleanup emotion dependencies (#23556) @eps1lon
+- [core] Fix formatting (#23567) @eps1lon
+- [core] Fix tracked component size regression (#23516) @eps1lon
+- [core] Fix transpilation target of UMD bundle (#23618) @eps1lon
+- [test] Create chunks for Argos (#23518) @oliviertassinari
+- [test] Debug argos-cli upload failures (#23623) @eps1lon
+- [test] Enable experimental-timezone tests (#23595) @eps1lon
+- [test] Misc visual regression flakiness improvements (#23619) @eps1lon
+- [test] Use playwright instead of vrtest (#23500) @eps1lon
+
+## 5.0.0-alpha.16
+
+###### _Nov 14, 2020_
+
+Big thanks to the 34 contributors who made this release possible. Here are some highlights ✨:
+
+- 📅 Migrate the date picker to the lab (#22692) @dmtrKovalenko.
+  We have integrated the components with the code infrastructure. Next we will migrate all the GitHub issues from [material-ui-pickers](https://github.com/mui-org/material-ui-pickers) and archive the repository. This migration will help provide first-class support for the date picker components. The component will stay in the lab as long as necessary to reach the high quality bar we have for core components. You can find the [new documentation here](https://next.material-ui.com/components/pickers/).
+
+  While the source code is currently hosted in the [main repository](https://github.com/mui-org/material-ui), we might move it to the [x repository](https://github.com/mui-org/material-ui-x) in the future, depending on what is easier for the commercial date range picker. The date picker will stay open source no matter what.
+
+- 📚 Revamp the documentation for [the system](https://next.material-ui.com/system/basics/). The System contains CSS utilities. The documentation now promotes the use of the `sx` prop. It's ideal for adding one-off styles, e.g. padding, but when pushed to its limits, it can be used to implement quickly a complete page.
+- 👩‍🎨 Upgrade emotion to v11 (#23007) @mnajdova.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.16`
+
+#### Breaking changes
+
+- [TextField] Change default variant from standard to outlined (#23503) @mbrookes
+  Standard has been removed from the Material Design guidelines. [This codemod](https://github.com/mui-org/material-ui/tree/next/packages/material-ui-codemod#textfield-variant-prop) will automatically update your code.
+
+  ```diff
+  -<TextField value="Standard" />
+  -<TextField value="Outlined" variant="outlined" />
+  +<TextField value="Standard" variant="standard" />
+  +<TextField value="Outlined" />
+  ```
+
+- [Autocomplete] Remove `debug` in favor of `open` and dev tools (#23377) @eps1lon
+  There are a couple of simpler alternatives: `open={true}`, Chrome devtools ["Emulate focused"](https://twitter.com/sulco/status/1305841873945272321), or React devtools props.
+
+#### Changes
+
+- [Autocomplete] Use Popper when `disablePortal` (#23263) @eps1lon
+- [Box] Better DX for deprecated props (#23285) @eps1lon
+- [codemod] Add a codemod for the Box sx prop (#23465) @mbrookes
+- [CssBaseline] Add dark mode scrollbar support (#23407) @mmmols
+- [Slider] Extract slots as standalone components (#22893) @mnajdova
+- [Stepper] Fix the icon prop support in StepLabel (#23408) @randyshoopman
+- [theme] Add htmlFontSize to Typography interface (#23412) @fergusmcdonald
+- [Tooltip] Fix PopperProps popper modifiers not being merged properly (#23421) @dominique-mueller
+- [Tooltip] Long press select text on iOS (#23466) @hmaddisb
+- [Tooltip] Unexpected behaviour onOpen/onClose (#23482) @brorlarsnicklas
+
+### `@material-ui/lab@v5.0.0-alpha.16`
+
+- [DatePicker] Migrate to the lab #22692 @dmtrKovalenko
+
+### `@material-ui/system@v5.0.0-alpha.16`
+
+- [system] Add typography prop that will pull from theme.typography (#23451) @mnajdova
+- [system] Create separate margin and padding functions (#23452) @mnajdova
+- [system] Export styleFunctionSx and improve signature (#23397) @mnajdova
+- [system] Merge breakpoints in correct order (#23380) @mnajdova
+- [system] Remove css utility in favor of sx (#23454) @mnajdova
+- [system] Warn for spacing when non integer value is used with theme.spacing array (#23460) @mnajdova
+
+### `@material-ui/styled-engine@v5.0.0-alpha.16`
+
+- [styled-engine] Upgrade emotion to 11 RC (#23007) @mnajdova
+
+### `@material-ui/unstyled@v5.0.0-alpha.16`
+
+- [Slider] Extract slots as standalone components (#22893) @mnajdova
+
+### `@material-ui/codemod@v5.0.0-alpha.16`
+
+- [TextField] Change default variant from standard to outlined (#23503) @mbrookes
+
+### Docs
+
+- [docs] Allow to host code in a different repo (#23390) @oliviertassinari
+- [docs] CHANGELOG for v5.0.0-alpha.15 (#23383) @oliviertassinari
+- [docs] Fix examples download URLs to match the correct branch name (#23467) @matchatype
+- [docs] Fix links being opened when dismissing context menus (#23491) @eps1lon
+- [docs] Fix the Netlify proxy for localization of X (#23387) @oliviertassinari
+- [docs] Fix usage of palette.type instead of palette.mode in docs (#23414) @hubgit
+- [docs] Improve documentation of the system (#23294) @mnajdova
+- [docs] Improve feedback a11y (#23459) @eps1lon
+- [docs] Improve formatting of the system (#23509) @oliviertassinari
+- [docs] Improve migration guide for theme.palette (#23416) @hubgit
+- [docs] Mention delay instead of transition twice (#23393) @benmneb
+- [docs] Prepare Material-UI X (#1893) @oliviertassinari
+- [docs] Redirect legacy GridList pages to ImageList (#23456) @eps1lon
+- [docs] Remove redundant aria-label when wrapped in Tooltip (#23455) @eps1lon
+- [docs] Sync translations (#23316) @l10nbot
+- [docs] Update buildAPI script to handle the "styled" components (#23370) @mnajdova
+- [docs] Update new components in the roadmap (#23507) @mbrookes
+- [docs] Update translations (#23501) @l10nbot
+
+### Core
+
+- [core] Batch small changes (#23422) @oliviertassinari
+- [core] Fix skipped ignore patterns (#23474) @eps1lon
+- [core] Switch to globby and fast-glob (#23382) @eps1lon
+- [test] Increase timeout threshold for slow Firefox tests (#23463) @eps1lon
+- [test] Make sure system properties are in the same order when generating CSS (#23388) @mnajdova
+- [test] Prefer longhand properties (#23445) @eps1lon
+- [test] Remove data-mui-test from tests (#23498) @eps1lon
+- [test] Remove keyDown#force (#23488) @eps1lon
+- [test] Use adapter instead of native Date (#23475) @eps1lon
+- [test] Use fake timers in visual regression tests (#23464) @eps1lon
+
+## 5.0.0-alpha.15
+
+###### _Nov 4, 2020_
+
+Big thanks to the 20 contributors who made this release possible. Here are some highlights ✨:
+
+- ⚛️ Add support for React 17 (#23311) @eps1lon.
+  React 17 release is unusual because it doesn't add any new developer-facing features. It was released a couple of days ago. You can learn more about it in the [introduction post](https://reactjs.org/blog/2020/10/20/react-v17.html). Material-UI now supports `^16.8.0 || ^17.0.0`.
+- 🛠 Introduce a new `@material-ui/unstyled` package (#23270) @mnajdova.
+  This package will host the unstyled version of the components. In this first iteration, only the Slider is available. You can find it documented under the [same page](https://next.material-ui.com/components/slider-styled/#unstyled-slider) as the styled version.
+
+  **Why an unstyled package?**
+
+  While engineering teams are successfully building custom design systems by wrapping Material-UI, we [occasionally hear](https://github.com/mui-org/material-ui/issues/6218) that Material Design or our styling solution are something they don't need. Some teams prefer SASS, others prefer to customize the components starting from a pristine state. What all these teams have in common is that they value the features coming from the components, such as accessibility.
+
+  The unstyled package goes one step down in the abstraction layer, providing more flexibility. Angular Material introduced this approach two years ago. Today their unstyled components account for [25% of the usage](https://npm-stat.com/charts.html?package=%40angular%2Fmaterial&package=%40angular%2Fcdk&from=2017-11-03&to=2020-11-03).
+
+  Another reason for introducing this package is to prepare the groundwork for a [second theme](https://github.com/mui-org/material-ui/issues/22485) (not Material Design based).
+
+  A note on the terminology: "unstyled" means that the components have the same API as the "styled" components but come without CSS. Material-UI also contains "headless" components that exposes a hook API, e.g. [useAutocomplete](https://next.material-ui.com/components/autocomplete/#useautocomplete) or [usePagination](https://next.material-ui.com/components/pagination/#usepagination).
+
+  This change is part of our strategy to iterate on the v5 architecture with the `Slider` first. In the next alpha release, we plan to replace the v4 slider with the v5 slider. Once the new approach is stress-tested and validated, we will roll it out to all the components.
+
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.15`
+
+#### Breaking changes
+
+- [AppBar] Fix z-index when position="static" (#23325) @sujinleeme
+  Remove z-index when position static and relative
+- [theme] Fix error message for augmentColor failure (#23371) @reedanders
+  The signature of `theme.palette.augmentColor` helper has changed:
+
+  ```diff
+  -theme.palette.augmentColor(red);
+  +theme.palette.augmentColor({ color: red, name: 'brand' });
+  ```
+
+#### Changes
+
+- [Autocomplete] Fix unclickable area between text input and endAdornment (#23229) @sujinleeme
+- [Autocomplete] Follow Material Design State spec (#23323) @sujinleeme
+- [Avatar] Fix usage of srcset property (#23286) @matheuspiment
+- [ClickAwayListener] Fix mounting behavior in Portals in React 17 (#23315) @eps1lon
+- [core] Allow React 17 (#23311) @eps1lon
+- [Icon] Fix translation, e.g Google Translate (#23237) @cbeltrangomez84
+- [LinearProgress] Fix Safari's bug during composition of different paint (#23293) @montogeek
+- [Radio] Fix dot misalignment in Safari (#23239) @anasufana
+- [styled-engine] Fix tagged template syntax with multiple expressions (#23269) @eps1lon
+- [Table] Fix empty row logic when displaying all (#23280) @JoaoJesus94
+- [Table] Fix handling of rowsPerPage={-1} (#23299) @JoaoJesus94
+- [TextareaAutosize] Fix container with no intrinsic height (#23273) @sujinleeme
+- [TextField] Fix disabled color in Safari (#23375) @Morteza-Jenabzadeh
+- [theme] Fix spacing string arguments (#23224) @GuilleDF
+- [Tooltip] Fix excess spacing (#23233) @benneq
+
+### `@material-ui/unstyled@v5.0.0-alpha.15`
+
+- [unstyled] Create package and move SliderUnstyled there (#23270) @mnajdova
+- [core] Allow React 17 (#23311) @eps1lon
+
+### `@material-ui/lab@v5.0.0-alpha.15`
+
+- [lab] Migrate Timeline to TypeScript (#23242) @oliviertassinari
+- [core] Allow React 17 (#23311) @eps1lon
+
+### `@material-ui/icons@v5.0.0-alpha.15`
+
+- [core] Allow React 17 (#23311) @eps1lon
+
+### `@material-ui/styles@v5.0.0-alpha.15`
+
+- [core] Allow React 17 (#23311) @eps1lon
+
+### `@material-ui/system@v5.0.0-alpha.15`
+
+- [core] Allow React 17 (#23311) @eps1lon
+- [theme] Fix spacing string arguments (#23224) @GuilleDF
+
+### Docs
+
+- [Transition] Document default appear value (#23221) @GuilleDF
+- [blog] Danail Hadjiatanasov joins Material-UI (#23223) @oliviertassinari
+- [docs] Add Material-UI Builder to in-house ads (#23342) @mbrookes
+- [docs] Fix a few typos and add comma (#23284) @reedanders
+- [docs] Fix few propTypes in Inputs (#23331) @youknowhat
+- [docs] Fix language cookie (#23324) @mbrookes
+- [docs] Fix typo in `README.md` (#23329) @mtsknn
+- [docs] Guard against unknown value in userLanguage cookie (#23336) @mbrookes
+- [docs] Make it clearer that custom router is supported (#23304) @Maxgit3
+- [docs] Sync translations (#23080) @l10nbot
+- [docs] Update homepage quotes (#23326) @mbrookes
+- [docs] Update nav translations (#23234) @mbrookes
+- [docs] Update system pages to use sx prop instead of deprecated Box props (#23368) @mnajdova
+- [docs] Use present tense for bool prop descriptions (#23274) @mbrookes
+
+### Core
+
+- [utils] Add all @material-ui/core/utils to @material-ui/utils (#23264) @mnajdova
+- [core] Batch small changes (#23327) @oliviertassinari
+- [core] Fix implicit transitive 'csstype' dependency (#23301) @quinnturner
+- [core] Move material-ui-benchmark into benchmark/server (#23271) @eps1lon
+- [core] Replace temp package with node built-ins (#23262) @eps1lon
+- [core] Restrict top level imports that target CJS modules (#23159) @eps1lon
+- [test] Fix unexpected console warn/error spy swallowing unrelated messages (#23312) @eps1lon
+- [test] Fix various issues with the new cli on windows (#23381) @eps1lon
+- [test] Improve test debugging (#23372) @eps1lon
+- [test] Introduce experimental CLI (#23369) @eps1lon
+- [test] Prevent growing call stack in custom keyDown/keyUp (#23321) @eps1lon
+- [test] Run with Safari 13 (#23292) @eps1lon
+
+## 5.0.0-alpha.14
+
+###### _Oct 23, 2020_
+
+Big thanks to the 23 contributors who made this release possible.
+Here are some highlights ✨:
+
+- 💄 Introduce a new `sx` prop (#23053, #23205) @mnajdova
+  We have resumed the work on Material-UI System. This is made possible by the latest progress on the new styling solution of v5.
+  You can read the [introduction blog post](https://medium.com/material-ui/introducing-material-ui-design-system-93e921beb8df) that we did for the system two years ago.
+
+  The system is meant to solve the following problems:
+
+  1. Naming things is hard. How should a class name, JSS style rule, or styled component be named?
+  2. Jumping between JS and CSS in the editor wastes time. This is particularly true as the complexity (LOCs/# of elements) of a component increases. It's still true when using the `styled()` API.
+  3. Introducing a `makeStyles` for the first time in a component is daunting. For example, it's why https://github.com/vscodeshift/material-ui-codemorphs#add-usestyles-hook exists. What if we had less code to type, gaining velocity when writing styles?
+  4. Pulling values out from the theme can be cumbersome. How can we make it less painful to increase the usage of design tokens?
+
+  This new iteration of the system brings two major improvements:
+
+  - It moves from the support of a subset of CSS to the support of a superset of CSS.
+    Learning the shorthand is optional. It's no longer necessary to moving back to styled() when the system doesn't support a specific CSS property.
+  - It moves from support on Box only to any core component (starting with the slider).
+
+    ```jsx
+    import Slider from '@material-ui/lab/SliderStyled';
+
+    // Set the primary color and a vertical margin of 16px on desktop.
+    <Slider sx={{ color: 'primary.main', my: { xs: 0, md: 2 } }} />;
+    ```
+
+- ✨ Upgrade Popper.js from v1 to v2 (#21761) @joshwooding
+  The change reduces the bundle size (-1 kB gzipped) while fixing bugs at the same time.
+
+- 🐛 Fix broken nested imports with the icons package (#23157) @eps1lon
+  The revamp of the bundling strategy in #22814 has broken the nested imports.
+  Imports such as the one below should work again with this release:
+
+  ```jsx
+  import CloseIcon from '@material-ui/icons/Close';
+  ```
+
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.14`
+
+#### Breaking changes
+
+- [Popper] Upgrade to popper.js to v2 (#21761) @joshwooding
+  This third-party library has introduced a lot of changes.<br />
+  You can read [their migration guide](https://popper.js.org/docs/v2/migration-guide/) or the following summary:
+
+  - The CSS prefixes have changed:
+    ```diff
+    popper: {
+      zIndex: 1,
+    - '&[x-placement*="bottom"] $arrow': {
+    + '&[data-popper-placement*="bottom"] $arrow': {
+    ```
+  - Method names have changed.
+
+    ```diff
+    -popperRef.current.scheduleUpdate()
+    +popperRef.current.update()
+    ```
+
+    ```diff
+    -popperRef.current.update()
+    +popperRef.current.forceUpdate()
+    ```
+
+  - Modifiers' API has changed a lot. There are too many changes to be covered here.
+
+- [withMobileDialog] Remove this higher-order component (#23202) @RDIL
+  The hook API allows a simpler and more flexible solution than the HOC:
+
+  ```diff
+  -import withMobileDialog from '@material-ui/core/withMobileDialog';
+  +import { useTheme, useMediaQuery } from '@material-ui/core';
+
+  function ResponsiveDialog(props) {
+  - const { fullScreen } = props;
+  + const theme = useTheme();
+  + const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const [open, setOpen] = React.useState(false);
+
+  // ...
+
+  -export default withMobileDialog()(ResponsiveDialog);
+  +export default ResponsiveDialog;
+  ```
+
+#### Changes
+
+- [Box] Add sx prop (#23053) @mnajdova
+- [Box] Deprecate system props (#23206) @mnajdova
+- [Card] Use flex display for CardHeader.avatar (#23169) @mordechaim
+- [Container] Fix support of custom breakpoint units (#23191) @espipj
+- [Container] Revert max-width change for xs @oliviertassinari
+- [InputBase] Use ref prop instead of inputRef prop on input component (#23174) @GuilleDF
+- [l10n] Add Kazakh (kz-KZ) locale (#23195) @abdulgafur24
+- [Rating] Ensure hover and click are in sync (#23117) @redbmk
+- [Select] Fix SelectDisplayProps className concat (#23211) @reedanders
+
+### `@material-ui/styled-engine@v5.0.0-alpha.14`
+
+- [styled] Add @babel/runtime dependency (#23175) @koistya
+
+### `@material-ui/system@v5.0.0-alpha.14`
+
+- [Box] Add sx prop (#23053) @mnajdova
+- [core] Fix bundles for packages without subpackages (#23157) @eps1lon
+
+### `@material-ui/icons@v5.0.0-alpha.14`
+
+- [core] Fix bundles for packages without subpackages (#23157) @eps1lon
+
+### `@material-ui/lab@v5.0.0-alpha.14`
+
+#### Breaking changes
+
+- [AvatarGroup] Move from lab to core (#23121) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import AvatarGroup from '@material-ui/lab/AvatarGroup';
+  +import AvatarGroup from '@material-ui/core/AvatarGroup';
+  ```
+
+#### Changes
+
+- [Slider] Add sx prop in SliderStyled (#23205) @mnajdova
+
+### `@material-ui/utils@v5.0.0-alpha.14`
+
+- [utils] Fix types of chainPropTypes (#23123) @oliviertassinari
+- [core] Fix bundles for packages without subpackages (#23157) @eps1lon
+
+### `@material-ui/types@v5.2.0-alpha.14`
+
+- [types] Add LICENSE files (#23162) @lielfr
+
+### Docs
+
+- [examples] Remove reason example project (#23158) @mnajdova
+- [examples] Update cdn example to use @material-ui/core@next (#23153) @mnajdova
+- [examples] Update preact to use the @material-ui/core@next (#23154) @mnajdova
+- [examples] Update ssr example to use @material-ui/core@next (#23155) @mnajdova
+- [examples] Updated nextjs-typescript example to use @material-ui/core@next (#23119) @numToStr
+- [docs] Add Menu component example with explicit positioning prop values (#23167) @jaebradley
+- [docs] Add page feedback (#22885) @mbrookes
+- [docs] Add Performance section for Modal (#23168) @jaebradley
+- [docs] Better document CardActionArea (#23196) @el1f
+- [docs] Cleaner image of font-size equation (#23189) @CamDavidsonPilon
+- [docs] Fix casing typo (#23148) @piperchester
+- [docs] Fix typo in steppers (#23163) @AGDholo
+- [docs] Fix typo on interoperability page (#23177) @SassNinja
+- [docs] Improve migration v5 guide @oliviertassinari
+- [docs] Lazy load demo toolbar (#23108) @eps1lon
+- [docs] Remove unused style selectors `extendedIcon` (#23160) @MatejKastak
+- [docs] Use Box sx prop on all Slider examples #23217 @mnajdova
+
+### Core
+
+- [benchmark] Add theme-ui and chakra-ui Box scenarios (#23180) @mnajdova
+- [benchmark] Create separate workspace (#23209) @eps1lon
+- [benchmark] Extracted Profiler & added output in readme (#23178) @mnajdova
+- [core] Batch small changes (#23116) @oliviertassinari
+- [core] Improve bundle size comment (#23110) @eps1lon
+- [core] Prevent unstable chunks in size snapshot (#23181) @eps1lon
+
+## 5.0.0-alpha.13
+
+###### _Oct 17, 2020_
+
+Big thanks to the 25 contributors who made this release possible.
+Here are some highlights ✨:
+
+- 📦 Ship modern bundle (#22814) @eps1lon.
+  This is a significant update to the [browsers supported](https://next.material-ui.com/getting-started/supported-platforms/) by Material-UI.
+  The previous policy was defined 2 years ago, and the landscape has evolved since then. The package now includes 4 bundles:
+
+  1. `stable` (default, formerly `esm`) which targets a snapshot (on release) of `> 0.5%, last 2 versions, Firefox ESR, not dead, not IE 11"`
+  2. `node` (formerly default) which targets a snapshot (on release) of `maintained node versions`
+  3. `legacy` (new) which is `stable` + IE11
+  4. `modern` (formerly `es`) which targets the last 1 version of evergreen browsers and active node (currently that is 14
+
+  The change yields a 6% reduction in bundle size 📦 (Babel only).
+  In the coming weeks, we will refactor the internals to take advantage of the new browser capabilities that dropping these older platforms allows. For instance, we might be able to remove the span we render inside the `<Button>` to work around [Flexbug #9](https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-9).
+
+  Check the updated [Supported platforms documentation](https://next.material-ui.com/getting-started/supported-platforms/) and [new "minimizing bundle size" guide](https://next.material-ui.com/guides/minimizing-bundle-size/).
+
+  If you target IE11, you need to use the new bundle (`legacy`). We are treating IE11 as a second class-citizen, which is a continuation of the direction taken in #22873.
+
+- 🚀 Improve the internal benchmark suite (#22923, #23058) @mnajdova.
+  This was a prerequisite step to improve the [system](https://next.material-ui.com/system/basics/). We needed to be able to measure performance. After #22945, we have measured that the `Box` component is x3 faster in v5-alpha compared to v4.
+- ✏️ A new blog post: [Q3 2020 Update](https://material-ui.com/blog/2020-q3-update/) (#23055) @oliviertassinari.
+- 🐙 Migrate more tests to react-testing-library @deiga, @Morteza-Jenabzadeh, @nicholas-l.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.13`
+
+#### Breaking changes
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+#### Change
+
+- [Autocomplete] Fix autoHighlight synchronization (#23025) @Tubaleviao
+- [Autocomplete] Ignore keydown event until IME is confirmed (#23050) @jiggum
+- [Card] Fix action area hover style on touch devices (#23079) @giulianovarriale
+- [Slider] Align value label text center (#23075) @LorenzHenk
+- [SwipeableDrawer] Decorrelate swipeAreaWidth and initial jumping amount (#23042) @omidtajik
+- [Tooltip] Fix followCursor preventing onMouseMove on children (#23104) @eps1lon
+- [Tooltip] Refactor event handling (#23092) @eps1lon
+- [theme] Add missing types for theme overrides (#23028) @povilass
+- [l10n] Add Arabic (ar_EG) locale (#23006) @GoldenWings
+
+### `@material-ui/lab@v5.0.0-alpha.13`
+
+- [TreeView] Fix bundle size link and refactor array spreads (#22992) @joshwooding
+- [TreeView] Fix `alpha` color utility instead of deprecated `fade` (#22978) @joshwooding
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### `@material-ui/utils@v5.0.0-alpha.13`
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### `@material-ui/system@v5.0.0-alpha.13`
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### `@material-ui/styles@v5.0.0-alpha.13`
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### `@material-ui/styled-engine@v5.0.0-alpha.13`
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### `@material-ui/styled-engine-sc@v5.0.0-alpha.13`
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### `@material-ui/icons@v5.0.0-alpha.13`
+
+- [core] Ship modern bundle (#22814) @eps1lon
+
+### Docs
+
+- [blog] Allow to support card preview (#23087) @oliviertassinari
+- [blog] Q3 2020 Update (#23055) @oliviertassinari
+- [docs] Add a new demo to the showcase (#22949) @adonig
+- [docs] Add demo for Link underline (#23074) @LorenzHenk
+- [docs] Add logarithmic slider demo (#23076) @LorenzHenk
+- [docs] Add react-admin in related projects page (#23097) @fzaninotto
+- [docs] Change color to palette (#23046) @mockingjet
+- [docs] Don't suggest putting a Switch inside a ListItemSecondaryAction (#23018) @sirlantis
+- [docs] Fix docs:dev (#23023) @eps1lon
+- [docs] Fix vertical alignment of Slider demo (#23059) @r0zar
+- [docs] Fix wrong variable characters (#23066) @AGDholo
+- [docs] Improve docs for Table sticky column grouping (#23100) @andre-silva-14
+- [docs] Improve icon preview color contrast (#22974) @oliviertassinari
+- [docs] Interoperability guide updates (#23030) @mnajdova
+- [docs] Move outdated versions into a collapsible section (#23029) @NoNamePro0
+- [docs] Point to material-ui-x/next instead of master @oliviertassinari
+- [docs] Restore ButtonBases images (#23083) @eps1lon
+- [docs] Slider demos clean up (#22964) @mnajdova
+- [docs] Sync translations (#22888) @l10nbot
+- [examples] Update gatsby example to use @material-ui/\* next (#23089) @mnajdova
+- [examples] Update gatsby-theme example to use @material-ui/\* next #23093 @mnajdova
+- [examples] Update nextjs example project to use @material-ui/\* next (#23094) @mnajdova
+
+### Core
+
+- [benchmark] Add browser benchmark (#22923) @mnajdova
+- [benchmark] Fix benchmark scripts & moved scenarios to correct benchmark project (#23058) @mnajdova
+- [test] Enable failing unexpected console warn|error in browser tests (#23063) @eps1lon
+- [test] Fail each test on unexpected console logs in test:unit (#23064) @eps1lon
+- [test] Introduce toHaveInlineStyle and toHaveComputedStyle matcher (#23054) @eps1lon
+- [test] Migrate ButtonBase to react-testing-library (#23011) @deiga
+- [test] Migrate IconButton to react-testing-library (#22972) @Morteza-Jenabzadeh
+- [test] Migrate InputBase to react-testing-library (#23014) @deiga
+- [test] Migrate SpeedDial to react-testing-library (#23021) @nicholas-l
+- [test] Migrate TableCell to react-testing-library (#23095) @nicholas-l
+- [test] Migrate TableRow to react-testing-library (#23105) @deiga
+- [test] Move some work out of evaluation phase (#23112) @eps1lon
+- [test] Supress 404 img warnings in browser tests (#23106) @eps1lon
+- [test] Throw on console.(error|warn) outside of test (#22907) @eps1lon
+- [test] Use dot reporter in CI (#23026) @eps1lon
+- [core] Add support for iOS Safari 12 (#23068) @eps1lon
+- [core] Also format dot files & folders (#22975) @oliviertassinari
+- [core] Extend yarn size:why (#22979) @eps1lon
+- [core] Fix react-next test (#23027) @oliviertassinari
+- [core] Lint CSS (#22976) @oliviertassinari
+- [core] Misc modules/\* cleanup (#22983) @eps1lon
+
+## 5.0.0-alpha.12
+
+###### _Oct 11, 2020_
+
+Big thanks to the 45 contributors who made this release possible.
+Here are some highlights ✨:
+
+- 🧪 The promotion of 4 components from the lab to core: Autocomplete, Pagination, SpeedDial, and ToggleButton. These components have been in the lab for more than 10 months @mbrookes.
+- 📦 Switch the style engine of the `Box` component from JSS to _@material-ui/styled-engine_ (use emotion by default) (#22945) @mnajdova.
+  The early benchmark we have run shows that performance has improved. We will share more detailed results in #21657.
+- 🐙 Migrate a large portion of the tests from enzyme to react-testing-library @eladmotola, @baterson, @bewong89, @devrasec, @guillermaster, @itamar244, @jeferson-sb, @The24thDS.
+  Last month, react-testing-library had [more downloads](https://npm-stat.com/charts.html?package=enzyme&package=%40testing-library%2Freact&from=2019-10-10&to=2020-10-10) than enzyme in the ecosystem!
+- 🏷 Add support for tooltips [following the cursor](https://next.material-ui.com/components/tooltips/#follow-cursor) (#22876) @xtrixia.
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.12`
+
+#### Breaking changes
+
+- [Accordion] Remove `display:flex` from AccordionDetails (#22809) @croraf
+  The style was too opinionated. Most developers expect `display: block`.
+- [Accordion] Replace IconButton wrapper with div (#22817) @croraf
+  Remove IconButtonProps prop from AccordionSummary.
+  The component renders a `<div>` element instead of an IconButton.
+  The prop is no longer relevant.
+- [Box] Add mui styled usage (#22945) @mnajdova
+  Change the style-engine powering the Box component from JSS to the style engine adatper (emotion by default).
+- [CircularProgress] Drop IE11 wobbly workaround (#22873) @suliskh
+  The IE11 workaround is harming performance on the latest browsers.
+  This change is part of a best-effort strategy to keep IE11 support.
+  We are degrading the UX and DX with IE11 where we can improve the components on modern browsers.
+- [Table] Rename onChangeRowsPerPage and onChangePage (#22900) @eladmotola
+  The change was done to match the API convention.
+
+  ```diff
+  <TablePagination
+  - onChangeRowsPerPage={()=>{}}
+  - onChangePage={()=>{}}
+  + onRowsPerPageChange={()=>{}}
+  + onPageChange={()=>{}}
+  ```
+
+- [theme] Rename fade to alpha (#22834) @mnajdova
+  Better describe its functionality. The previous name was leading to confusion when the input color already had an alpha value. The helper **overrides** the alpha value of the color.
+
+  ```diff
+  - import { fade } from '@material-ui/core/styles';
+  + import { alpha } from '@material-ui/core/styles';
+
+  const classes = makeStyles(theme => ({
+  -  backgroundColor: fade(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+  +  backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+  }));
+  ```
+
+- [Tooltip] Make `interactive` default (#22382) @eps1lon
+  The previous default behavior failed [success criterion 1.4.3 ("hoverable") in WCAG 2.1](https://www.w3.org/TR/WCAG21/#content-on-hover-or-focus).
+  To reflect the new default value, the prop was renamed to `disableInteractive`.
+  If you want to restore the old behavior (thus not reaching level AA), you can apply the following diff:
+
+  ```diff
+  -<Tooltip>
+  +<Tooltip disableInteractive>
+  # Interactive tooltips no longer need the `interactive` prop.
+  -<Tooltip interactive>
+  +<Tooltip>
+  ```
+
+#### Changes
+
+- [Accordion] Remove incorrect demo which nests input in button (#22898) @croraf
+- [Autocomplete] Fix filtering when value is already selected (#22935) @montelius
+- [Autocomplete] Fix virtualization example in IE11 (#22940) @bearfromtheabyss
+- [Autocomplete] Restrict component props in `renderInput` (#22789) @eps1lon
+- [Box] Add types for `ref` (#22927) @lcswillems
+- [Button] Fix invalid type value (#22883) @oliviertassinari
+- [Button] Improve loading transition (#22884) @oliviertassinari
+- [Grid] Clarify document about direction column limitation (#22871) @ThewBear
+- [IconButton] Improve warning against non root onClick listeners (#22821) @pranjanpr
+- [Popper] Use placement viewport instead of window (#22748) @maksimgm
+- [Select] Add generic support for value (#22839) @AntoineGrandchamp
+- [Skeleton] Fix importing with named export (#22879) @0prodigy
+- [SpeedDial] Fix keyboard navigation when uncontrolled (#22826) @akharkhonov
+- [styled] Specify emotion & styled-components as optional peer dependencies (#22808) @mnajdova
+- [styled] Support default theme when none is available (#22791) @mnajdova
+- [Tabs] Fix RTL scrollbar with Chrome 85 (#22830) @ankit
+- [TextField] Pass minRows to InputComponent (#22831) @suliskh
+- [ToggleButton] Fix vertical double border (#22825) @Avi98
+- [ToggleButton] Match ToggleButtonGroup name and render function name (#22790) @jjoselv
+- [Tooltip] Add placement `followCursor` (#22876) @xtrixia
+- [Tooltip] Improve docs and warning for custom children (#22775) @brorlarsnicklas
+- [Tooltip] Use label semantics (#22729) @eps1lon
+- [useAutocomplete] Fix getXProps functions type (#22749) @kentaro84207
+
+### `@material-ui/styled-engine@v5.0.0-alpha.12`
+
+- [styled] Support default theme when none is available (#22791) @mnajdova
+
+### `@material-ui/lab@v5.0.0-alpha.12`
+
+#### Breaking changes
+
+- [Autocomplete] Move from lab to core (#22715) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import Autocomplete from '@material-ui/lab/Autocomplete';
+  -import useAutocomplete from '@material-ui/lab/useAutocomplete';
+  +import Autocomplete from '@material-ui/core/Autocomplete';
+  +import useAutocomplete from '@material-ui/core/useAutocomplete';
+  ```
+
+- [Pagination] Move from lab to core (#22848) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import Pagination from '@material-ui/lab/Pagination';
+  -import PaginationItem from '@material-ui/lab/PaginationItem';
+  -import { usePagination } from '@material-ui/lab/Pagination';
+  +import Pagination from '@material-ui/core/Pagination';
+  +import PaginationItem from '@material-ui/core/PaginationItem';
+  +import usePagination from '@material-ui/core/usePagination';
+  ```
+
+- [SpeedDial] Move from lab to core (#22743) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import SpeedDial from '@material-ui/lab/SpeedDial';
+  -import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+  -import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+  +import SpeedDial from '@material-ui/core/SpeedDial';
+  +import SpeedDialAction from '@material-ui/core/SpeedDialAction';
+  +import SpeedDialIcon from '@material-ui/core/SpeedDialIcon';
+  ```
+
+- [ToggleButton] Move from lab to core (#22784) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import ToggleButton from '@material-ui/lab/ToggleButton';
+  -import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+  +import ToggleButton from '@material-ui/core/ToggleButton';
+  +import ToggleButtonGroup from '@material-ui/core/ToggleButtonGroup';
+  ```
+
+- [TreeView] Improve customization of tree item (#22846) @joshwooding
+  Remove `onLabelClick` and `onIconClick`.
+
+#### Changes
+
+- [AvatarGroup] Add variant prop (#22832) @hjades
+- [SliderStyled] Fix mark label alignment on coarse pointer devices (#22849) @joshwooding
+
+### Docs
+
+- [docs] Add example for using styled-components as styled-engine (#22788) @mnajdova
+- [docs] Add longhand system API props to docs (#22796) @possibilities
+- [docs] Box & system cleanup (#22962) @mnajdova
+- [docs] CONTRIBUTING.md only yarn is supported (#22754) @Yashvirani
+- [docs] Document createSvgIcon() (#22843) @mbrookes
+- [docs] Document inherited props (#22318) @oliviertassinari
+- [docs] Document LoadingButton behavior (#22878) @eps1lon
+- [docs] Fix dark theme for input field on autocomplete (#22711) @GauravKesarwani
+- [docs] Fix material icon search details view (#22793) @skr571999
+- [docs] Fix type vs. mode and capitalization of createMuiTheme (#22844) @joshwooding
+- [docs] Fix typo in guides/typescript (#22806) @croraf
+- [docs] Fix various typos (#22842) @kkirsche
+- [docs] For non-SSR language, internal search fall back to English (#22902) @bicstone
+- [docs] Improve CRA example (#22967) @spursbyte
+- [docs] Improve FormControl duplication warning (#22823) @talgautb
+- [docs] Improve perf when opening the drawer (#22781) @eps1lon
+- [docs] Improve SEO on titles (#22742) @oliviertassinari
+- [docs] Improve the left side-nav (#22780) @oliviertassinari
+- [docs] Include peer deps in installation steps (#22889) @numToStr
+- [docs] Link all the examples in docs (#22891) @Avi98
+- [docs] More robust description matcher (#22836) @eps1lon
+- [docs] Reduce risk of 404 when changing the default branch (#22801) @eps1lon
+- [docs] Resolve .tsx first (#22315) @oliviertassinari
+- [docs] Simplify locales example (#22747) @mbrookes
+- [docs] Sync translations (#22752, #22851) @l10nbot
+- [docs] Update installation guide to contain peer dependencies (#22787) @mnajdova
+- [docs] Update ToggleButton import (#22971) @mbrookes
+- [docs] Use demo name as codesandbox name (#22926) @eps1lon
+
+### Core
+
+- [benchmark] Add cross-env to fix window run issue (#22895) @mnajdova
+- [core] Batch small changes (#22746) @oliviertassinari
+- [core] Batch small changes (#22847) @oliviertassinari
+- [core] Drop babel-plugin-transform-dev-warning (#22802) @eps1lon
+- [core] Misc dependency fixes (#22909) @eps1lon
+- [test] Apply lazy forwardRef fix (#22904) @eps1lon
+- [test] Autocomplete drop "defaultProps" pattern (#22896) @eps1lon
+- [test] Fix react-next patch (#22800) @eps1lon
+- [test] Migrate Accordion to react-testing-library (#22952) @bewong89
+- [test] Migrate Backdrop to react-testing-library (#22931) @itamar244
+- [test] Migrate Container to react-testing-library (#22919) @eladmotola
+- [test] Migrate CssBaseline to react-testing-library (#22920) @eladmotola
+- [test] Migrate Fab to react-testing-library (#22959) @The24thDS
+- [test] Migrate Fade to react-testing-library (#22918) @eladmotola
+- [test] Migrate Grow to react-testing-library (#22917) @eladmotola
+- [test] Migrate List to react-testing-library (#22929) @eladmotola
+- [test] Migrate MenuList and ImageListItem to react-testing-library (#22958) @eladmotola
+- [test] Migrate MobileStepper to react-testing-library (#22963) @devrasec
+- [test] Migrate more components to react-testing-library (#22872) @baterson
+- [test] Migrate more components to react-testing-library (#22874) @baterson
+- [test] Migrate more components to react-testing-library (#22892) @baterson
+- [test] Migrate NativeSelect to react-testing-library (#22970) @guillermaster
+- [test] Migrate NativeSelectInput to react-testing-library (#22910) @baterson
+- [test] Migrate RadioGroup to react-testing-library (#22953) @eladmotola
+- [test] Migrate Slide to react-testing-library (#22913) @eladmotola
+- [test] Migrate SpeedDialIcon to react-testing-library (#22965) @jeferson-sb
+- [test] Migrate TabIndicator to react-testing-library (#22906) @eladmotola
+- [test] Migrate TextField to react-testing-library (#22944) @The24thDS
+- [test] Migrate useTheme,withTheme to react-testing-library (#22928) @eladmotola
+- [test] Migrate Zoom to react-testing-library (#22914) @eladmotola
+- [test] Prevent nextjs build cache to grow indefinitely (#22948) @eps1lon
+- [test] Simplify usage of `yarn mocha` (#22899) @eps1lon
+- [test] Solve 2000ms timeout (#22778) @oliviertassinari
+- [test] Update react next patch (#22890) @eps1lon
+- [test] Use appropriate templates for csb CI (#22943) @eps1lon
+- [test] Verbose reporter in CI (#22924) @eps1lon
+
+## 5.0.0-alpha.11
+
+###### _Sep 26, 2020_
+
+Big thanks to the 29 contributors who made this release possible.
+Here are some highlights ✨:
+
+- 👩‍🎨 A first iteration on the new styling solution.
+
+  You can find a [new version](https://next.material-ui.com/components/slider-styled/) of the slider in the lab powered by [emotion](https://emotion.sh/).
+
+  In the event that you are already using styled-components in your application, you can swap emotion for styled-components 💅. Check [this CodeSandbox](https://codesandbox.io/s/sliderstyled-with-styled-components-forked-olc27?file=/package.json) for a demo. It relies on aliases to prevent any bundle size overhead.
+
+  The new styling solution saves 2kB gzipped in the bundle compared to JSS, and about 14 kB gzipped if you were already using emotion or styled-components.
+
+  Last but not least, the change allows us to take advantage dynamic style props. We will use them for dynamic color props, variant props, and new style props (an improved [system](https://material-ui.com/system/basics/)).
+
+  This change has been in our roadmap for more than a year.
+  We announced it in the [v4 release blog post](https://medium.com/material-ui/material-ui-v4-is-out-4b7587d1e701) as a direction v5 would take.
+
+- 🛠 A first iteration on the unstyled components.
+
+  You can find a [new version](https://next.material-ui.com/components/slider-styled/#UnstyledSlider.tsx) of the slider in the lab without any styles.
+  The unstyled component weighs 6.5 kB gzipped, compared with 26 kB for the styled version when used standalone. The component is best suited for use when you want to fully customize the look of the component without reimplementing the JavaScript and accessibility logic.
+
+- ⚡️ A first alpha of the [DataGrid](https://material-ui.com/components/data-grid/) component.
+
+  It has taken 6 months of development since the initial commit (March 15th, 2020) to make the first alpha release of the grid. The component comes in two versions:
+  @material-ui/data-grid is licensed under MIT, while @material-ui/x-grid is licensed under a commercial license.
+
+- 🪓 Keep working on the breaking changes.
+
+  We aim to complete most of the breaking changes during the alpha stage of v5.
+  We will move to beta once all the breaking changes we have anticipated are handled.
+  As always, you should find a clear and simple upgrade path for each of them.
+  You can learn more about the breaking changes left to be done in #22700.
+
+- And many more 🐛 bug fixes and 📚 improvements.
+
+### `@material-ui/core@v5.0.0-alpha.11`
+
+#### Breaking changes
+
+- [Chip] Rename `default` variant to `filled` (#22683) @mnajdova
+  Rename `default` variant to `filled` for consistency.
+
+  ```diff
+  -<Chip variant="default">
+  +<Chip variant="filled">
+  ```
+
+- [Tabs] Add allowScrollButtonsMobile prop for mobile view (#22700) @GauravKesarwani
+  The API that controls the scroll buttons has been split it into two props:
+
+  - The `scrollButtons` prop controls when the scroll buttons are displayed depending on the space available.
+  - The `allowScrollButtonsMobile` prop removes the CSS media query that systematically hides the scroll buttons on mobile.
+
+  ```diff
+  -<Tabs scrollButtons="on" />
+  -<Tabs scrollButtons="desktop" />
+  -<Tabs scrollButtons="off" />
+  +<Tabs scrollButtons allowScrollButtonsMobile />
+  +<Tabs scrollButtons />
+  +<Tabs scrollButtons={false} />
+  ```
+
+- [theme] Improve breakpoints definitions (#22695) @mnajdova
+  Breakpoints are now treated as values instead of ranges.
+  The behavior of `down(key)` was changed to define media query less than the value defined with the corresponding breakpoint (exclusive).
+  The behavior of `between(start, end)` was also updated to define media query for the values between the actual values of start (inclusive) and end (exclusive).
+
+  Find examples of the changes required defined below:
+
+```diff
+-theme.breakpoints.down('sm') // '@media (max-width:959.95px)' - [0, sm + 1) => [0, md)
++theme.breakpoints.down('md') // '@media (max-width:959.95px)' - [0, md)
+```
+
+```diff
+-theme.breakpoints.between('sm', 'md') // '@media (min-width:600px) and (max-width:1279.95px)' - [sm, md + 1) => [sm, lg)
++theme.breakpoints.between('sm', 'lg') // '@media (min-width:600px) and (max-width:1279.95px)' - [sm, lg)
+```
+
+- [theme] Rename `type` to `mode` (#22687) @mnajdova
+  Renames `theme.palette.type` to `theme.palette.mode`, to better follow the "dark mode" term that is usually used for describing this feature.
+
+  ```diff
+  import { createMuiTheme } from '@material-ui/core/styles';
+
+  -const theme = createMuiTheme({palette: { type: 'dark' }}),
+  +const theme = createMuiTheme({palette: { mode: 'dark' }}),
+  ```
+
+  The changes are supported by the `adaptV4Theme()` for easing the migration
+
+#### Changes
+
+- [Checkbox] Improve indeterminate UI (#22635) @oliviertassinari
+- [Chip] Fix prop-type support for custom variants (#22603) @cansin
+- [icons] Expose a data-test-id attribute on all svg icons (#22634) @jaebradley
+- [Rating] Add form integration test suite (#22573) @eps1lon
+- [Rating] Simpler customization of active "no value" styles (#22613) @eps1lon
+- [Rating] Treat as input when readOnly (#22606) @eps1lon
+- [Rating] Treat read-only as image (#22639) @eps1lon
+- [Select] Improve docs for displayEmpty prop (#22601) @mihaipanait
+- [Slider] Better tracking of mouse events (#22557, #22638) @chrisinajar, @oliviertassinari
+- [Slider] Create unstyled version and migrate to emotion & styled-components (#22435) @mnajdova
+- [Slider] Export components from lab and renamed to fit file names (#22723) @mnajdova
+- [Slider] Fix value label display for custom value component (#22614) @NoNonsense126
+- [Stepper] Add slight transition (#22654) @xtrixia
+- [Tabs] Fix TabScrollButton using absolute path (#22690) @4vanger
+- [Tabs] Only scroll the visible tabs (#22600) @quochuy
+- [theme] convertLength does not work for fromUnit !== 'px' (#22739) @brorlarsnicklas
+- [theme] Fix createSpacing.d.ts definition (#22645) @dabretin
+- [theme] Fix Hidden breakpoints issues and updates the migration guide (#22702) @mnajdova
+
+### `@material-ui/lab@v5.0.0-alpha.11`
+
+#### Breaking changes
+
+- [Alert] Move from lab to core (#22651) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import Alert from '@material-ui/lab/Alert';
+  -import AlertTitle from '@material-ui/lab/AlertTitle';
+  +import Alert from '@material-ui/core/Alert';
+  +import AlertTitle from '@material-ui/core/AlertTitle';
+  ```
+
+- [Rating] Move from lab to core (#22725) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import Rating from '@material-ui/lab/Rating';
+  +import Rating from '@material-ui/core/Rating';
+  ```
+
+- [Skeleton] Move from lab to core (#22740) @mbrookes
+  Move the component from the lab to the core. This component will become stable.
+
+  ```diff
+  -import Skeleton from '@material-ui/lab/Skeleton';
+  +import Skeleton from '@material-ui/core/Skeleton';
+  ```
+
+- [Autocomplete] Get root elements of options via renderOption (#22591) @ImanMahmoudinasab
+  After this change, the full DOM structure of the option is exposed.
+  It makes customizations easier.
+  You can recover from the change with:
+
+  ```diff
+  <Autocomplete
+  - renderOption={(option, { selected }) => (
+  -   <React.Fragment>
+  + renderOption={(props, option, { selected }) => (
+  +   <li {...props}>
+        <Checkbox
+          icon={icon}
+          checkedIcon={checkedIcon}
+          style={{ marginRight: 8 }}
+          checked={selected}
+        />
+        {option.title}
+  -   </React.Fragment>
+  +   </li>
+    )}
+  />
+  ```
+
+#### Changes
+
+- [lab] Fix transitive dependencies in @material-ui/lab (#22671) @koistya
+- [Autocomplete] Add "remove-option" to AutocompleteCloseReason type (#22672) @iansjk
+- [Autocomplete] Don't close popup when Ctrl/Meta is pressed (#22696) @montelius
+- [Autocomplete] Fix accessibility issue with empty option set (#22712) @tylerjlawson
+- [Autocomplete] Update GitHub customization example (#22735) @hmaddisb
+
+### `@material-ui/styled-engine@v5.0.0-alpha.11`
+
+The new default style engine leveraging emotion.
+
+### `@material-ui/styled-engine-sc@v5.0.0-alpha.11`
+
+Allows developer to swap emotion with styled-components.
+More documentation are coming.
+
+### `@material-ui/icons@v5.0.0-alpha.11`
+
+- [icons] Synchronize with Google (#22680) @delewis13
+
+### `@material-ui/styles@v5.0.0-alpha.11`
+
+- [Slider] Create unstyled version and migrate to emotion & styled-components (#22435) @mnajdova
+
+### `@material-ui/system@v5.0.0-alpha.11`
+
+- [core] Port createSpacing to TypeScript (#22720) @eps1lon
+
+### Docs
+
+- [blog] New posts (#22607) @oliviertassinari
+- [docs] Add additional context to Autocomplete asynchronous documentation (#22621) @jaebradley
+- [docs] Add emotion dependencies in codesandbox examples (#22736) @mnajdova
+- [docs] Add props from Unstyled component to Styled API page (#22733) @mnajdova
+- [docs] Add ui-schema in related projects (#22644) @elbakerino
+- [docs] Avoid confusion between layout grid and data grid (#22681) @oliviertassinari
+- [docs] Batch small changes (#22646) @oliviertassinari
+- [docs] Configuring redirects for MUI X (#22632) @dtassone
+- [docs] Customized hook at Autocomplete issue in dark mode (#22605) @hmaddisb
+- [docs] Encourage DataGrid in /components/tables/ over alternatives (#22637) @oliviertassinari
+- [docs] Fix emotion broken in SSR (#22731) @mnajdova
+- [docs] Fix markdown metadata yaml (#22629) @oliviertassinari
+- [docs] Fix static asset loading with X @oliviertassinari
+- [docs] Improve Dashboard template (#22647) @pak1989
+- [docs] Improve DX for docs generation (#22619) @eps1lon
+- [docs] Migrate templates to TypeScript (#22650) @oliviertassinari
+- [docs] New Crowdin updates (#22620) @mbrookes
+- [docs] Prevent toolbar tooltips overlapping demos (#22732) @eps1lon
+- [docs] Reduce indirections (#22642) @Arsikod
+- [docs] Reference experimental slider demos correctly (#22738) @eps1lon
+- [docs] Remove minimum-scale from meta viewport in docs (#22724) @barik
+- [docs] Remove wrong migration instruction (#22710) @oliviertassinari
+- [docs] Use codesandbox deploy for demos created from deploy previews (#22616) @eps1lon
+
+### Core
+
+- [core] Port createSpacing to TypeScript (#22720) @eps1lon
+- [core] Replace ChangeEvent<{}> with SyntheticEvent (#22716) @eps1lon
+- [core] Use ttp sources directly (#22706) @eps1lon
+- [test] Add skip ci to Crowdin commit message (#22685) @mbrookes
+- [test] Only run on push for master/next (#22624) @eps1lon
+- [test] Run CircleCI anytime (#22676) @eps1lon
+
 ## 5.0.0-alpha.10
 
 ###### _Sep 15, 2020_
@@ -75,15 +1491,6 @@ Here are some highlights ✨:
 
   ```
   theme.spacing(2) => '16px'
-  ```
-
-  You can restore the previous behavior with:
-
-  ```diff
-  -const theme = createMuiTheme();
-  +const theme = createMuiTheme({
-  +  spacing: x => x * 8,
-  +});
   ```
 
 - [theme] Remove palette.text.hint key (#22537) @mbrookes
@@ -244,7 +1651,7 @@ const theme = createMuiTheme({
   ```diff
   import { createMuiTheme } from '@material-ui/core/styles';
 
-  const theme = createMuitheme({
+  const theme = createMuiTheme({
   -  props: {
   -    MuiButton: {
   -      disableRipple: true,
@@ -265,7 +1672,7 @@ const theme = createMuiTheme({
   ```diff
   import { createMuiTheme } from '@material-ui/core/styles';
 
-  const theme = createMuitheme({
+  const theme = createMuiTheme({
   -  overrides: {
   -    MuiButton: {
   -      root: { padding: 0 },
@@ -983,7 +2390,7 @@ Big thanks to the 16 contributors who made this release possible.
 - [l10n] Update sv-SE locale (#21631) @tbz
 - [Menu] Remove overflow style in MenuItem (#21644) @tj3407
 - [MenuItem] Add types for ListItemClasses (#21654) @eps1lon
-- [Slider] Fix cannot read property ‘focus’ of nulll (#21653) @mageprincess
+- [Slider] Fix cannot read property ‘focus’ of null (#21653) @mageprincess
 - [TextField] Fix CSS isolation issue (#21665) @Codetalker777
 - [TrapFocus] Fix portal support (#21610) @mnajdova
 - [TypeScript] Fix version support (#21640) @jakubfiglak
@@ -1047,7 +2454,7 @@ Big thanks to the 33 contributors who made this release possible. Here are some 
 
   ```diff
   -import Typography from '@material-ui/core/Typography';
-  +import { visuallyHidden } from '@material-ui/system';
+  +import { visuallyHidden } from '@material-ui/utils';
   +import styled from 'styled-component';
 
   +const Span = styled('span')(visuallyHidden);
@@ -1307,7 +2714,7 @@ Big thanks to the 21 contributors who made this release possible.
 
 ### `@material-ui/core@v4.10.1`
 
-- [CircularProgress] Fix IE 11 wobbling (#21248) @AmirAhrari
+- [CircularProgress] Fix IE11 wobbling (#21248) @AmirAhrari
 - [l10n] Improve Ukrainian translation (#21239) @goodwin64
 - [LinearProgress] Set aria-valuemin and aria-valuemax (#21195) @eps1lon
 - [List] Add ‘alignItemsFlexStart’ to ListItemIconClassKey #21256) @YoonjiJang
@@ -1404,7 +2811,7 @@ Here are some highlights ✨:
 - [Autocomplete] Fix iOS double tap (#21060) @kaplantm
 - [Pagination] Document difference with TablePagination (#21107) @hoop71
 - [Skeleton] Allow children to influence width and height (#21097) @mikew
-- [Skeleton] Reduce SkeletonChildren test flakyness (#21121) @eps1lon
+- [Skeleton] Reduce SkeletonChildren test flakiness (#21121) @eps1lon
 - [TabPanel] Allow flow content (#21017) @eps1lon
 - [ToggleButton] Add orientation prop (#21051) @xiaomaini
 - [TreeView] Add test for undesired behavior (#21043) @eps1lon
@@ -1456,7 +2863,7 @@ Here are some highlights ✨:
 - [l10n] Add Hindi (hi-IN) locale (#20916) @chandan-singh
 - [Popper] Fix keepMounted visibility (#20937) @weslenng
 - [Select] Focus labelled element on click (#20833) @qkdreyer
-- [Slider] Fix center label in IE 11 (#20942) @Uneetpatel7
+- [Slider] Fix center label in IE11 (#20942) @Uneetpatel7
 - [Tabs] Add `selectionFollowsFocus` (#20936) @eps1lon
 - [Tabs] Forward aria-label\* attributes to tablist (#20986) @eps1lon
 - [TextField] Fix typography inheritance issue (#20908) @esseswann
@@ -1490,7 +2897,7 @@ Here are some highlights ✨:
 - [docs] Add missing spot do DiamondSponsors (#20958) @eps1lon
 - [docs] Fix leaking lazy stylesheets (#20903) @eps1lon
 - [docs] Label accessibility for native select (#20876) @mkesavan13
-- [docs] Reduce likelyhood of overflow in ToC (#20961) @eps1lon
+- [docs] Reduce likelihood of overflow in ToC (#20961) @eps1lon
 - [docs] Remove redirection to v0 (#17637) (#20902) @dellink
 - [docs] Sychronize translations (#20982) @oliviertassinari
 
@@ -1839,7 +3246,7 @@ Big thanks to the 20 contributors who made this release possible.
 - [docs] Batch small changes (#20312) @oliviertassinari
 - [docs] Explain mini-theme example (#20339) @maksimgm
 - [docs] Fix Tidelift UTM parameters (#20348) @phated
-- [docs] Fix grammer: a -> they (#20336) @nainardev
+- [docs] Fix grammar: a -> they (#20336) @nainardev
 - [docs] Fix masked text field bug (#20397) @mattcorner
 - [docs] Improve \_app usage in nextjs examples (#20381) @HaNdTriX
 - [docs] Improve analytics (#20337) @oliviertassinari
@@ -1931,7 +3338,7 @@ Here are some highlights ✨:
 ### Core
 
 - [test] Improve regression test suite debugging (#20194) @eps1lon
-- [ci] Retry mergable state for 30 minutes (#20269) @eps1lon
+- [ci] Retry mergeable state for 30 minutes (#20269) @eps1lon
 - [core] Automatically apply "PR: needs rebase" PR label (#20169) @eps1lon
 - [core] Batch small changes (#20255) @oliviertassinari
 - [core] Fix docs:start which should start next.js server (#20202) @ro7584
@@ -1986,7 +3393,7 @@ Here are some highlights ✨:
 
 ### `@material-ui/styles@v4.9.6`
 
-- [styles] Fix theme default props overriden by Component default (#20091) @adridavid
+- [styles] Fix theme default props overridden by Component default (#20091) @adridavid
 - [styles] Name anonymous function type (#19996) @eps1lon
 
 ### `@material-ui/system@v4.9.6`
@@ -2431,7 +3838,7 @@ Here are some highlights ✨:
 - [core] Distinguish JSSProperties and CSSProperties (#19263) @eps1lon
 - [core] Fix TypographyStyle not allowing media queries and allowing unsafe undefined access (#19269) @eps1lon
 - [core] Ignore a few flaky visual tests (#19226) @oliviertassinari
-- [core] Remove unecessary exports from styles/transitions.js (#19337) @JonKrone
+- [core] Remove unnecessary exports from styles/transitions.js (#19337) @JonKrone
 - [core] Simplify types of styled (#19243) @eps1lon
 - [core] Use node 10 in every CI/CD pipeline (#19301) @eps1lon
 - [core] Warn when defaultValue changes (#19070) @m4theushw
@@ -3489,7 +4896,7 @@ Here are some highlights ✨:
 - [Popover] Fix update position action (#17097) @netochaves
 - [RadioGroup] Make value accept any (#17132) @cmeeren
 - [Slider] Avoid mutating user's value prop (#17085) @elmeerr
-- [Switch] Fix rendering in IE 11 and Safari (#17095) @rbrishabh
+- [Switch] Fix rendering in IE11 and Safari (#17095) @rbrishabh
 - [Table] Add sticky header support (#17139) @egerardus
 - [TextField] Specs alignment (#17192) @elmeerr
 - [TextField] Update outlined label when prop changes (#17217) @Shubhamchinda
@@ -3519,7 +4926,7 @@ Here are some highlights ✨:
 - [docs] Minor Update to remove "n°" notations (#17200) @skube
 - [docs] Missing degree/option symbol (#17189) @skube
 - [docs] New translations (#17134) @mbrookes
-- [docs] Remove unecessary createStyles in TypeScript Tabs demo (#17164) @Imballinst
+- [docs] Remove unnecessary createStyles in TypeScript Tabs demo (#17164) @Imballinst
 - [docs] Require less strict tsconfig (#17214) @eps1lon
 - [examples] Fix warning in next.js example (#17133) @Janpot
 - [examples] Fix warnings Container in \_app.js with Next.js (#17181) @saltyshiomix
@@ -3599,12 +5006,12 @@ Here are some highlights ✨:
 - [ButtonGroup] Separate button colors (#16876) @CyanoFresh
 - [CssBaseline] Add backdrop base styles (#16880) @yordis
 - [Fab] Accept FabProps in theme.props (#16877) @aditya1906
-- [FormControl] Warn if rendered mulitple inputs (#16923) @lemes
+- [FormControl] Warn if rendered multiple inputs (#16923) @lemes
 - [Popper] Fix ScrollPlayground.js demo (#16948) @pinktig
 - [Slider] Update TypeScript demo to cast types to values (#16957) @allypally
 - [Stepper] Improve the description of the icon prop (#16916) @mbrookes
 - [TextField] How to leverage CSS input validation (#16903) @jonkelling
-- [Textfield] Add left property to prevent scrollbars on IE 11 (#16936) @beaudry
+- [Textfield] Add left property to prevent scrollbars on IE11 (#16936) @beaudry
 - [ToggleButton] Fix horizontal shift (#16861) @wereHamster
 - [Transition] Forward isAppearing to onEnter, onEntering, onEntered (#16917) @millerrafi
 
@@ -3997,7 +5404,7 @@ Here are some highlights ✨:
 - ♿️ Fix Select and Menu keyboard behavior (#16323).
 - 🚀 Reduce the Modal bundle size by -22% (5 kB) (#15839, #16254, #16262).
 - 💄 Remove noise from the material.io generated icons (#16258).
-- ⚛️ Extend StrictMode compatiblity to 25 more components (#16283).
+- ⚛️ Extend StrictMode compatibility to 25 more components (#16283).
 - And many more 🐛 bug fixes and 📚 improvements.
 
 ### `@material-ui/core@v4.1.2`
@@ -4049,7 +5456,7 @@ Here are some highlights ✨:
 - [docs] Batch of fixes (#16229) @oliviertassinari
 - [docs] Better react-router-dom version comment (#16335) @kyarik
 - [docs] Convert SideEffects to hooks (#16197) @eps1lon
-- [docs] Fix IE 11 rendering issue on the pickers page (#16246) @oliviertassinari
+- [docs] Fix IE11 rendering issue on the pickers page (#16246) @oliviertassinari
 - [docs] Fix code example (#16279) @maslowproject
 - [docs] Fix links that point to the next branch (#16326) @Maxim-Mazurok
 - [docs] Fix outdated react-transition-group docs link (#16274) @eps1lon
@@ -4071,7 +5478,7 @@ Here are some highlights ✨:
 - [core] Add missing MuiTableHead and MuiTableBody type to theme.props (#16220) @merceyz
 - [core] Add missing exports from styles in core (#16311) @fzaninotto
 - [core] Change <> to <React.Fragment> (#16225) @aditya1906
-- [core] Extend StrictMode compatiblity (#16283) @eps1lon
+- [core] Extend StrictMode compatibility (#16283) @eps1lon
 - [core] Move size tracking to azure pipelines (#16182) @eps1lon
 - [core] Remove string from SpacingArgument in theme.spacing (#16290) @merceyz
 - [ci] Build packages in parallel for size snapshot (#16261) @eps1lon
@@ -4094,7 +5501,7 @@ Here are some highlights ✨:
 
 ### `@material-ui/core@v4.1.1`
 
-- [ButtonBase] Fix riple not stoping on mouse up (#16142) @joaosilvalopes
+- [ButtonBase] Fix riple not stopping on mouse up (#16142) @joaosilvalopes
 - [useMediaQuery] Defensive logic against matchMedia not available (#16196) @oliviertassinari
 - [Typography] Fix variantMapping rejecting partial type (#16187) @eps1lon
 
@@ -4229,7 +5636,7 @@ Here are some highlights ✨:
 
 - 🐛 A second stability release after the release of v4.0.0.
 - 💄 Add a new size="small" prop to the Chip component (#15751) @mbrookes.
-- 🐛 Fix three IE 11 issues (#15921, #15952, #15967) @eps1lon, @rupert-ong, @ryancogswell
+- 🐛 Fix three IE11 issues (#15921, #15952, #15967) @eps1lon, @rupert-ong, @ryancogswell
 - And many more 📚 improvements.
 
 ### `@material-ui/core@v4.0.2`
@@ -4293,7 +5700,7 @@ Here are some highlights ✨:
 ### Core
 
 - [core] Add dependency react>=16.3.0 requested by @emotion/core and react-js (#15982) @marco-silva0000
-- [core] Fix IE 11 crashes related to Object.assign (#15921) @eps1lon
+- [core] Fix IE11 crashes related to Object.assign (#15921) @eps1lon
 - [core] Minor fixes (#15875) @joshwooding
 - [core] Remove export of internal test-utils (#15895) @eps1lon
 - [core] Update babel-plugin-optimize-clsx (#15894) @merceyz
@@ -4311,7 +5718,7 @@ Here are some highlights ✨:
 
 - 🐛 A stability release after the release of v4.0.0.
 - 🤖 A new codemod to migrate the theme.spacing.unit API (#15782) @joshwooding.
-- 🐛 Fix IE 11 crash (#15856) @aditya1906.
+- 🐛 Fix IE11 crash (#15856) @aditya1906.
 - 📚 Clean up the documentation after the next -> master migration.
 
 ### `@material-ui/core@v4.0.1`
@@ -4928,7 +6335,7 @@ We hope 2-3 weeks of beta will be enough. We plan on releasing v4 stable in May.
 - [core] Reduce calls to actions prop (#15370) @eps1lon
 - [core] Upgrade react-transition-group (#15375) @eps1lon
 - [test] Add missing styles tests (#15376) @ellisio
-- [test] Add hoc + overrideable component workaround (#15381) @ellisio
+- [test] Add hoc + overridable component workaround (#15381) @ellisio
 - [utils] Fix lazy and memo components issuing forward ref warnings (#15322) @eps1lon
 
 ## 4.0.0-alpha.7
@@ -5021,7 +6428,7 @@ Here are some highlights ✨:
 - [docs] Add ref forwarding to API docs (#15135) @eps1lon
 - [docs] Add ImgMediaCard TypeScript demo (#15130) @jasondashwang
 - [docs] Link 'React Material-UI Cookbook' (#15211) @oliviertassinari
-- [docs] Fix the docs in dev mode for IE 11 (#15230) @oliviertassinari
+- [docs] Fix the docs in dev mode for IE11 (#15230) @oliviertassinari
 - [docs] New translations (#15235) @mbrookes
 - [examples] Update all the examples + page layout examples (#15219) @nareshbhatia
 - [docs] Tidy up moved / deleted translations and update the Crowdin config (#15247) @mbrookes
@@ -5080,7 +6487,7 @@ Here are some highlights ✨:
 
 ### `@material-ui/styles@v4.0.0-alpha.6`
 
-- [styles] Fix IE 11 issue (#15034) @oliviertassinari
+- [styles] Fix IE11 issue (#15034) @oliviertassinari
 - [styles] Use the hook directly in styled() (#15029) @oliviertassinari
 - [styles] Add a new injectFirst prop (#15028) @oliviertassinari
 - [styles] Go back to index counter (#15044) @oliviertassinari
@@ -5409,7 +6816,7 @@ Here are some highlights ✨:
 - [docs] Add button demos in ts (#14739) @eps1lon
 - [docs] Document the migration from v3 to v4 (#14741) @oliviertassinari
 - [docs] before() is Mocha; beforeEach() is Jest (#14743) @masaok
-- [docs] Fix IE 11 build (#14781) @oliviertassinari
+- [docs] Fix IE11 build (#14781) @oliviertassinari
 - [docs] Kill as many non hook demos as possible (#14805) @oliviertassinari
 - [docs] Prepare Google & Algolia i18n search + v3/v4 search (#14806) @oliviertassinari
 - [docs] Speed-up pull requests build (#14811) @oliviertassinari
@@ -6369,7 +7776,7 @@ Here are some highlights ✨:
 
 ### `@material-ui/core@v3.6.2`
 
-- [Tooltip] Supress warning if button is disabled and title is empty (#13785) @rfbotto
+- [Tooltip] Suppress warning if button is disabled and title is empty (#13785) @rfbotto
 - [Dialog] Warn if className in PaperProps is set (#13797) @eps1lon
 - [TextField] Fix textfield label position when empty (#13791) @Studio384
 - [Popper] Save 7 KB gzipped (for people only using it) (#13804) @oliviertassinari
@@ -6525,7 +7932,7 @@ import Divider from '@material-ui/core/Divider';
 - [TablePagination] Improve TypeScript definition (#13601) @xiaoyu-tamu
 - [SwipeableDrawer] Add `SwipeAreaProps` property (#13592) @SerhiiBilyk
 - [ListItem] Add three-line support (#13553) @ntorion
-- [Grid] Fix the IE 11 issue in the demo (7d2070fb388295d38806ecc49717006f34393e74) @oliviertassinari
+- [Grid] Fix the IE11 issue in the demo (7d2070fb388295d38806ecc49717006f34393e74) @oliviertassinari
 - [Zoom] Correct transition delay value of the example (#13645) @t49tran
 - [Tabs] Improve the warning message (#13640) @oliviertassinari
 - [Grow] Condense the demo (#13665) @Thyix
@@ -6669,7 +8076,7 @@ _Powered by [JSS](https://github.com/cssinjs/jss)._
 - [docs] Remove redundant text (#13547) @EbiEbiEvidence
 - [docs] Add language menu (#13544) @mbrookes
 - [docs] Misc fixes (#13555) @oliviertassinari
-- [docs] Add cookie for persistant colors (#13567) @mbrookes
+- [docs] Add cookie for persistent colors (#13567) @mbrookes
 
 ### Core
 
@@ -6729,7 +8136,7 @@ Here are some highlights ✨:
 - [docs] Add Google Analytics events (#13451) @goldins
 - [docs] Use stable context API (#13477) @eps1lon
 - [docs] Update CONTRIBUTING.md (#13478) @josgraha
-- [docs] Fix material-ui-popup-state IE 11 issue (#13474) @jedwards1211
+- [docs] Fix material-ui-popup-state IE11 issue (#13474) @jedwards1211
 - [docs] Add Typography example for MenuItem (#13500) @joshwooding
 - [docs] Reword flexbox limitation (#13508) @joshwooding
 
@@ -6748,12 +8155,12 @@ Here are some highlights ✨:
 
 - 🐛 Fix some important issues with the Modal (#13378, #13389) @TomiCake.
 - 🐛 Fix a Dialog scroll issue (#13409) @Ang-YC.
-- 📝 Full IE 11 support (#13375, #13324) @eps1lon.
+- 📝 Full IE11 support (#13375, #13324) @eps1lon.
 - And many more bug fixes and documentation improvements.
 
 ### `@material-ui/core@v3.3.2`
 
-- [Stepper] Fix visual issue on IE 11 (#13375) @oliviertassinari
+- [Stepper] Fix visual issue on IE11 (#13375) @oliviertassinari
 - [Modal] Reuse the same reference (#13378) @oliviertassinari
 - [MenuItem] Add disableGutters property (#13329) @adeelibr
 - [FormControl] Issue 13246 revert (#13380) @drkohlipk
@@ -6771,7 +8178,7 @@ Here are some highlights ✨:
 ### Docs
 
 - [docs] Fix some issue with i18n (#13342) @GFwer
-- [docs] Add polyfill for IE 11 (#13324) @eps1lon
+- [docs] Add polyfill for IE11 (#13324) @eps1lon
 - [docs] Correct title attribute for Paella recipe card (#13398) @vixmorrigan-redseven
 - [docs] CONTRIBUTING is not read by default (#13400) @eps1lon
 - [docs] Add missing </span> for prop-type (#13401) @mvsmal
@@ -6917,7 +8324,7 @@ Here are some highlights ✨:
 - [CardActionArea] Fix overflow issue (#13213) @mdsadiq
 - [Typography] Improve the upgrade story (#13214) @oliviertassinari
 - [Snackbar] Remove non supported property `anchorOrigin.vertical=enter` (#13238) @iamhosseindhv
-- [Tabs] Fix IE 11 styling (#13230) @pography
+- [Tabs] Fix IE11 styling (#13230) @pography
 
 ### `@material-ui/lab@v3.0.0-alpha.20`
 
@@ -7388,7 +8795,7 @@ We use the same strategy for Chrome.
 - [docs] Add "Insights" by justaskusers.com to the list of showcases (#12620) @mattes3
 - [docs] Use public api of jss instead of private vars (#12629) @eps1lon
 - [docs] Improve Autocomplete filtering suggestions (#12641) @jorgegorka
-- [docs] Fix IE 11 support (#12650) @oliviertassinari
+- [docs] Fix IE11 support (#12650) @oliviertassinari
 - [docs] Fix typos (#12652) @dandv
 - [docs] Use the event.target.checked API systematically (#12644) @chellem
 - [docs] Correct `by and enum` typo in api.md (#12663) @G-Rath
@@ -7704,7 +9111,7 @@ Here are some highlights ✨:
 - [Grow] Fix scroll on entered (#12199) @stephenway
 - [Popper] Fix update logic (#12218) @oliviertassinari
 - [Badge] Increase readability (#12221) @oliviertassinari
-- [styles] Increase the class name lenght limit before raising (#12222) @oliviertassinari
+- [styles] Increase the class name length limit before raising (#12222) @oliviertassinari
 - [icons] Fix SVG path precision issue (#12225) @ChristiaanScheermeijer
 - [Popper] Typing and documentation (#12223) @dispix
 - [Select] Simpler onChange event.target logic (#12231) @oliviertassinari
@@ -7803,7 +9210,7 @@ N/A
 - [core] Improve the prop-types of shape (#12098) @oliviertassinari
 - [core] Upgrade dev dependencies (#12117) @oliviertassinari
 - [core] Error typo fix (#12118) @TheRusskiy
-- [test] Fix Argos-CI flakyness (#12142) @oliviertassinari
+- [test] Fix Argos-CI flakiness (#12142) @oliviertassinari
 
 #### Lab
 
@@ -7963,7 +9370,7 @@ N/A
 
 - [ClickAwayListener] Add a demo (#11801) @oliviertassinari
 - [Grid] Add support a auto value (#11804) @oliviertassinari
-- [StepButton] Fix IE 11 flexbox (#11814) @paulnta
+- [StepButton] Fix IE11 flexbox (#11814) @paulnta
 - [styles] Re-add default parameter of string for WithStyles (#11808) @pelotom
 - [SwipeableDrawer] Allow custom style (#11805) @Johann-S
 - [ButtonBase] Corrected the type definitions for the TouchRipple classes (#11818) @C-Rodg
@@ -8192,7 +9599,7 @@ N/A
 - [core] Cut the head of the snake 🐍 (#11477) @oliviertassinari
 - [core] Add esm bundle to start tracking treeshakability (#11489) @TrySound
 - [core] More aggressive transpilation (#11492) @oliviertassinari
-- [core] Enable loose mode for staged featues (#11511) @TrySound
+- [core] Enable loose mode for staged features (#11511) @TrySound
 - [core] Simplify the babel docs config (#11514) @oliviertassinari
 - [core] Remove lodash 💃 (#11521) @oliviertassinari
 - [core] Internalize ScrollbarSize (#11523) @oliviertassinari
@@ -8334,7 +9741,7 @@ We provide a codemod to automate the migration: https://github.com/mui-org/mater
 - [core] Require React 16.3.0 or greater (#11347, #11361) @oliviertassinari
 - [Grid] Remove the hidden property (#11348) @oliviertassinari
 
-Split the responsabilities between the different components. Help with tree-shaking.
+Split the responsibilities between the different components. Help with tree-shaking.
 
 ```diff
 -        <Grid item xs hidden={{ xlUp: true }}>
@@ -8526,7 +9933,7 @@ This change is for consistency with the other components. No need to repeat the 
 
 - [CircularProgress] Remove min & max props (#11211) @mbrookes
 
-Makes the API consistant with LinearProgress
+Makes the API consistent with LinearProgress
 
 ```diff
 <CircularProgress
@@ -8919,7 +10326,7 @@ I have made a mistake in [#8108](https://github.com/mui-org/material-ui/pull/810
 - [StepButton] Support vertical stepper (#10698) @danieljuhl
 - [TextField] Update defaultValue prop types (#10703) @moondef
 - [Input] Rename isDirty to isEmpty (#10704) @oliviertassinari
-- [Select] Perfom the layout computation as soon as possible (#10706) @oliviertassinari
+- [Select] Perform the layout computation as soon as possible (#10706) @oliviertassinari
 - [Stepper] Add error prop to StepIcon and StepLabel (#10705) @nicoffee
 - [Grid] Add zeroMinWidth to TypeScript definition (#10712) @cvanem
 - [Select] Fix data-value value (#10723) @a-x-
@@ -8979,7 +10386,7 @@ N/A
 #### Component Fixes / Enhancements
 
 - [Select] Fix chip alignment (#10611) @adamszeptycki
-- [Tabs] Add 'scrollButtons' and 'indicator' to TabsClassKey TypeScript defintion (#10618) @cvanem
+- [Tabs] Add 'scrollButtons' and 'indicator' to TabsClassKey TypeScript definition (#10618) @cvanem
 - [TablePagination] Add SelectProps property (#10629) @mrahman1122
 - [ListItemSecondaryAction] Vertically center (#10628) @jedwards1211
 - [Select] Add visual tests to prevent future regression (#10642) @oliviertassinari
@@ -9135,7 +10542,7 @@ The best way to recover from this breaking change is to check the warnings in th
 - [Table] Default display style for all table components (#10447) @caub
 - [Collapse] Fix description (#10454) @onurkose
 - [ButtonBase] Add a TouchRippleProps property (#10470) @christophediprima
-- [Select] Ensure label is shrinked when using startAdornment (#10474) @carab
+- [Select] Ensure label is shrunk when using startAdornment (#10474) @carab
 - [Card][list] Implement responsive gutters (#10477) @lukePeavey
 - [icon] Add "side-effects": false to material-ui-icons (#10482) @b1f6c1c4
 - [IconButton] Fix theme.spacing.unit size dependency (#10486) @oliviertassinari
@@ -9211,7 +10618,7 @@ N/A
 - [docs] rename theme-default to default-theme (#10356) @mbrookes
 - [docs] Fix modal page link (#10360) @tanmayrajani
 - [docs] Plan the breaking changes before v1 (#10348) @oliviertassinari
-- [docs] Fix IE 11 and W3C warnings (#10394) @oliviertassinari
+- [docs] Fix IE11 and W3C warnings (#10394) @oliviertassinari
 - [docs] Sort the pages by path and ignore dashes (#10396) @leMaik
 - [docs] Autocomplete migration (#10397) @oliviertassinari
 - [docs] Add AudioNodes to the showcase (#10407) @JohnWeisz
@@ -9714,7 +11121,7 @@ It's unclear if this change is making the implementation follow the specificatio
 - [ListItemText] Update Typings for primary and secondary text class keys (#9946) @spallister
 - [palette] ShadeBackground interface updated (#9955) @daniel-rabe
 - [TableCell] Fix TypeScript definition (#9959) @ljvanschie
-- [Select] Fix a small vertical alignement issue (#9964) @oliviertassinari
+- [Select] Fix a small vertical alignment issue (#9964) @oliviertassinari
 - [IconButton] Better follow the spec (#9967) @oliviertassinari
 - [Select] Add inputProps property (#9979) @oliviertassinari
 - [typescript] Palette typing fixes and error augmentation (#9973) @pelotom
@@ -10068,7 +11475,7 @@ The zIndex object has been updated to match the usage.
 - [CardHeader] Add component property (#9634) @oliviertassinari
 - [Snackbar] Clarify that autoHideDuration calls onClose (#9628) @evantrimboli
 - [Table] Add aria-label's to pagination left/right arrows (#9622) @gregnb
-- [Input] More predictible value behavior (#9647) @oliviertassinari
+- [Input] More predictable value behavior (#9647) @oliviertassinari
 - [styles] Make sure to escape whitespace (#9644) @jedwards1211
 - [Reboot] New component (#9661) @oliviertassinari
 - [Snackbar] Allow consecutive messages to display (#9670) @tkvw
@@ -10090,7 +11497,7 @@ The zIndex object has been updated to match the usage.
 
 #### Core
 
-- [test] Document the ImageMagick / GraphicsMagick dependancy (#9608) @mbrookes
+- [test] Document the ImageMagick / GraphicsMagick dependency (#9608) @mbrookes
 - [typescript] re-declare `isMuiElement` and `isMuiComponent` as typeguard (#9630) @SSW-SCIENTIFIC
 - [core] Upgrade the dependencies (#9642) @oliviertassinari
 
@@ -10505,7 +11912,7 @@ In the following diff `SwitchBase` can be a `Checkbox` a `Radio` or a `Switch`.
 - [docs] Add composed withStyles & withTheme HOCs to the FAQ (#9079) @mbrookes
 - [docs] Add file upload examples with the icon buttons (#9087) @Tevinthuku
 - [docs] Fix word (#9091) @Hissvard
-- [docs] Fix AppSearch horizontal rythm (#9107) @mbrookes
+- [docs] Fix AppSearch horizontal rhythm (#9107) @mbrookes
 - [docs] Fix misc typos, grammar and add minor clarifications (#9112) @mbrookes
 
 #### Core
@@ -10563,7 +11970,7 @@ Here are some highlights ✨:
 - [utils] Make ClickAwayListener public (#8967) @oliviertassinari
 - [Slider] Add the logic back (#8972) @oliviertassinari
 - [Select] Remove IE11 arrow (#8976) @oliviertassinari
-- [Select] Menu Items centered in IE 11 (#8982) @lukePeavey
+- [Select] Menu Items centered in IE11 (#8982) @lukePeavey
 - [Select] Fix width on Safari (#8985) @oliviertassinari
 - [IconButton] Add buttonRef property (#8986) @oliviertassinari
 - [Grid] Document a limitation (#8987) @oliviertassinari
@@ -11741,7 +13148,7 @@ This change provides more flexibility.
 +  <BottomNavigation value={value} onChange={this.handleChange}>
 ```
 
-Also plan to do the same for the `Tabs` in order to have a consistant API
+Also plan to do the same for the `Tabs` in order to have a consistent API
 where we always use `value`/`onChange` for controlled components.
 
 #### Component Fixes / Enhancements
@@ -12013,7 +13420,7 @@ Shout out to @kybarg for the update of the `TextField` in order to better follow
 
 This release introduces an important change in the API and the implementation.
 Each exposed component is wrapped with a `withStyles` Higher-order component.
-This HOC has different responsibilities, the one you gonna be interested in is
+This HOC has different responsibilities, the one you're going to be interested in is
 regarding the `classes` property. Now, we consider the CSS as a public API.
 You now have two way to customize absolutely all the CSS injected by Material-UI.
 Either the instance level with the `classes` property or the class level with the
@@ -12026,8 +13433,9 @@ To learn more about it, have a look at the documentation.
 - [core] Various fixes after using it on a real project (#6882) @oliviertassinari
   Apply the other properties (undocumented) on the root of the Menu.
 - [core] Add a new classes property to all the components #6911 @oliviertassinari
-  If you where using the ref to access the internal of the component or native elements,
-  you gonna have to change your strategy, either use `innerRef` or `inputRef`.
+
+If you were using the ref to access the internals of the component or native elements,
+you're going to have to change your strategy. Either use `innerRef` or `inputRef`.
 
 #### Component Fixes / Enhancements
 
@@ -12464,9 +13872,9 @@ We are now at 93.53%. That's pretty great.
 
 ###### _Feb 7, 2017_
 
-One year from now, we were struggling with removing all the mixins from the project.
-Now, it's about rewriting all our components.
-We gonna try doing frequent alpha releases to keep some intertie. At least once per week would be good.
+One year ago, we were struggling with removing all the mixins from the project.
+Now, it's about rewriting all the components.
+We're going to try doing frequent alpha releases to keep some intertia. At least once per week would be good.
 As always, we are keeping the [documentation](https://material-ui.com) up to date.
 
 #### Component Fixes / Enhancements
@@ -12659,7 +14067,7 @@ This is another release improving the stability of `v0.16.x` while we are workin
 - [IE] Remove the unsupported initial property (#5539)
 - [MenuItem][listitem] Allow overriding hoverColor (#5502)
 - [ListItem] Fix an issue with the controlled behavior (#5514)
-- [ListItem] Clear hover state if componet get's disabled (#5528)
+- [ListItem] Clear hover state if component gets disabled (#5528)
 - [Popover] Fix support for invalid `anchorEl` (#5444)
 - [RaisedButton] Fix hover on touch devices (#5536)
 - [Stepper] Fix children count method (#5429)
@@ -12667,7 +14075,7 @@ This is another release improving the stability of `v0.16.x` while we are workin
 - [Tabs] Fix Firefox height issue (bf25bc118523b359bba5a5540205174a1c2d9e27)
 - [Table] Warning on rendering attempt of unsupported child (#5520)
 - [TextField] Add ability to style label color when a value is present (#5490)
-- [TextField] Fix wrong style behing applied to div elements (#5446)
+- [TextField] Fix wrong style being applied to div elements (#5446)
 - [TextField] Fix floatingLabelFocusStyle when floatingLabelFixed is true (#5487)
 - [TextField] Remove the isClean logic (#5540)
 - [TimePicker] Fix `autoOk` closing the dialog too early (#5511)
@@ -13549,7 +14957,7 @@ Unless you have used these implementation details in your code.
   1. `react/jsx-closing-bracket-location` (#2953)
   1. `jsx-equals-spacing` (#3035)
 - [Performance] Fix V8 deopt, leakage of `arguments` (#2876)
-- [ServerSideRendering] Make userAgent contexual (#3009)
+- [ServerSideRendering] Make userAgent contextual (#3009)
 
 #### Component Fixes / Enhancements
 
@@ -13929,7 +15337,8 @@ v0.12.4 should have really been v0.13.0 as it breaks compatibility with React 0.
   - There's now a concept of `mui theme` and `raw theme`, `mui theme` is produced from `raw theme`
   - `ThemeManager` has been changed, no longer needs `new` in call
   - `ThemeManager` produces `mui theme` from `raw theme`. Raw themes may be user-defined.
-  - Functions in `ThemeManager` allow to modify theme variables. Component-level styles may be overriden in the `mui theme`.
+  - Functions in `ThemeManager` allow to modify theme variables. Component-level styles may be
+  - overridden in the `mui theme`.
   - See new documentation [here](http://material-ui.com/#/customization/themes)
 - Function names in the context-pure mixin have been changed (#1711)
   - `getContextProps()` has been changed to `getRelevantContextKeys()`
@@ -14043,7 +15452,7 @@ v0.12.4 should have really been v0.13.0 as it breaks compatibility with React 0.
 - IconMenu - Added isOpen() (#1288)
 - LeftNav
   - Added menuItemClassName, menuItemClassNameSubheader, menuItemClassNameLink props (#1318)
-  - Fixed a display problem that cuased icons to not be the correct color (#1324)
+  - Fixed a display problem that caused icons to not be the correct color (#1324)
 - ListItem - fixed incorrect styling on disabled list items (#1350)
 - SelectField
   - Fixed a bug that happened when select field was controlled and the value was undefined (#1227)
@@ -14274,7 +15683,7 @@ v0.12.4 should have really been v0.13.0 as it breaks compatibility with React 0.
 
 ##### Theming
 
-- Theme spacing can now be overriden (#879)
+- Theme spacing can now be overridden (#879)
 
 ## 0.9.1
 
@@ -14462,7 +15871,7 @@ We've cleaned up some of our click/tap events. (#771) Upgrade should be straight
 ##### General
 
 - Updated react-draggable2 dependency (#391)
-- Updated react and peer dependecies to React v0.13 (#452)
+- Updated react and peer dependencies to React v0.13 (#452)
 
 ##### Components
 
@@ -14740,7 +16149,7 @@ We've cleaned up some of our click/tap events. (#771) Upgrade should be straight
   - The initial number of rows can now be set with the rows prop.
 - Toggle
   - Fixed alignment issue (#118)
-  - The inital state of the toggle can now be set with the toggled prop.
+  - The initial state of the toggle can now be set with the toggled prop.
 
 ## 0.3.2
 
@@ -14756,7 +16165,7 @@ We've cleaned up some of our click/tap events. (#771) Upgrade should be straight
   - Added key prop to dialog actions. (#99)
   - Added onDismiss event callback. (#86)
   - Dialog is now positioned onMound and onUpdate (#85)
-  - Fixed a bug that cuased dialog to not be vertically centered on long pages
+  - Fixed a bug that caused dialog to not be vertically centered on long pages
 - Dropdown Menu
   - Added autoWidth prop (#89)
 - Menu
@@ -14885,7 +16294,7 @@ We've cleaned up some of our click/tap events. (#771) Upgrade should be straight
 ###### _Nov. 7, 2014_
 
 - Icon
-  - Added all font icons from the unoffical material design icon font:
+  - Added all font icons from the unofficial material design icon font:
     https://github.com/designjockey/material-design-fonticons
   - All icon names had to change because of this. Sorry. :(
 - PaperButton

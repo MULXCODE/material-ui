@@ -20,15 +20,6 @@ Each breakpoint (a key) matches with a _fixed_ screen width (a value):
 - **lg,** large: 1280px
 - **xl,** extra-large: 1920px
 
-These breakpoint values are used to determine breakpoint ranges. A range starts from the breakpoint value inclusive, to the next breakpoint value exclusive:
-
-```js
-value         |0px     600px    960px    1280px   1920px
-key           |xs      sm       md       lg       xl
-screen width  |--------|--------|--------|--------|-------->
-range         |   xs   |   sm   |   md   |   lg   |   xl
-```
-
 These values can be [customized](#custom-breakpoints).
 
 ## CSS Media Queries
@@ -47,7 +38,7 @@ In the following demo, we change the background color (red, blue & green) based 
 const styles = (theme) => ({
   root: {
     padding: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       backgroundColor: theme.palette.secondary.main,
     },
     [theme.breakpoints.up('md')]: {
@@ -187,9 +178,8 @@ const styles = (theme) => ({
 const styles = (theme) => ({
   root: {
     backgroundColor: 'blue',
-    // Match [0, md + 1)
-    //       [0, lg)
-    //       [0, 1280px)
+    // Match [0, md)
+    //       [0, 960px)
     [theme.breakpoints.down('md')]: {
       backgroundColor: 'red',
     },
@@ -240,9 +230,8 @@ const styles = (theme) => ({
 const styles = (theme) => ({
   root: {
     backgroundColor: 'blue',
-    // Match [sm, md + 1)
-    //       [sm, lg)
-    //       [600px, 1280px)
+    // Match [sm, md)
+    //       [600px, 960px)
     [theme.breakpoints.between('sm', 'md')]: {
       backgroundColor: 'red',
     },
@@ -282,7 +271,7 @@ Some implementation details that might be interesting to being aware of:
   You might want to use a heuristic to approximate
   the screen width of the client browser screen width.
   For instance, you could be using the user-agent or the [client-hints](https://caniuse.com/#search=client%20hint).
-  we also can set the initial width globally using [`custom props`](/customization/globals/#default-props) in the theme.
+  we also can set the initial width globally using [`custom props`](/customization/theme-components/#default-props) in the theme.
   In order to set the initialWidth we need to pass a custom prop with this shape:
 
 ```js

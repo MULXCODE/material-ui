@@ -1,8 +1,7 @@
 ---
-title: Drawer React-Komponente
+title: React Drawer component
 components: Drawer, SwipeableDrawer
-githubLabel:
-  component: Seitliches Menü (Drawer)
+githubLabel: 'component: Drawer'
 materialDesign: https://material.io/components/navigation-drawer
 ---
 
@@ -38,10 +37,26 @@ The following properties are used in this documentation website for optimal usab
 - iOS has a "swipe to go back" feature that interferes with the discovery feature, so discovery has to be disabled.
 
 ```jsx
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+const iOS =
+  typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-<SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} />
+<SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} />;
 ```
+
+### Keep mounted
+
+To ensure a temporary drawer is not unmounted, specify the `ModalProps` prop like:
+
+```jsx
+<Drawer
+  variant="temporary"
+  ModalProps={{
+    keepMounted: true,
+  }}
+/>
+```
+
+More details in the [Modal performance section](/components/modal/#performance).
 
 ## Responsive Navigationsleiste
 

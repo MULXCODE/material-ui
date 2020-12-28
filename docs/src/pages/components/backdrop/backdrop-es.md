@@ -1,15 +1,14 @@
 ---
-title: Backdrop React Component
+title: Backdrop React Componente
 components: Backdrop
-githubLabel:
-  component: Backdrop
+githubLabel: 'component: Backdrop'
 ---
 
 # Backdrop
 
 <p class="description">El componente backdrop es usado para proveer énfasis en un elemento particular o en partes de este.</p>
 
-The backdrop signals to the user of a state change within the application and can be used for creating loaders, dialogs and more. En su forma simple, el componente backdrop añade una capa de atenuado sobre su aplicación.
+El backdrop señala al usuario de un cambio de estado dentro de una aplicación y puede ser usado para crear cargadores, diálogos y más. En su forma simple, el componente backdrop añade una capa de atenuado sobre su aplicación.
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 

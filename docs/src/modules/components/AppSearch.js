@@ -1,13 +1,15 @@
 import * as React from 'react';
 import url from 'url';
-import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 import useLazyCSS from 'docs/src/modules/utils/useLazyCSS';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { fade, useTheme, makeStyles } from '@material-ui/core/styles';
+import { alpha, useTheme, makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 import { handleEvent } from 'docs/src/modules/components/MarkdownLinks';
 import docsearch from 'docsearch.js';
+import { LANGUAGES_SSR } from 'docs/src/modules/constants';
+import { useUserLanguage, useTranslate } from 'docs/src/modules/utils/i18n';
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -45,7 +47,7 @@ const useStyles = makeStyles(
           fontWeight: theme.typography.fontWeightRegular,
         },
         '& .algolia-docsearch-suggestion--highlight': {
-          color: theme.palette.type === 'light' ? '#174d8c' : '#acccf1',
+          color: theme.palette.mode === 'light' ? '#174d8c' : '#acccf1',
         },
         '& .algolia-docsearch-suggestion': {
           textDecoration: 'none',
@@ -76,13 +78,13 @@ const useStyles = makeStyles(
       marginRight: theme.spacing(2),
       marginLeft: theme.spacing(1),
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
       },
       '& $inputInput': {
         transition: theme.transitions.create('width'),
-        width: 120,
+        width: 140,
         '&:focus': {
           width: 170,
         },
@@ -103,6 +105,25 @@ const useStyles = makeStyles(
     inputInput: {
       padding: theme.spacing(1, 1, 1, 9),
     },
+    shortcut: {
+      fontSize: theme.typography.pxToRem(13),
+      lineHeight: '21px',
+      color: alpha(theme.palette.common.white, 0.8),
+      border: `1px solid ${alpha(theme.palette.common.white, 0.4)}`,
+      backgroundColor: alpha(theme.palette.common.white, 0.1),
+      padding: theme.spacing(0, 0.5),
+      position: 'absolute',
+      right: theme.spacing(1),
+      height: 23,
+      top: 'calc(50% - 11px)',
+      borderRadius: theme.shape.borderRadius,
+      transition: theme.transitions.create('opacity', {
+        duration: theme.transitions.duration.shortest,
+      }),
+      '&.Mui-focused': {
+        opacity: 0,
+      },
+    },
   }),
   { name: 'AppSearch' },
 );
@@ -115,19 +136,31 @@ const useStyles = makeStyles(
 export default function AppSearch() {
   const classes = useStyles();
   const inputRef = React.useRef(null);
+  const [focused, setFocused] = React.useState(false);
   const theme = useTheme();
-  const userLanguage = useSelector((state) => state.options.userLanguage);
-  const t = useSelector((state) => state.options.t);
+  const userLanguage = useUserLanguage();
+  const t = useTranslate();
 
   useLazyCSS('https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css', '#app-search');
 
   React.useEffect(() => {
     const handleKeyDown = (nativeEvent) => {
-      if (
-        ['/', 's'].indexOf(nativeEvent.key) !== -1 &&
-        document.activeElement.nodeName === 'BODY' &&
-        document.activeElement !== inputRef.current
-      ) {
+      if (nativeEvent.defaultPrevented) {
+        return;
+      }
+
+      if (nativeEvent.key === 'Escape' && document.activeElement === inputRef.current) {
+        inputRef.current.blur();
+        return;
+      }
+
+      const matchMainShortcut =
+        (nativeEvent.ctrlKey || nativeEvent.metaKey) && nativeEvent.key === 'k';
+      const matchNonkeyboardNode =
+        ['INPUT', 'SELECT', 'TEXTAREA'].indexOf(document.activeElement.tagName) === -1 &&
+        !document.activeElement.isContentEditable;
+
+      if (matchMainShortcut && matchNonkeyboardNode) {
         nativeEvent.preventDefault();
         inputRef.current.focus();
       }
@@ -143,6 +176,10 @@ export default function AppSearch() {
 
   React.useEffect(() => {
     if (desktop) {
+      // In non-SSR languages, fall back to English.
+      const facetFilterLanguage =
+        LANGUAGES_SSR.indexOf(userLanguage) !== -1 ? `language:${userLanguage}` : `language:en`;
+
       // This assumes that by the time this effect runs the Input component is committed
       // this holds true as long as the effect and the component are in the same
       // suspense boundary. If you move effect and component apart be sure to check
@@ -152,7 +189,7 @@ export default function AppSearch() {
         indexName: 'material-ui',
         inputSelector: '#docsearch-input',
         algoliaOptions: {
-          facetFilters: ['version:next', `language:${userLanguage}`],
+          facetFilters: ['version:next', facetFilterLanguage],
         },
         autocompleteOptions: {
           openOnFocus: true,
@@ -200,6 +237,8 @@ export default function AppSearch() {
     }
   }, [desktop, userLanguage]);
 
+  const macOS = window.navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
   return (
     <div className={classes.root} style={{ display: desktop ? 'flex' : 'none' }}>
       <div className={classes.search}>
@@ -214,11 +253,21 @@ export default function AppSearch() {
         type="search"
         id="docsearch-input"
         inputRef={inputRef}
+        onFocus={() => {
+          setFocused(true);
+        }}
+        onBlur={() => {
+          setFocused(false);
+        }}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
       />
+      <div className={clsx(classes.shortcut, { 'Mui-focused': focused })}>
+        {/* eslint-disable-next-line material-ui/no-hardcoded-labels */}
+        {macOS ? '⌘' : 'Ctrl'}K
+      </div>
     </div>
   );
 }

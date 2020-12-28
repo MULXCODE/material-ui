@@ -1,8 +1,7 @@
 ---
-title: Snackbar React component
+title: React Snackbar component
 components: Snackbar, SnackbarContent
-githubLabel:
-  component: Snackbar
+githubLabel: 'component: Snackbar'
 materialDesign: https://material.io/components/snackbars
 waiAria: 'https://www.w3.org/TR/wai-aria-1.1/#alert'
 ---
@@ -29,7 +28,7 @@ A basic snackbar that aims to reproduce Google Keep's snackbar behavior.
 
 ## Snackbars personalizadas
 
-Here are some examples of customizing the component. You can learn more about this in the [overrides documentation page](/customization/components/).
+Here are some examples of customizing the component. Puedes aprender más sobre esto en la [sección Personalizando Componentes de la documentación](/customization/how-to-customize/).
 
 {{"demo": "pages/components/snackbars/CustomizedSnackbars.js"}}
 

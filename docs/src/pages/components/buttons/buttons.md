@@ -1,5 +1,5 @@
 ---
-title: Button React component
+title: React Button component
 components: Button, IconButton, ButtonBase, LoadingButton
 materialDesign: https://material.io/components/buttons
 githubLabel: 'component: Button'
@@ -99,7 +99,7 @@ deselected, such as adding or removing a star to an item.
 ## Customized buttons
 
 Here are some examples of customizing the component. You can learn more about this in the
-[overrides documentation page](/customization/components/).
+[overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 

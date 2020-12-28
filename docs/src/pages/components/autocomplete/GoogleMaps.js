@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -113,16 +113,10 @@ export default function GoogleMaps() {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Add a location"
-          variant="outlined"
-          fullWidth
-        />
+        <TextField {...params} label="Add a location" fullWidth />
       )}
       renderOption={(props, option) => {
-        const matches =
-          option.structured_formatting.main_text_matched_substrings;
+        const matches = option.structured_formatting.main_text_matched_substrings;
         const parts = parse(
           option.structured_formatting.main_text,
           matches.map((match) => [match.offset, match.offset + match.length]),

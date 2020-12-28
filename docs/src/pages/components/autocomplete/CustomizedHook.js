@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
+import useAutocomplete from '@material-ui/core/useAutocomplete';
 import NoSsr from '@material-ui/core/NoSsr';
 import { useTheme, createMuiTheme } from '@material-ui/core/styles';
 import CheckIcon from '@material-ui/icons/Check';
@@ -16,8 +16,8 @@ const Label = styled('label')`
 const InputWrapper = styled('div')`
   ${({ theme }) => `
   width: 300px;
-  border: 1px solid ${theme.palette.type === 'dark' ? '#434343' : '#d9d9d9'};
-  background-color: ${theme.palette.type === 'dark' ? '#141414' : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
+  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
   border-radius: 4px;
   padding: 1px;
   display: flex;
@@ -33,8 +33,8 @@ const InputWrapper = styled('div')`
   }
 
   & input {
-    background-color: ${theme.palette.type === 'dark' ? '#141414' : '#fff'};
-    color: ${theme.palette.type === 'dark' ? '#fff' : '#000'};
+    background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
+    color: ${theme.palette.mode === 'dark' ? '#fff' : '#000'};
     font-size: 14px;
     height: 30px;
     box-sizing: border-box;
@@ -62,9 +62,9 @@ const Tag = styled(({ label, onDelete, ...props }) => (
   margin: 2px;
   line-height: 22px;
   background-color: ${
-    theme.palette.type === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
+    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
   };
-  border: 1px solid ${theme.palette.type === 'dark' ? '#303030' : '#e8e8e8'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? '#303030' : '#e8e8e8'};
   border-radius: 2px;
   box-sizing: content-box;
   padding: 0 4px 0 10px;
@@ -97,7 +97,7 @@ const Listbox = styled('ul')`
   padding: 0;
   position: absolute;
   list-style: none;
-  background-color: ${theme.palette.type === 'dark' ? '#141414' : '#fff'};
+  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
   overflow: auto;
   max-height: 250px;
   border-radius: 4px;
@@ -118,7 +118,7 @@ const Listbox = styled('ul')`
   }
 
   & li[aria-selected='true'] {
-    background-color: ${theme.palette.type === 'dark' ? '#2b2b2b' : '#fafafa'};
+    background-color: ${theme.palette.mode === 'dark' ? '#2b2b2b' : '#fafafa'};
     font-weight: 600;
 
     & svg {
@@ -127,7 +127,7 @@ const Listbox = styled('ul')`
   }
 
   & li[data-focus='true'] {
-    background-color: ${theme.palette.type === 'dark' ? '#003b57' : '#e6f7ff'};
+    background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
     cursor: pointer;
 
     & svg {
@@ -167,10 +167,7 @@ export default function CustomizedHook() {
         <div>
           <div {...getRootProps()}>
             <Label {...getInputLabelProps()}>Customized hook</Label>
-            <InputWrapper
-              ref={setAnchorEl}
-              className={focused ? 'focused' : ''}
-            >
+            <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
               {value.map((option, index) => (
                 <Tag label={option.title} {...getTagProps({ index })} />
               ))}
@@ -264,8 +261,7 @@ const top100Films = [
   { title: 'Alien', year: 1979 },
   { title: 'Sunset Boulevard', year: 1950 },
   {
-    title:
-      'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
     year: 1964,
   },
   { title: 'The Great Dictator', year: 1940 },

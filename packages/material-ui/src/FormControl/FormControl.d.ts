@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PropTypes } from '..';
 import { OverridableComponent, OverrideProps } from '../OverridableComponent';
 
 export interface FormControlTypeMap<P = {}, D extends React.ElementType = 'div'> {
@@ -42,11 +41,11 @@ export interface FormControlTypeMap<P = {}, D extends React.ElementType = 'div'>
      */
     fullWidth?: boolean;
     /**
-     * If `true`, the component will be displayed in focused state.
+     * If `true`, the component is displayed in focused state.
      */
     focused?: boolean;
     /**
-     * If `true`, the label will be hidden.
+     * If `true`, the label is hidden.
      * This is used to increase density for a `FilledInput`.
      * Be sure to add `aria-label` to the `input` element.
      * @default false
@@ -56,14 +55,15 @@ export interface FormControlTypeMap<P = {}, D extends React.ElementType = 'div'>
      * If `dense` or `normal`, will adjust vertical spacing of this and contained components.
      * @default 'none'
      */
-    margin?: PropTypes.Margin;
+    margin?: 'dense' | 'normal' | 'none';
     /**
-     * If `true`, the label will indicate that the input is required.
+     * If `true`, the label will indicate that the `input` is required.
      * @default false
      */
     required?: boolean;
     /**
      * The size of the text field.
+     * @default 'medium'
      */
     size?: 'small' | 'medium';
     /**
@@ -81,10 +81,10 @@ export interface FormControlTypeMap<P = {}, D extends React.ElementType = 'div'>
  * consistent across the children of the `FormControl`.
  * This context is used by the following components:
  *
- * -   FormLabel
- * -   FormHelperText
- * -   Input
- * -   InputLabel
+ * *   FormLabel
+ * *   FormHelperText
+ * *   Input
+ * *   InputLabel
  *
  * You can find one composition example below and more going to [the demos](https://material-ui.com/components/text-fields/#components).
  *
@@ -96,7 +96,8 @@ export interface FormControlTypeMap<P = {}, D extends React.ElementType = 'div'>
  * </FormControl>
  * ```
  *
- * ⚠️Only one input can be used within a FormControl.
+ * ⚠️ Only one `InputBase` can be used within a FormControl because it create visual inconsistencies.
+ * For instance, only one input can be focused at the same time, the state shouldn't be shared.
  * Demos:
  *
  * - [Checkboxes](https://material-ui.com/components/checkboxes/)

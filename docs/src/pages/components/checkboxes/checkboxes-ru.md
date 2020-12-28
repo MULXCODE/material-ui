@@ -1,9 +1,8 @@
 ---
-title: Checkbox React component
+title: Компонент React Checkbox
 components: Checkbox, FormControl, FormGroup, FormLabel, FormControlLabel
 materialDesign: 'https://material.io/components/selection-controls#checkboxes'
-githubLabel:
-  component: Checkbox
+githubLabel: 'component: Checkbox'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#checkbox'
 ---
 
@@ -23,11 +22,17 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#checkbox'
 
 ## Checkbox with FormControlLabel
 
+A checkbox input can only have two states in a form: checked or unchecked. It either submits its value or doesn't. Visually, there are actually three states a checkbox can be in: checked, unchecked, or indeterminate.
+
+{{"demo": "pages/components/checkboxes/IndeterminateCheckbox.js"}}
+
+## Чекбоксы с FormGroup
+
 `Checkbox` can be provided with a label thanks to the `FormControlLabel` component.
 
 {{"demo": "pages/components/checkboxes/CheckboxLabels.js"}}
 
-## Чекбоксы с FormGroup
+## Расположение метки
 
 `FormGroup` - это полезная обертка, используемая для группировки компонентов элементов управления выбором, она предоставляет более простой API.
 
@@ -41,7 +46,7 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#checkbox'
 
 ## Customized checkbox
 
-Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/checkboxes/CustomizedCheckbox.js", "defaultCodeOpen": false}}
 

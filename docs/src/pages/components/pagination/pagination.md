@@ -1,8 +1,7 @@
 ---
-title: Pagination React component
+title: React Pagination component
 components: Pagination, PaginationItem
 githubLabel: 'component: Pagination'
-packageName: '@material-ui/lab'
 ---
 
 # Pagination
@@ -49,13 +48,13 @@ You can specify how many digits to display either side of current page with the 
 
 ## `usePagination`
 
-For advanced customization use cases, we expose a `usePagination()` hook.
+For advanced customization use cases, we expose a headless `usePagination()` hook.
 It accepts almost the same options as the Pagination component minus all the props
 related to the rendering of JSX.
 The Pagination component uses this hook internally.
 
 ```jsx
-import { usePagination } from '@material-ui/lab/Pagination';
+import { usePagination } from '@material-ui/core/Pagination';
 ```
 
 {{"demo": "pages/components/pagination/UsePagination.js"}}

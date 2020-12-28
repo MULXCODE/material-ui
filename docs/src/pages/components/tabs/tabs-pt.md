@@ -1,8 +1,7 @@
 ---
-title: Componente React para Abas
+title: Componente React Abas
 components: Tabs, Tab, TabScrollButton, TabContext, TabList, TabPanel
-githubLabel:
-  component: Abas
+githubLabel: 'component: Tabs'
 materialDesign: https://material.io/components/tabs
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#tabpanel'
 ---
@@ -59,11 +58,11 @@ Botões de rolagem para a esquerda e para a direita serão automaticamente apres
 
 ### Botões de rolagem forçados
 
-Botões de rolagem para esquerda e direita serão apresentados independente da largura de exibição do dispositivo.
+Botões de rolagem esquerda e direita são apresentados (espaço reserva) independente da largura de exibição com `scrollButtons={true}` `allowScrollButtonsMobile`:
 
 {{"demo": "pages/components/tabs/ScrollableTabsButtonForce.js", "bg": true}}
 
-If you want to make sure the buttons are always visible, you should customize the opacity.
+Se você quiser certificar-se de que os botões são sempre visíveis, você deve customizar a opacidade.
 
 ```css
 .MuiTabs-scrollButtons.Mui-disabled {
@@ -75,13 +74,13 @@ If you want to make sure the buttons are always visible, you should customize th
 
 ### Impedir botões de rolagem
 
-Botões de rolagem para a esquerda e para a direita nunca serão apresentados. Toda rolagem deve ser iniciada por meio de mecanismos de rolagem do agente do usuário (por exemplo, deslizar para a esquerda/direita, rolar scroll do mouse, etc.)
+Botões de rolagem da esquerda e direita nunca serão apresentados com `scrollButtons={false}`. Toda rolagem deve ser iniciada por meio de mecanismos de rolagem do agente do usuário (por exemplo, deslizar para a esquerda/direita, rolar scroll do mouse, etc.)
 
 {{"demo": "pages/components/tabs/ScrollableTabsButtonPrevent.js", "bg": true}}
 
 ## Abas customizadas
 
-Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui está um exemplo de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/tabs/CustomizedTabs.js", "bg": true}}
 
@@ -93,7 +92,7 @@ O rótulo das abas podem ser compostos apenas por ícones ou apenas por texto.
 
 {{"demo": "pages/components/tabs/VerticalTabs.js", "bg": true}}
 
-Note that you can restore the scrollbar with `visibleScrollbar`.
+Note que você pode restaurar a barra de rolagem com `visibleScrollbar`.
 
 ## Abas de navegação
 

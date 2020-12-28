@@ -9,9 +9,9 @@ import Copyright from '../src/Copyright';
 export default function Index() {
   return (
     <Container maxWidth="sm">
-      <Box my={4}>
+      <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Next.js example
+          Next.js v5-alpha example
         </Typography>
         <Link href="/about" color="secondary">
           Go to the about page

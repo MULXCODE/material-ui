@@ -1,8 +1,7 @@
 ---
-title: Componente React para Seleção
+title: Componente React Seleção
 components: Select, NativeSelect
-githubLabel:
-  component: Seleção
+githubLabel: 'component: Select'
 ---
 
 # Seleção
@@ -25,19 +24,19 @@ Se você estiver procurando por recursos mais avançados, como combobox, seleç�
 
 ## Propriedades
 
-### Filled and outlined variants
+### Variantes filled e outlined
 
-{{"demo": "pages/components/selects/NativeSelects.js"}}
+{{"demo": "pages/components/selects/SelectVariants.js"}}
 
-### Labels and helper text
+### Rótulos e texto de ajuda
 
 {{"demo": "pages/components/selects/SelectLabels.js"}}
 
-### Auto width
+### Largura automática
 
 {{"demo": "pages/components/selects/SelectAutoWidth.js"}}
 
-### Other props
+### Outras propriedades
 
 {{"demo": "pages/components/selects/SelectOtherProps.js"}}
 
@@ -53,7 +52,7 @@ O componente wrapper `TextField` é um controle de formulário completo, incluin
 
 ## Seleções customizadas
 
-Aqui estão alguns exemplos de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui estão alguns exemplos de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 O primeiro passo é estilizar o componente `InputBase`. Uma vez estilizado, você pode usá-lo diretamente como um campo de texto ou fornecê-lo à propriedade `input` da seleção para ter um campo `select`.
 
@@ -63,7 +62,7 @@ O primeiro passo é estilizar o componente `InputBase`. Uma vez estilizado, voc�
 
 ## Seleção Aberta Controlada
 
-O componente `Select` pode lidar com múltiplas seleções. O componente `Select` pode lidar com várias seleções.
+O componente `Select` pode lidar com múltiplas seleções. O componente `Select` pode lidar com múltiplas seleções.
 
 Como na seleção única, você pode extrair o novo valor acessando `event.target.value` na chamada `onChange`. É sempre uma matriz.
 
@@ -71,27 +70,27 @@ Como na seleção única, você pode extrair o novo valor acessando `event.targe
 
 {{"demo": "pages/components/selects/MultipleSelect.js"}}
 
-### Checkmarks
+### Marcações
 
 {{"demo": "pages/components/selects/MultipleSelectCheckmarks.js"}}
 
 ### Chip
 
-Alternativamente, um `TextField` com `id` e `label` cria a marcação adequada e ids para você:
+{{"demo": "pages/components/selects/MultipleSelectChip.js"}}
 
 ### Placeholder
 
-Para uma [seleção nativa](#native-select), você deve utilizar um rótulo fornecendo o atributo `id` do elemento de seleção para o atributo `htmlFor` do `InputLabel`:
+{{"demo": "pages/components/selects/MultipleSelectPlaceholder.js"}}
 
-### Native
+### Nativo
 
 {{"demo": "pages/components/selects/MultipleSelectNative.js"}}
 
-## Com uma caixa de Diálogo
+## Seleção aberta controlada
 
 {{"demo": "pages/components/selects/ControlledOpenSelect.js"}}
 
-## Agrupando
+## Com um diálogo
 
 Embora não seja recomendado pela especificação do Material Design, você pode usar uma seleção dentro de um diálogo.
 

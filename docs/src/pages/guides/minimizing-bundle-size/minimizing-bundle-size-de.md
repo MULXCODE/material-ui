@@ -40,7 +40,7 @@ import { Button, TextField } from '@material-ui/core';
 
 This is the option we document in all the demos, since it requires no configuration. It is encouraged for library authors extending the components. Head to [Option 2](#option-2) for the approach that yields the best DX and UX.
 
-Beim direkten Importieren auf diese Weise werden die Exporte in [`@material-ui/core/index.js`](https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/index.js) nicht verwendet. Diese Datei kann trotzdem als praktische Referenz für die öffentlichen Module dienen.
+While importing directly in this manner doesn't use the exports in [the main file of `@material-ui/core`](https://unpkg.com/@material-ui/core), this file can serve as a handy reference as to which modules are public.
 
 Be aware that we only support first and second level imports. Anything deeper is considered private and can cause issues, such as module duplication in your bundle.
 
@@ -104,26 +104,22 @@ Wählen Sie eines der folgenden Plugins:
     [
       'babel-plugin-import',
       {
-        'libraryName': '@material-ui/core',
-        // Use "'libraryDirectory': ''," if your bundler does not support ES modules
-        'libraryDirectory': 'esm',
-        'camel2DashComponentName': false
+        libraryName: '@material-ui/core',
+        camel2DashComponentName: false,
       },
-      'core'
+      'core',
     ],
     [
       'babel-plugin-import',
       {
-        'libraryName': '@material-ui/icons',
-        // Use "'libraryDirectory': ''," if your bundler does not support ES modules
-        'libraryDirectory': 'esm',
-        'camel2DashComponentName': false
+        libraryName: '@material-ui/icons',
+        camel2DashComponentName: false,
       },
-      'icons'
-    ]
+      'icons',
+    ],
   ];
 
-  module.exports = {plugins};
+  module.exports = { plugins };
   ```
 
 - [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports) with the following configuration:
@@ -138,20 +134,18 @@ Wählen Sie eines der folgenden Plugins:
       'babel-plugin-transform-imports',
       {
         '@material-ui/core': {
-          // Use "transform: '@material-ui/core/${member}'," if your bundler does not support ES modules
-          'transform': '@material-ui/core/esm/${member}',
-          'preventFullImport': true
+          transform: '@material-ui/core/${member}',
+          preventFullImport: true,
         },
         '@material-ui/icons': {
-          // Use "transform: '@material-ui/icons/${member}'," if your bundler does not support ES modules
-          'transform': '@material-ui/icons/esm/${member}',
-          'preventFullImport': true
-        }
-      }
-    ]
+          transform: '@material-ui/icons/${member}',
+          preventFullImport: true,
+        },
+      },
+    ],
   ];
 
-  module.exports = {plugins};
+  module.exports = { plugins };
   ```
 
 If you are using Create React App, you will need to use a couple of projects that let you use `.babelrc` configuration, without ejecting.
@@ -202,7 +196,7 @@ Enjoy significantly faster start times.
 
 #### 2. Convert all your imports
 
-Finally, you can convert your existing codebase to this option with this [top-level-imports](https://github.com/mui-org/material-ui/blob/next/packages/material-ui-codemod/README.md#top-level-imports) codemod. It will perform the following diffs:
+Finally, you can convert your existing codebase to this option with this [top-level-imports codemod](https://www.npmjs.com/package/@material-ui/codemod#top-level-imports). It will perform the following diffs:
 
 ```diff
 -import Button from '@material-ui/core/Button';
@@ -210,10 +204,16 @@ Finally, you can convert your existing codebase to this option with this [top-le
 +import { Button, TextField } from '@material-ui/core';
 ```
 
-## ECMAScript
+## Available bundles
 
 Das auf npm veröffentlichte Paket ist mit [Babel](https://github.com/babel/babel) **transpiliert**, um die [ unterstützten Plattformen](/getting-started/supported-platforms/) zu berücksichtigen.
 
-A second version of the components is also published, which you can find under the [`/es` folder](https://unpkg.com/@material-ui/core/es/). Die gesamte nicht offizielle Syntax wird auf den [ECMA-262 Standard](https://www.ecma-international.org/publications/standards/Ecma-262.htm) transpiliert, nichts mehr. Dies kann verwendet werden, um separate Bundles für verschiedene Browser zu erstellen. Ältere Browser erfordern mehr transpilierte JavaScript-Funktionen. Dies erhöht die Größe des Packets. Für die Laufzeitfunktionen von ES2015 sind keine polyfills enthalten. IE11 + und Evergreen-Browser unterstützen alle erforderlichen Funktionen. Wenn Sie Unterstützung für andere Browser benötigen, sollten Sie [`@babel/polyfill`](https://www.npmjs.com/package/@babel/polyfill) in Betracht ziehen.
+⚠️ In order to minimize duplication of code in users' bundles, library authors are **strongly discouraged** to import from any of the other bundles.
 
-⚠️ In order to minimize duplication of code in users' bundles, library authors are **strongly discouraged** from using the `/es` folder.
+### Modern bundle
+
+The modern bundle can be found under the [`/modern` folder](https://unpkg.com/@material-ui/core/modern/). It targets the latest released versions of evergreen browsers (Chrome, Firefox, Safari, Edge). Dies kann verwendet werden, um separate Bundles für verschiedene Browser zu erstellen.
+
+### Legacy bundle
+
+If you need to support IE 11 you cannot use the default or modern bundle without transpilation. However, you can use the legacy bundle found under the [`/legacy` folder](https://unpkg.com/@material-ui/core/legacy/). You don't need any additional polyfills.

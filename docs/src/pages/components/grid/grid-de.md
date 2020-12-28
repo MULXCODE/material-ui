@@ -1,8 +1,7 @@
 ---
-title: Grid React Komponente
+title: React Grid component
 components: Grid
-githubLabel:
-  component: Grid
+githubLabel: 'component: Grid'
 materialDesign: https://material.io/design/layout/understanding-layout.html
 ---
 
@@ -13,6 +12,8 @@ materialDesign: https://material.io/design/layout/understanding-layout.html
 Das [Grid](https://material.io/design/layout/responsive-layout-grid.html) sorgt für visuelle Konsistenz zwischen Layouts und ermöglicht Flexibilität bei einer Vielzahl von Designs. Die responsive UI von Material Design basiert auf einem 12-Spalten-Rasterlayout.
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
+
+> ⚠️ The `Grid` component shouldn't be confused with a data grid; it is closer to a layout grid. For a data grid head to [the `DataGrid` component](/components/data-grid/).
 
 ## So funktioniert es
 
@@ -83,6 +84,14 @@ https://www.w3.org/TR/css-flexbox-1/#box-model
 
 {{"demo": "pages/components/grid/NestedGrid.js", "bg": true}}
 
+⚠️ Defining an explicit width to a Grid element that is flex container, flex item, and has spacing at the same time lead to unexpected behavior, avoid doing it:
+
+```jsx
+<Grid spacing={1} container item xs={12}>
+```
+
+If you need to do such, remove one of the props.
+
 ## Einschränkungen
 
 ### Negative Abstände
@@ -124,7 +133,9 @@ In order for the item to stay within the container you need to set `min-width: 0
 
 ### direction: column | column-reverse
 
-Obwohl die `Grid-` Komponente eine `direction-` Eigenschaft hat, die Werte von `row`, `row-reverse`, `column`und `column-reverse` zulässt, gibt es einige Funktionen, die in `column` und `column-reverse` Containern nicht unterstützt werden. Die Eigenschaften, die die Anzahl der Gitter definieren, die die Komponente für einen bestimmten Rasterpunkt (`xs`, `sm`, `md`, `lg` und `xl`) hat, konzentrieren sich auf die Steuerung der Breite und **nicht** auf die Höhe innerhalb der `column` und `column-reverse` Container. Wenn innerhalb `column` oder `column-reverse` - Container verwendete, können diese Eigenschaften unerwünschte Nebenwirkungen auf die Breite der `Grid` Elemente haben.
+The `xs`, `sm`, `md`, `lg`, and `xl` props are **not supported** within `direction="column"` and `direction="column-reverse"` containers.
+
+They define the number of grids the component will use for a given breakpoint. They are intended to control **width** using `flex-basis` in `row` containers but they will impact height in `column` containers. If used, these props may have undesirable effects on the height of the `Grid` item elements.
 
 ## CSS-Raster Layout
 

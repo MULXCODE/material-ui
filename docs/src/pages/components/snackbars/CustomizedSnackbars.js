@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from '@material-ui/core/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -42,11 +42,7 @@ export default function CustomizedSnackbars() {
         Open success snackbar
       </Button>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity="success"
-          className={classes.alert}
-        >
+        <Alert onClose={handleClose} severity="success" className={classes.alert}>
           This is a success message!
         </Alert>
       </Snackbar>

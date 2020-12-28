@@ -37,10 +37,7 @@ A experiência de uso com o Material-UI pode ser melhorada com algumas configura
 O Material-UI é desenvolvido com a estratégia mobile-first, uma estratégia na qual primeiro escrevemos código para dispositivos móveis e, em seguida, dimensionamos componentes conforme necessário, usando consultas de mídia CSS. Para garantir a renderização adequada e o zoom de toque para todos os dispositivos, adicione a meta tag de visualização responsiva ao seu elemento `<head>`.
 
 ```html
-<meta
-  name="viewport"
-  content="minimum-scale=1, initial-scale=1, width=device-width"
-/>
+<meta name="viewport" content="initial-scale=1, width=device-width" />
 ```
 
 ### CssBaseline
@@ -57,4 +54,4 @@ Agora que você tem uma ideia da configuração básica, é hora de aprender mai
 
 - Como aplicar [a fonte e a tipografia do Material Design](/components/typography/).
 - Como tirar proveito da [solução de tema](/customization/theming/).
-- Como [customizar](/customization/components/) o visual e a aparência dos componentes.
+- Como [customizar](/customization/how-to-customize/) o visual e a aparência dos componentes.

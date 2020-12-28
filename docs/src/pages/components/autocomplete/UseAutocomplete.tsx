@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
+import useAutocomplete from '@material-ui/core/useAutocomplete';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     input: {
       width: 200,
+      backgroundColor: theme.palette.background.paper,
+      color: theme.palette.getContrastText(theme.palette.background.paper),
     },
     listbox: {
       width: 200,
@@ -61,7 +63,7 @@ export default function UseAutocomplete() {
       </div>
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>
-          {groupedOptions.map((option, index) => (
+          {(groupedOptions as typeof top100Films).map((option, index) => (
             <li {...getOptionProps({ option, index })}>{option.title}</li>
           ))}
         </ul>
@@ -140,8 +142,7 @@ const top100Films = [
   { title: 'Alien', year: 1979 },
   { title: 'Sunset Boulevard', year: 1950 },
   {
-    title:
-      'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
     year: 1964,
   },
   { title: 'The Great Dictator', year: 1940 },

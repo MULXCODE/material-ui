@@ -19,7 +19,7 @@ export interface TooltipProps extends StandardProps<React.HTMLAttributes<HTMLDiv
   classes?: {
     /** Styles applied to the Popper component. */
     popper?: string;
-    /** Styles applied to the Popper component if `interactive={true}`. */
+    /** Styles applied to the Popper component unless `disableInteractive={true}`. */
     popperInteractive?: string;
     /** Styles applied to the Popper component if `arrow={true}`. */
     popperArrow?: string;
@@ -41,6 +41,12 @@ export interface TooltipProps extends StandardProps<React.HTMLAttributes<HTMLDiv
     tooltipPlacementBottom?: string;
   };
   /**
+   * Set to `true` if the `title` acts as an accessible description.
+   * By default the `title` acts as an accessible label for the child.
+   * @default false
+   */
+  describeChild?: boolean;
+  /**
    * Do not respond to focus events.
    * @default false
    */
@@ -50,6 +56,12 @@ export interface TooltipProps extends StandardProps<React.HTMLAttributes<HTMLDiv
    * @default false
    */
   disableHoverListener?: boolean;
+  /**
+   * Makes a tooltip not interactive, i.e. it will close when the user
+   * hovers over the tooltip before the `leaveDelay` is expired.
+   * @default false
+   */
+  disableInteractive?: boolean;
   /**
    * Do not respond to long press touch events.
    * @default false
@@ -72,16 +84,15 @@ export interface TooltipProps extends StandardProps<React.HTMLAttributes<HTMLDiv
    */
   enterTouchDelay?: number;
   /**
+   * If `true`, the tooltip follow the cursor over the wrapped element.
+   * @default false
+   */
+  followCursor?: boolean;
+  /**
    * This prop is used to help implement the accessibility logic.
    * If you don't provide this prop. It falls back to a randomly generated id.
    */
   id?: string;
-  /**
-   * Makes a tooltip interactive, i.e. will not close when the user
-   * hovers over the tooltip before the `leaveDelay` is expired.
-   * @default false
-   */
-  interactive?: boolean;
   /**
    * The number of milliseconds to wait before hiding the tooltip.
    * This prop won't impact the leave touch delay (`leaveTouchDelay`).
@@ -133,6 +144,7 @@ export interface TooltipProps extends StandardProps<React.HTMLAttributes<HTMLDiv
   PopperComponent?: React.ComponentType<PopperProps>;
   /**
    * Props applied to the [`Popper`](/api/popper/) element.
+   * @default {}
    */
   PopperProps?: Partial<PopperProps>;
   /**

@@ -2,8 +2,7 @@
 title: Componente React para Botão
 components: Button, IconButton, ButtonBase
 materialDesign: https://material.io/components/buttons
-githubLabel:
-  component: Button
+githubLabel: 'component: Button'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 ---
 
@@ -86,15 +85,15 @@ Botões de ícones são comumente encontrados em barras de aplicativos e barras 
 
 ## Botões customizados
 
-Aqui estão alguns exemplos de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui estão alguns exemplos de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 
 🎨 Se você está procurando inspiração, você pode verificar [os exemplos de customização de MUI Treasury](https://mui-treasury.com/styles/button).
 
-## Botões complexos
+## Botões de progresso
 
-The loading buttons can show pending state and disable interactions.
+Os botões de progresso podem mostrar o estado pendente e desativar as interações.
 
 {{"demo": "pages/components/buttons/LoadingButtons.js"}}
 

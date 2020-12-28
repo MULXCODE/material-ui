@@ -16,11 +16,7 @@ import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 
 function App() {
-  return (
-    <Button variant="contained" color="primary">
-      你好，世界
-    </Button>
-  );
+  return <Button variant="contained">你好，世界</Button>;
 }
 
 ReactDOM.render(<App />, document.querySelector('#app'));
@@ -39,10 +35,7 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 Material-UI 是先在移动设备上开发的，我们采用了首先为移动设备编写代码，然后根据需要使用 CSS media queries（CSS媒体查询）扩展组件的策略。 如要确保所有设备的正确渲染和触摸缩放，请将响应式可视区域的元标记添加到您的`<head>`元素中。
 
 ```html
-<meta
-  name="viewport"
-  content="minimum-scale=1, initial-scale=1, width=device-width"
-/>
+<meta name="viewport" content="initial-scale=1, width=device-width" />
 ```
 
 ### CssBaseline
@@ -59,4 +52,4 @@ Material-UI 提供了一个可选的 [CssBaseline](/components/css-baseline/) �
 
 - 如何提供 [Material Design 字体和文字铸排](/components/typography/)。
 - 如何使用[主题解决方案](/customization/theming/) 。
-- 如何 [覆盖](/customization/components/) 组件的呈现和观感。
+- 如何 [覆盖](/customization/how-to-customize/) 组件的呈现和观感。

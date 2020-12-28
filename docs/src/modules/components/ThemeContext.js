@@ -6,13 +6,13 @@ import {
   unstable_createMuiStrictModeTheme as createStrictModeTheme,
   darken,
 } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { enUS, zhCN, faIR, ruRU, ptBR, esES, frFR, deDE, jaJP } from '@material-ui/core/locale';
 import { blue, pink } from '@material-ui/core/colors';
 import { unstable_useEnhancedEffect as useEnhancedEffect } from '@material-ui/core/utils';
 import { getCookie } from 'docs/src/modules/utils/helpers';
 import useLazyCSS from 'docs/src/modules/utils/useLazyCSS';
+import { useUserLanguage } from 'docs/src/modules/utils/i18n';
 
 const languageMap = {
   en: enUS,
@@ -169,7 +169,7 @@ export function ThemeProvider(props) {
       case 'CHANGE':
         return {
           ...state,
-          paletteType: action.payload.paletteType || state.paletteType,
+          paletteMode: action.payload.paletteMode || state.paletteMode,
           direction: action.payload.direction || state.direction,
           paletteColors: action.payload.paletteColors || state.paletteColors,
         };
@@ -178,29 +178,24 @@ export function ThemeProvider(props) {
     }
   }, themeInitialOptions);
 
-  const userLanguage = useSelector((state) => state.options.userLanguage);
+  const userLanguage = useUserLanguage();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const preferredType = prefersDarkMode ? 'dark' : 'light';
-  const { dense, direction, paletteColors, paletteType = preferredType, spacing } = themeOptions;
+  const preferredMode = prefersDarkMode ? 'dark' : 'light';
+  const { dense, direction, paletteColors, paletteMode = preferredMode, spacing } = themeOptions;
 
   useLazyCSS('/static/styles/prism-okaidia.css', '#prismjs');
 
   React.useEffect(() => {
     if (process.browser) {
       const nextPaletteColors = JSON.parse(getCookie('paletteColors') || 'null');
-      const nextPaletteType = getCookie('paletteType');
+      const nextPaletteMode = getCookie('paletteMode') || preferredMode;
 
       dispatch({
         type: 'CHANGE',
-        payload: { paletteColors: nextPaletteColors, paletteType: nextPaletteType },
+        payload: { paletteColors: nextPaletteColors, paletteMode: nextPaletteMode },
       });
     }
-  }, []);
-
-  // persist paletteType
-  React.useEffect(() => {
-    document.cookie = `paletteType=${paletteType};path=/;max-age=31536000`;
-  }, [paletteType]);
+  }, [preferredMode]);
 
   useEnhancedEffect(() => {
     document.body.dir = direction;
@@ -211,18 +206,18 @@ export function ThemeProvider(props) {
       {
         direction,
         nprogress: {
-          color: paletteType === 'light' ? '#000' : '#fff',
+          color: paletteMode === 'light' ? '#000' : '#fff',
         },
         palette: {
           primary: {
-            main: paletteType === 'light' ? blue[700] : blue[200],
+            main: paletteMode === 'light' ? blue[700] : blue[200],
           },
           secondary: {
-            main: paletteType === 'light' ? darken(pink.A400, 0.1) : pink[200],
+            main: paletteMode === 'light' ? darken(pink.A400, 0.1) : pink[200],
           },
-          type: paletteType,
+          mode: paletteMode,
           background: {
-            default: paletteType === 'light' ? '#fff' : '#121212',
+            default: paletteMode === 'light' ? '#fff' : '#121212',
           },
           ...paletteColors,
         },
@@ -233,13 +228,13 @@ export function ThemeProvider(props) {
     );
 
     nextTheme.palette.background.level2 =
-      paletteType === 'light' ? nextTheme.palette.grey[100] : '#333';
+      paletteMode === 'light' ? nextTheme.palette.grey[100] : '#333';
 
     nextTheme.palette.background.level1 =
-      paletteType === 'light' ? '#fff' : nextTheme.palette.grey[900];
+      paletteMode === 'light' ? '#fff' : nextTheme.palette.grey[900];
 
     return nextTheme;
-  }, [dense, direction, paletteColors, paletteType, spacing, userLanguage]);
+  }, [dense, direction, paletteColors, paletteMode, spacing, userLanguage]);
 
   React.useEffect(() => {
     // Expose the theme as a global variable so people can play with it.

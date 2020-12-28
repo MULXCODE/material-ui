@@ -6,7 +6,7 @@ import InputBase from '../InputBase';
 import withStyles from '../styles/withStyles';
 
 export const styles = (theme) => {
-  const light = theme.palette.type === 'light';
+  const light = theme.palette.mode === 'light';
   const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
   const backgroundColor = light ? 'rgba(0, 0, 0, 0.09)' : 'rgba(255, 255, 255, 0.09)';
 
@@ -41,13 +41,13 @@ export const styles = (theme) => {
         borderBottomColor: theme.palette.secondary.main,
       },
     },
-    /* Styles applied to the root element if `disableUnderline={false}`. */
+    /* Styles applied to the root element unless `disableUnderline={true}`. */
     underline: {
       '&:after': {
         borderBottom: `2px solid ${theme.palette.primary.main}`,
         left: 0,
         bottom: 0,
-        // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
+        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
         content: '""',
         position: 'absolute',
         right: 0,
@@ -69,7 +69,7 @@ export const styles = (theme) => {
         borderBottom: `1px solid ${bottomLineColor}`,
         left: 0,
         bottom: 0,
-        // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
+        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
         content: '"\\00a0"',
         position: 'absolute',
         right: 0,
@@ -99,12 +99,12 @@ export const styles = (theme) => {
     },
     /* Pseudo-class applied to the root element if `error={true}`. */
     error: {},
-    /* Styles applied to the `input` element if `margin="dense"`. */
-    marginDense: {},
+    /* Styles applied to the `input` element if `size="small"`. */
+    sizeSmall: {},
     /* Styles applied to the root element if `multiline={true}`. */
     multiline: {
       padding: '25px 12px 8px',
-      '&$marginDense': {
+      '&$sizeSmall': {
         paddingTop: 21,
         paddingBottom: 4,
       },
@@ -119,15 +119,15 @@ export const styles = (theme) => {
     input: {
       padding: '25px 12px 8px',
       '&:-webkit-autofill': {
-        WebkitBoxShadow: theme.palette.type === 'light' ? null : '0 0 0 100px #266798 inset',
-        WebkitTextFillColor: theme.palette.type === 'light' ? null : '#fff',
-        caretColor: theme.palette.type === 'light' ? null : '#fff',
+        WebkitBoxShadow: theme.palette.mode === 'light' ? null : '0 0 0 100px #266798 inset',
+        WebkitTextFillColor: theme.palette.mode === 'light' ? null : '#fff',
+        caretColor: theme.palette.mode === 'light' ? null : '#fff',
         borderTopLeftRadius: 'inherit',
         borderTopRightRadius: 'inherit',
       },
     },
-    /* Styles applied to the `input` element if `margin="dense"`. */
-    inputMarginDense: {
+    /* Styles applied to the `input` element if `size="small"`. */
+    inputSizeSmall: {
       paddingTop: 21,
       paddingBottom: 4,
     },
@@ -135,7 +135,7 @@ export const styles = (theme) => {
     inputHiddenLabel: {
       paddingTop: 16,
       paddingBottom: 17,
-      '&$inputMarginDense': {
+      '&$inputSizeSmall': {
         paddingTop: 8,
         paddingBottom: 9,
       },
@@ -197,7 +197,7 @@ FilledInput.propTypes = {
    */
   autoComplete: PropTypes.string,
   /**
-   * If `true`, the `input` element will be focused during the first mount.
+   * If `true`, the `input` element is focused during the first mount.
    */
   autoFocus: PropTypes.bool,
   /**
@@ -206,6 +206,7 @@ FilledInput.propTypes = {
   classes: PropTypes.object,
   /**
    * The color of the component. It supports those theme colors that make sense for this component.
+   * The prop defaults to the value (`'primary'`) inherited from the parent FormControl component.
    */
   color: PropTypes.oneOf(['primary', 'secondary']),
   /**
@@ -213,7 +214,8 @@ FilledInput.propTypes = {
    */
   defaultValue: PropTypes.any,
   /**
-   * If `true`, the `input` element will be disabled.
+   * If `true`, the `input` element is disabled.
+   * The prop defaults to the value (`false`) inherited from the parent FormControl component.
    */
   disabled: PropTypes.bool,
   /**
@@ -225,12 +227,12 @@ FilledInput.propTypes = {
    */
   endAdornment: PropTypes.node,
   /**
-   * If `true`, the input will indicate an error. This is normally obtained via context from
-   * FormControl.
+   * If `true`, the `input` will indicate an error.
+   * The prop defaults to the value (`false`) inherited from the parent FormControl component.
    */
   error: PropTypes.bool,
   /**
-   * If `true`, the input will take up the full width of its container.
+   * If `true`, the `input` will take up the full width of its container.
    * @default false
    */
   fullWidth: PropTypes.bool,
@@ -256,6 +258,7 @@ FilledInput.propTypes = {
   /**
    * If `dense`, will adjust vertical spacing. This is normally obtained via context from
    * FormControl.
+   * The prop defaults to the value (`'none'`) inherited from the parent FormControl component.
    */
   margin: PropTypes.oneOf(['dense', 'none']),
   /**
@@ -267,7 +270,7 @@ FilledInput.propTypes = {
    */
   minRows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
-   * If `true`, a textarea element will be rendered.
+   * If `true`, a `textarea` element is rendered.
    * @default false
    */
   multiline: PropTypes.bool,
@@ -283,7 +286,7 @@ FilledInput.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * The short hint displayed in the input before the user enters a value.
+   * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder: PropTypes.string,
   /**
@@ -292,7 +295,8 @@ FilledInput.propTypes = {
    */
   readOnly: PropTypes.bool,
   /**
-   * If `true`, the `input` element will be required.
+   * If `true`, the `input` element is required.
+   * The prop defaults to the value (`false`) inherited from the parent FormControl component.
    */
   required: PropTypes.bool,
   /**

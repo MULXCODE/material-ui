@@ -23,10 +23,10 @@ export const styles = (theme) => ({
     '&:focus': {
       // Show that it's not an text input
       backgroundColor:
-        theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)',
+        theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)',
       borderRadius: 0, // Reset Chrome style
     },
-    // Remove IE 11 arrow
+    // Remove IE11 arrow
     '&::-ms-expand': {
       display: 'none',
     },
@@ -99,6 +99,7 @@ export const styles = (theme) => ({
     opacity: 0,
     pointerEvents: 'none',
     width: '100%',
+    boxSizing: 'border-box',
   },
 });
 
@@ -178,7 +179,7 @@ NativeSelect.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * The input value. The DOM API casts this to a string.
+   * The `input` value. The DOM API casts this to a string.
    */
   value: PropTypes.any,
   /**

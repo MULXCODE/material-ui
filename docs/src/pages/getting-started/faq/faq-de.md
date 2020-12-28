@@ -261,6 +261,8 @@ function handleRender(req, res) {
 
   // Rendern des Komponenten als String.
   const html = ReactDOMServer.renderToString(
+  const html = ReactDOMServer.renderToString(
+  const html = ReactDOMServer.renderToString(
 
   - // Eine Sheet Instanz erstellen.
 ```
@@ -281,7 +283,11 @@ Der Klassennamenwert basiert auf dem Konzept des [Klassennamensgenerators](/styl
 
   ```diff
   - // Erstellen Sie einen neuen Klassennamengenerator.
-  - // Erstellen Sie einen neuen Klassennamengenerator.
+  -const generateClassName = createGenerateClassName();
+
+function handleRender(req, res) {
+
++ // Erstellt einen neuen Klassennamengenerator.
   -const generateClassName = createGenerateClassName();
 
 function handleRender(req, res) {
@@ -290,6 +296,8 @@ function handleRender(req, res) {
 
     // Rendern des Komponenten als String.
     const html = ReactDOMServer.renderToString(
+  const html = ReactDOMServer.renderToString(
+  const html = ReactDOMServer.renderToString(
 
   - // Eine Sheet Instanz erstellen.
   ```

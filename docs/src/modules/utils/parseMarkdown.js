@@ -1,4 +1,4 @@
-import marked from 'marked/lib/marked';
+import marked from 'marked';
 import { LANGUAGES_IN_PROGRESS } from 'docs/src/modules/constants';
 import kebabCase from 'lodash/kebabCase';
 import textToHash from 'docs/src/modules/utils/textToHash';
@@ -6,7 +6,7 @@ import prism from 'docs/src/modules/utils/prism';
 
 const headerRegExp = /---[\r\n]([\s\S]*)[\r\n]---/;
 const titleRegExp = /# (.*)[\r\n]/;
-const descriptionRegExp = /<p class="description">(.*)<\/p>[\r\n]/;
+const descriptionRegExp = /<p class="description">(.*)<\/p>/s;
 const headerKeyValueRegExp = /(.*?): (.*)/g;
 const emptyRegExp = /^\s*$/;
 const notEnglishMarkdownRegExp = /-([a-z]{2})\.md$/;
@@ -42,8 +42,14 @@ export function getHeaders(markdown) {
   // eslint-disable-next-line no-cond-assign
   while ((regexMatches = headerKeyValueRegExp.exec(header)) !== null) {
     const key = regexMatches[1];
-    const value = regexMatches[2].replace(/'(.*)'/, '$1');
-    headers[key] = value;
+    const value = regexMatches[2].replace(/(.*)/, '$1');
+    if (value[0] === '[') {
+      // Need double quotes to JSON parse.
+      headers[key] = JSON.parse(value.replace(/'/g, '"'));
+    } else {
+      // Remove trailing single quote yml escaping.
+      headers[key] = value.replace(/^'|'$/g, '');
+    }
   }
 
   if (headers.components) {
@@ -78,7 +84,7 @@ export function getTitle(markdown) {
 export function getDescription(markdown) {
   const matches = markdown.match(descriptionRegExp);
 
-  return matches?.[1];
+  return matches?.[1].trim();
 }
 
 /**
@@ -244,7 +250,7 @@ ${headers.components
               `<h${level}>`,
               `<a class="anchor-link" id="${hash}"></a>`,
               headingHtml,
-              `<a class="anchor-link-style" aria-hidden="true" aria-label="anchor" href="#${hash}">`,
+              `<a class="anchor-link-style" aria-hidden="true" href="#${hash}">`,
               '<svg><use xlink:href="#anchor-link-icon" /></svg>',
               '</a>',
               `</h${level}>`,

@@ -1,17 +1,16 @@
 ---
-title: React 按钮组件
-components: Button, IconButton, ButtonBase
+title: React Button（按钮）组件
+components: Button, IconButton, ButtonBase, LoadingButton
 materialDesign: https://material.io/components/buttons
-githubLabel:
-  component: Button
+githubLabel: 'component: Button'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 ---
 
-# Button
+# Button 按钮
 
-<p class="description">只需通过轻按一下按钮，用户即可采取行动并做出选择。</p>
+<p class="description">只需轻点按钮，用户就可以触发动作或做出选择。</p>
 
-[按钮](https://material.io/design/components/buttons.html) 传达了一系列用户可以执行的操作命令。 他们通常直接放置在您的用户界面中，例如：
+按钮可以传送了用户可以采取的行动。 他们通常直接放置在您的用户界面中，例如：
 
 - Dialogs 对话框
 - Modal windows 模态窗口
@@ -23,7 +22,7 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 ## Contained Buttons 实心按钮
 
-[实心按钮](https://material.io/design/components/buttons.html#contained-button)表示高度的强调，你根据它们的立体效果和填充颜色来区分彼此。 它们用于触发应用程序所具有的主要功能。
+[实心按钮](https://material.io/design/components/buttons.html#contained-button) 表示高度的强调，你根据它们的立体效果和填充颜色来区分彼此。 它们用于触发应用程序所具有的主要功能。
 
 {{"demo": "pages/components/buttons/ContainedButtons.js"}}
 
@@ -33,7 +32,7 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 ## Text Buttons 文本按钮
 
-在卡片中，文本按钮有助于强调卡片的内容。
+[文本按钮](https://material.io/components/buttons#text-button) 通常用于不太明显的操作，包括那些位于：
 
 - 在 dialogs 对话框中的
 - 在 cards 卡片中的
@@ -44,7 +43,7 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 ## Outlined Buttons 描边按钮
 
-[描边按钮](https://material.io/design/components/buttons.html#outlined-button)表示中等的强调。 它们包含了一些重要的操作，但不是一个 app 中的主要操作。
+[描边按钮](https://material.io/components/buttons#outlined-button) 表示中等程度的强调。 它们包含了一些重要的操作，但不是一个 app 中的主要操作。
 
 你也可以将描边按钮作为比实心按钮次要一点的替代方案，或者用来作为比文本按钮重要一点的展示。
 
@@ -55,7 +54,13 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 所有组件都接受 `onClick` 处理程序，该处理程序被应用到根 DOM 元素中。
 
 ```jsx
-<Button onClick={() => { alert('clicked') }}>Click me</Button>
+<Button
+  onClick={() => {
+    alert('clicked');
+  }}
+>
+  点击我
+</Button>
 ```
 
 请注意，文档里组件的 API 部分 [避免](/guides/api/#native-properties) 提到原生的属性（还是有很多）。
@@ -86,21 +91,21 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 ## Customized Buttons（自定义按钮）
 
-你可以参考以下一些例子来自定义组件。 您可以在[重写文档页](/customization/components/)中了解有关此内容的更多信息。
+你可以参考以下一些例子来自定义组件。 您可以在 [重写文档页面](/customization/how-to-customize/) 中了解更多有关此内容的信息。
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 
 👑 如果您还在寻找灵感，您可以看看 [MUI Treasury 特别定制的一些例子](https://mui-treasury.com/styles/button)。
 
-## Complex Buttons（复杂按钮）
+## 载入按钮（Loading buttons）
 
 加载按钮可以显示加载状态并且禁用与此交互。
 
 {{"demo": "pages/components/buttons/LoadingButtons.js"}}
 
-这有一个[与 react-router 交互的例子](/guides/composition/#button)。
+切换此切换按钮，可以查看不同状态之间的转换。
 
-在 disabled 不可用的按钮上，ButtonBase 组件会有这个设置：`pointer-events: none;` ，这样一来不可用样式的鼠标悬浮就不会出现。
+{{"demo": "pages/components/buttons/LoadingButtonsTransition.js"}}
 
 ## Complex Buttons（复杂按钮）
 
@@ -114,7 +119,7 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 这有一个[与 react-router 交互的例子](/guides/composition/#button)。
 
-## 局限性
+## 设计局限
 
 ### Cursor 鼠标悬浮的禁用
 
@@ -140,10 +145,10 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 
 ```jsx
 <span style={{ cursor: 'not-allowed' }}>
-    <Button component={Link} disabled>
-      disabled
-    </Button>
-  </span>
+  <Button component={Link} disabled>
+    disabled
+  </Button>
+</span>
 ```
 
 这个方法能支持任何元素，例如，一个 `<a>` 元素。

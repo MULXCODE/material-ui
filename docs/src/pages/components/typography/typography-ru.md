@@ -1,12 +1,11 @@
 ---
-title: Typography React component
-components: Оформление текста
-githubLabel:
-  component: Оформление текста
+title: Компонент React Typography
+components: Typography
+githubLabel: 'component: Typography'
 materialDesign: https://material.io/design/typography/the-type-system.html
 ---
 
-# Оформление текста
+# Typography
 
 <p class="description">Используйте оформление для максимально четкого и эффективного представления своего дизайна и содержания.</p>
 
@@ -16,7 +15,7 @@ materialDesign: https://material.io/design/typography/the-type-system.html
 
 ## Основное
 
-The *Roboto* font will **not** be automatically loaded by Material-UI. Разработчик отвечает за загрузку всех шрифтов, используемых в его приложении. Есть несколько простых способов начать использование шрифта Roboto. Для более продвинутой конфигурации ознакомьтесь с [разделом настроек темы](/customization/typography/).
+The *Roboto* font will **not** be automatically loaded by Material-UI. You are responsible for loading any fonts used in your application. Есть несколько простых способов начать использование шрифта Roboto. Для более продвинутой конфигурации ознакомьтесь с [разделом настроек темы](/customization/typography/).
 
 ## Шрифт Roboto через CDN
 
@@ -28,14 +27,17 @@ The *Roboto* font will **not** be automatically loaded by Material-UI. Разр�
 
 ## Установка используя npm
 
-Вы можете [установить его](https://www.npmjs.com/package/fontsource-roboto) набрав команду ниже в терминале:
+Вы можете [установить его](https://www.npmjs.com/package/@fontsource/roboto) набрав команду ниже в терминале:
 
-`npm install fontsource-roboto`
+`npm install @fontsource/roboto`
 
 Затем вы можете импортировать его в вашу точку входа.
 
 ```js
-import 'fontsource-roboto';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 ```
 
 For more info check out [Fontsource](https://github.com/DecliningLotus/fontsource/blob/master/packages/roboto/README.md).
@@ -44,11 +46,13 @@ Fontsource может быть настроен на загрузку опред
 
 ## Компоненты
 
+The Typography component makes it easy to apply a default set of font weights and sizes in your application.
+
 {{"demo": "pages/components/typography/Types.js"}}
 
 ## Темы
 
-В некоторых ситуациях вы не сможете использовать компонент `Typography`. Надеемся, что вы сможете воспользоваться ключами свойства темы [` typograpthy`](/customization/default-theme/?expand-path=$.typography).
+В некоторых ситуациях вы не сможете использовать компонент `Typography`. Надеемся, что вы сможете воспользоваться ключами свойства темы [`typograpthy`](/customization/default-theme/?expand-path=$.typography).
 
 {{"demo": "pages/components/typography/TypographyTheme.js"}}
 
@@ -65,7 +69,7 @@ The Typography component uses the `variantMapping` property to associate a UI va
 </Typography>
 ```
 
-- Вы можете изменить сопоставление вариантов [глобально используя тему](/customization/globals/#default-props):
+- Вы можете изменить сопоставление вариантов [глобально используя тему](/customization/theme-components/#default-props):
 
 ```js
 const theme = createMuiTheme({
@@ -87,6 +91,10 @@ const theme = createMuiTheme({
   },
 });
 ```
+
+## Adding & disabling variants
+
+In addition to using the default typography variants, you can add custom ones, or disable any you don't need. See the [Adding & disabling variants](/customization/typography/#adding-amp-disabling-variants) example for more info.
 
 ## Доступность
 

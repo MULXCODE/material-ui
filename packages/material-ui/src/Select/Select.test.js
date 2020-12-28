@@ -424,6 +424,12 @@ describe('<Select />', () => {
       expect(getByRole('button')).to.have.attribute('aria-disabled', 'true');
     });
 
+    it('sets disabled attribute in input when component is disabled', () => {
+      const { container } = render(<Select disabled value="" />);
+
+      expect(container.querySelector('input')).to.have.property('disabled', true);
+    });
+
     specify('aria-disabled is not present if component is not disabled', () => {
       const { getByRole } = render(<Select disabled={false} value="" />);
 
@@ -541,6 +547,19 @@ describe('<Select />', () => {
       );
 
       expect(getByRole('listbox')).to.have.attribute('aria-labelledby', 'select-label');
+    });
+
+    it('should have appropriate accessible description when provided in props', () => {
+      const { getByRole } = render(
+        <React.Fragment>
+          <Select aria-describedby="select-helper-text" value="" />
+          <span id="select-helper-text">Helper text content</span>
+        </React.Fragment>,
+      );
+
+      const target = getByRole('button');
+      expect(target).to.have.attribute('aria-describedby', 'select-helper-text');
+      expect(target).toHaveAccessibleDescription('Helper text content');
     });
   });
 
@@ -940,12 +959,12 @@ describe('<Select />', () => {
     const ref = React.createRef();
     const { setProps } = render(<Select inputProps={{ ref }} value="" />);
 
-    expect(ref.current.node).to.have.property('tagName', 'INPUT');
+    expect(ref.current.node).to.have.tagName('input');
 
     setProps({
       value: '',
     });
-    expect(ref.current.node).to.have.property('tagName', 'INPUT');
+    expect(ref.current.node).to.have.tagName('input');
   });
 
   describe('prop: inputRef', () => {
@@ -953,7 +972,7 @@ describe('<Select />', () => {
       const ref = React.createRef();
       render(<Select inputRef={ref} value="" />);
 
-      expect(ref.current.node).to.have.property('tagName', 'INPUT');
+      expect(ref.current.node).to.have.tagName('input');
     });
 
     // TODO: This might be confusing a prop called input!Ref can imperatively
@@ -1085,5 +1104,22 @@ describe('<Select />', () => {
     setProps({ value: 'france' });
     fireEvent.click(container.querySelector('button[type=submit]'));
     expect(handleSubmit.callCount).to.equal(1);
+  });
+
+  it('should programmatically focus the select', () => {
+    const { getByRole } = render(
+      <Select
+        value={1}
+        inputRef={(input) => {
+          if (input !== null) {
+            input.focus();
+          }
+        }}
+      >
+        <MenuItem value={1}>1</MenuItem>
+        <MenuItem value={2}>2</MenuItem>
+      </Select>,
+    );
+    expect(document.activeElement).to.equal(getByRole('button'));
   });
 });

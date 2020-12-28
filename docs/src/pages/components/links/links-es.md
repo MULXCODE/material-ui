@@ -1,7 +1,6 @@
 ---
 components: Link
-githubLabel:
-  component: Link
+githubLabel: 'component: Link'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#link'
 ---
 
@@ -21,6 +20,12 @@ However, the Link component has different default properties than the Typography
 
 - `color="primary"` as the link needs to stand out.
 - `variant="inherit"` as the link will, most of the time, be used as a child of a Typography component.
+
+## Underline
+
+The `underline` prop can be used to set the underline behavior. The default is `hover`.
+
+{{"demo": "pages/components/links/UnderlineLink.js"}}
 
 ## Seguridad
 

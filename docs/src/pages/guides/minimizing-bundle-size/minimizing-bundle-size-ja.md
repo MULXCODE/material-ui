@@ -18,17 +18,16 @@ import { Button, TextField } from '@material-ui/core';
 
 ## 開発環境
 
-開発時のバンドルはライブラリの全てを含むので、 **遅い起動時間**の原因となります。 これは、特に`@material-ui/icons`からインポートする場合に顕著です。 起動時間は、上位からの名前指定インポートがない場合に比べて、約6倍遅い場合もあります。
+開発時のバンドルはライブラリの全てを含むので、 **遅い起動時間**の原因となります。 これは、特に`@material-ui/icons`からインポートする場合に顕著です。 起動時間は、上位からの名前指定インポートがない場合に比べて、約6倍遅い場合もあります。 これは、特に`@material-ui/icons`からインポートする場合に顕著です。 起動時間は、上位からの名前指定インポートがない場合に比べて、約6倍遅い場合もあります。
 
 この課題を持っているのであれば、様々な対応を取ることができます。
 
 ### 選択肢 1
 
-パス指定インポートを利用して、使用していないモジュールのインポートを避けることができます。 例えば：
+パス指定インポートを利用して、使用していないモジュールのインポートを避けることができます。 例えば： 例えば： 例えば：
 
 ```js
-// 🚀 早い!
-import Button from '@material-ui/core/Button';
+// 🚀 早い! import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 ```
 
@@ -38,9 +37,9 @@ import TextField from '@material-ui/core/TextField';
 import { Button, TextField } from '@material-ui/core';
 ```
 
-設定を必要としないので、この選択肢は全てのデモで利用しています。 コンポーネントを利用するパッケージ作成者には推奨されています。 最高のDXとUXをもたらすアプローチは[選択肢 2](#option-2)をみましょう。
+設定を必要としないので、この選択肢は全てのデモで利用しています。 コンポーネントを利用するパッケージ作成者には推奨されています。 設定を必要としないので、この選択肢は全てのデモで利用しています。 コンポーネントを利用するパッケージ作成者には推奨されています。 最高のDXとUXをもたらすアプローチは[選択肢 2](#option-2)をみましょう。
 
-このように直接インポートする場合 [`@material-ui/core/index.js`](https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/index.js)のエクスポートを使用しないので、公開されているモジュールと同じくらいに手軽な参照として提供されます。
+While importing directly in this manner doesn't use the exports in [the main file of `@material-ui/core`](https://unpkg.com/@material-ui/core), this file can serve as a handy reference as to which modules are public.
 
 1, 2階層までのインポートのみ対応していることに注意してください。 これより深い階層はプライベートとみなされ、バンドルのモジュール重複などの問題を引き起こします。
 
@@ -60,7 +59,7 @@ import TabIndicator from '@material-ui/core/Tabs/TabIndicator';
 //                                               ^^^^^^^^^^^^ 3rd level
 ```
 
-`eslint`を使用している場合、 [`no-restricted-imports` ルール](https://eslint.org/docs/rules/no-restricted-imports)で問題のあるインポートを検知可能です。 以下の `.eslintrc`設定は、`@material-ui`からの問題のあるインポート文をハイライトします。
+`eslint`を使用している場合、 [`no-restricted-imports` ルール](https://eslint.org/docs/rules/no-restricted-imports)で問題のあるインポートを検知可能です。 以下の `.eslintrc`設定は、`@material-ui`からの問題のあるインポート文をハイライトします。 以下の `.eslintrc`設定は、`@material-ui`からの問題のあるインポート文をハイライトします。 以下の `.eslintrc`設定は、`@material-ui`からの問題のあるインポート文をハイライトします。
 
 ```json
 {
@@ -81,7 +80,7 @@ import TabIndicator from '@material-ui/core/Tabs/TabIndicator';
 
 - UX: Babelプラグインは、バンドラーがサポートしていない場合でも、トップレベルのtree-shakingを有効にします。
 - DX: Babelプラグインは、開発モードでも選択肢1と同様の起動時間の速さをもたらします。
-- この記法は、一つのインポート文で複数のモジュールに対応するのでコードの重複をへらします。 全体として、読みやすく、新しいモジュールをimportする際に間違いをする機会を削減します。
+- この記法は、一つのインポート文で複数のモジュールに対応するのでコードの重複をへらします。 この記法は、一つのインポート文で複数のモジュールに対応するのでコードの重複をへらします。 全体として、読みやすく、新しいモジュールをimportする際に間違いをする機会を削減します。
 
 ```js
 import { Button, TextField } from '@material-ui/core';
@@ -105,26 +104,22 @@ import { Button, TextField } from '@material-ui/core';
     [
       'babel-plugin-import',
       {
-        'libraryName': '@material-ui/core',
-        // Use "'libraryDirectory': ''," if your bundler does not support ES modules
-        'libraryDirectory': 'esm',
-        'camel2DashComponentName': false
+        libraryName: '@material-ui/core',
+        camel2DashComponentName: false,
       },
-      'core'
+      'core',
     ],
     [
       'babel-plugin-import',
       {
-        'libraryName': '@material-ui/icons',
-        // Use "'libraryDirectory': ''," if your bundler does not support ES modules
-        'libraryDirectory': 'esm',
-        'camel2DashComponentName': false
+        libraryName: '@material-ui/icons',
+        camel2DashComponentName: false,
       },
-      'icons'
-    ]
+      'icons',
+    ],
   ];
 
-  module.exports = {plugins};
+  module.exports = { plugins };
   ```
 
 - [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports)と以下の設定
@@ -140,20 +135,18 @@ import { Button, TextField } from '@material-ui/core';
       'babel-plugin-transform-imports',
       {
         '@material-ui/core': {
-          // Use "transform: '@material-ui/core/${member}'," if your bundler does not support ES modules
-          'transform': '@material-ui/core/esm/${member}',
-          'preventFullImport': true
+          transform: '@material-ui/core/${member}',
+          preventFullImport: true,
         },
         '@material-ui/icons': {
-          // Use "transform: '@material-ui/icons/${member}'," if your bundler does not support ES modules
-          'transform': '@material-ui/icons/esm/${member}',
-          'preventFullImport': true
-        }
-      }
-    ]
+          transform: '@material-ui/icons/${member}',
+          preventFullImport: true,
+        },
+      },
+    ],
   ];
 
-  module.exports = {plugins};
+  module.exports = { plugins };
   ```
 
 Create React Appを使用している場合、`.babelrc`の利用を許容しているいくつかのプロジェクトを使用する必要があります。
@@ -208,7 +201,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 #### 2. すべてのインポートを変換する
 
-Finally, you can convert your existing codebase to this option with this [top-level-imports](https://github.com/mui-org/material-ui/blob/next/packages/material-ui-codemod/README.md#top-level-imports) codemod. 以下のような 変更になります。
+Finally, you can convert your existing codebase to this option with this [top-level-imports codemod](https://www.npmjs.com/package/@material-ui/codemod#top-level-imports). 以下のような 変更になります。
 
 ```diff
 -import Button from '@material-ui/core/Button';
@@ -216,10 +209,16 @@ Finally, you can convert your existing codebase to this option with this [top-le
 +import { Button, TextField } from '@material-ui/core';
 ```
 
-## ECMAScript
+## Available bundles
 
 npmに公開されたパッケージは[Babel](https://github.com/babel/babel)で**トランスパイル**されています。[対応するプラットフォーム](/getting-started/supported-platforms/)への互換性のためです。
 
-ふたつめのバージョンも同様に公開されています。[`/es` フォルダー](https://unpkg.com/@material-ui/core/es/)に存在します。 全ての非公式構文は、 [ECMA-262 standard](https://www.ecma-international.org/publications/standards/Ecma-262.htm)にトランスパイルされます。それ以上でもありません。 これは、異なるブラウザに対して別々のバンドルを作成するために使用できます。 古いブラウザはより多くのJavaScriptの機能をトランスパイル必要性があり、これはバンドルサイズの増加につながります。 ES2015のランタイムには、polyfillは含まれません。 IE11+ と evergreen browsersは必要な全ての機能をサポートしています。 他のブラウザへのサポートが必要な場合、[`@babel/polyfill`](https://www.npmjs.com/package/@babel/polyfill)の使用を検討してください。
+⚠️ In order to minimize duplication of code in users' bundles, library authors are **strongly discouraged** to import from any of the other bundles.
 
-⚠️ ユーザーのバンドルで、重複の発生を最小限にするために、ライブラリの作成者は、`/es` フォルダーの使用は**明確に非推奨**としています。
+### Modern bundle
+
+The modern bundle can be found under the [`/modern` folder](https://unpkg.com/@material-ui/core/modern/). It targets the latest released versions of evergreen browsers (Chrome, Firefox, Safari, Edge). これは、異なるブラウザに対して別々のバンドルを作成するために使用できます。
+
+### Legacy bundle
+
+If you need to support IE 11 you cannot use the default or modern bundle without transpilation. However, you can use the legacy bundle found under the [`/legacy` folder](https://unpkg.com/@material-ui/core/legacy/). You don't need any additional polyfills.

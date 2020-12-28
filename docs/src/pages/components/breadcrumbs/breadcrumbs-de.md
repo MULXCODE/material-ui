@@ -1,8 +1,7 @@
 ---
-title: Breadcrumbs React-Komponente
+title: React Breadcrumbs component
 components: Breadcrumbs, Link, Typography
-githubLabel:
-  component: Breadcrumbs
+githubLabel: 'component: Breadcrumbs'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#breadcrumb'
 ---
 
@@ -38,7 +37,7 @@ In den folgenden Beispielen werden zwei textbasierte Trennzeichen und ein SVG-Ic
 
 ## Benutzerdefinierte Breadcrumbs
 
-Hier ist ein Beispiel zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/components/).
+Hier ist ein Beispiel zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/how-to-customize/).
 
 {{"demo": "pages/components/breadcrumbs/CustomizedBreadcrumbs.js"}}
 

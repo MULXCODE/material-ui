@@ -1,8 +1,7 @@
 ---
-title: Stepper React-Komponente
+title: React Stepper component
 components: MobileStepper, Step, StepButton, StepConnector, StepContent, StepIcon, StepLabel, Stepper
-githubLabel:
-  component: Stepper
+githubLabel: 'component: Stepper'
 materialDesign: https://material.io/archive/guidelines/components/steppers.html
 ---
 
@@ -57,7 +56,7 @@ Labels can be placed below the step icon by setting the `alternativeLabel` prop 
 
 ### Non-linear - Alternative Label
 
-Hier ist ein Beispiel zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/components/).
+Hier ist ein Beispiel zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/how-to-customize/).
 
 {{"demo": "pages/components/steppers/CustomizedSteppers.js"}}
 
@@ -69,7 +68,7 @@ Vertical steppers are designed for narrow screen sizes. They are ideal for mobil
 
 ## Mobile Stepper
 
-Diese Komponente implementiert einen kompakten Stepper, der für ein mobiles Gerät geeignet ist. IT has more limited functionality than the vertical stepper. Siehe [Mobile steps](https://material.io/archive/guidelines/components/steppers.html#steppers-types-of-steps) zur Inspiration.
+Diese Komponente implementiert einen kompakten Stepper, der für ein mobiles Gerät geeignet ist. It has more limited functionality than the vertical stepper. Siehe [Mobile steps](https://material.io/archive/guidelines/components/steppers.html#steppers-types-of-steps) zur Inspiration.
 
 The mobile stepper supports three variants to display progress through the available steps: text, dots, and progress.
 

@@ -123,7 +123,7 @@ export default function createPalette(palette) {
       main: green[500],
       dark: green[700],
     },
-    type = 'light',
+    mode = 'light',
     contrastThreshold = 3,
     tonalOffset = 0.2,
     ...other
@@ -154,32 +154,38 @@ export default function createPalette(palette) {
     return contrastText;
   }
 
-  const augmentColor = (color, mainShade = 500, lightShade = 300, darkShade = 700) => {
+  const augmentColor = ({ color, name, mainShade = 500, lightShade = 300, darkShade = 700 }) => {
     color = { ...color };
     if (!color.main && color[mainShade]) {
       color.main = color[mainShade];
     }
 
-    if (!color.main) {
+    if (!color.hasOwnProperty('main')) {
       throw new MuiError(
-        'Material-UI: The color provided to augmentColor(color) is invalid.\n' +
+        'Material-UI: The color%s provided to augmentColor(color) is invalid.\n' +
           'The color object needs to have a `main` property or a `%s` property.',
+        name ? ` (${name})` : '',
         mainShade,
       );
     }
 
     if (typeof color.main !== 'string') {
       throw new MuiError(
-        'Material-UI: The color provided to augmentColor(color) is invalid.\n' +
-          '`color.main` should be a string, but `%s` was provided instead.\n\n' +
-          'Did you intend to use one of the following approaches?\n\n' +
-          'import { green } from "@material-ui/core/colors";\n\n' +
+        'Material-UI: The color%s provided to augmentColor(color) is invalid.\n' +
+          '`color.main` should be a string, but `%s` was provided instead.\n' +
+          '\n' +
+          'Did you intend to use one of the following approaches?\n' +
+          '\n' +
+          'import { green } from "@material-ui/core/colors";\n' +
+          '\n' +
           'const theme1 = createMuiTheme({ palette: {\n' +
           '  primary: green,\n' +
-          '} });\n\n' +
+          '} });\n' +
+          '\n' +
           'const theme2 = createMuiTheme({ palette: {\n' +
           '  primary: { main: green[500] },\n' +
           '} });',
+        name ? ` (${name})` : '',
         JSON.stringify(color.main),
       );
     }
@@ -193,11 +199,11 @@ export default function createPalette(palette) {
     return color;
   };
 
-  const types = { dark, light };
+  const modes = { dark, light };
 
   if (process.env.NODE_ENV !== 'production') {
-    if (!types[type]) {
-      console.error(`Material-UI: The palette type \`${type}\` is not supported.`);
+    if (!modes[mode]) {
+      console.error(`Material-UI: The palette mode \`${mode}\` is not supported.`);
     }
   }
 
@@ -205,20 +211,26 @@ export default function createPalette(palette) {
     {
       // A collection of common colors.
       common,
-      // The palette type, can be light or dark.
-      type,
+      // The palette mode, can be light or dark.
+      mode,
       // The colors used to represent primary interface elements for a user.
-      primary: augmentColor(primary),
+      primary: augmentColor({ color: primary, name: 'primary' }),
       // The colors used to represent secondary interface elements for a user.
-      secondary: augmentColor(secondary, 'A400', 'A200', 'A700'),
+      secondary: augmentColor({
+        color: secondary,
+        name: 'secondary',
+        mainShade: 'A400',
+        lightShade: 'A200',
+        darkShade: 'A700',
+      }),
       // The colors used to represent interface elements that the user should be made aware of.
-      error: augmentColor(error),
+      error: augmentColor({ color: error, name: 'error' }),
       // The colors used to represent potentially dangerous actions or important messages.
-      warning: augmentColor(warning),
+      warning: augmentColor({ color: warning, name: 'warning' }),
       // The colors used to present information to the user that is neutral and not necessarily important.
-      info: augmentColor(info),
+      info: augmentColor({ color: info, name: 'info' }),
       // The colors used to indicate the successful completion of an action that user triggered.
-      success: augmentColor(success),
+      success: augmentColor({ color: success, name: 'succes' }),
       // The grey colors.
       grey,
       // Used by `getContrastText()` to maximize the contrast between
@@ -232,8 +244,8 @@ export default function createPalette(palette) {
       // two indexes within its tonal palette.
       // E.g., shift from Red 500 to Red 300 or Red 700.
       tonalOffset,
-      // The light and dark type object.
-      ...types[type],
+      // The light and dark mode object.
+      ...modes[mode],
     },
     other,
   );

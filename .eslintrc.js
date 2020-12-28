@@ -22,7 +22,11 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 7,
   },
-  plugins: ['eslint-plugin-material-ui', 'eslint-plugin-react-hooks', '@typescript-eslint/eslint-plugin'],
+  plugins: [
+    'eslint-plugin-material-ui',
+    'eslint-plugin-react-hooks',
+    '@typescript-eslint/eslint-plugin',
+  ],
   settings: {
     'import/resolver': {
       webpack: {
@@ -36,10 +40,12 @@ module.exports = {
    */
   rules: {
     'consistent-this': ['error', 'self'],
-    // just as bad as "max components per file"
+    // Just as bad as "max components per file"
     'max-classes-per-file': 'off',
     // Too interruptive
     'no-alert': 'error',
+    // Stylistic opinion
+    'arrow-body-style': 'off',
     // Allow warn and error for dev environments
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-param-reassign': 'off', // It's fine.
@@ -48,9 +54,18 @@ module.exports = {
       {
         patterns: [
           '@material-ui/*/*/*',
+          // Begin block: Packages with files instead of packages in the top level
+          // Importing from the top level pulls in CommonJS instead of ES modules
+          // Allowing /icons as to reduce cold-start of dev builds significantly.
+          // There's nothing to tree-shake when importing from /icons this way:
+          // '@material-ui/icons/*/',
+          '@material-ui/system/*',
+          '@material-ui/utils/*',
+          // End block
+          // Macros are fine since their import path is transpiled away
+          '!@material-ui/utils/macros',
+          '@material-ui/utils/macros/*',
           '!@material-ui/utils/macros/*.macro',
-          // public API: https://next.material-ui-pickers.dev/getting-started/installation#peer-library
-          '!@material-ui/pickers/adapter/*',
         ],
       },
     ],
@@ -99,7 +114,7 @@ module.exports = {
         // Otherwise the rule thinks inner props = outer props
         // But in TypeScript we want to know that a certain prop is defined during render
         // while it can be ommitted from the callsite.
-        // Then defaultProps (or default values) will make sure the the prop is defined during render
+        // Then defaultProps (or default values) will make sure that the prop is defined during render
         allowRequiredDefaults: true,
       },
     ],

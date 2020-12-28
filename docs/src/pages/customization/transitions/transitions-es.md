@@ -17,7 +17,7 @@
 
 #### Regresa
 
-`transition`: A CSS transition value, which composes all CSS properties that should be transitioned, together with the defined duration, easing and duration.
+`transition`: A CSS transition value, which composes all CSS properties that should be transitioned, together with the defined duration, easing and delay.
 
 Use the <code>theme.transitions.create()</code> helper to create consistent transitions for the elements of your UI.</p>
 
@@ -39,7 +39,7 @@ theme.transitions.create(['background-color', 'transform']);
 
 `duration`: The calculated duration based on the height.
 
-## Durations
+## Duraciones
 
 You can change some or all of the duration values, or provide your own (for use in the `create()` helper). This example shows all the default values (in milliseconds), but you only need to provide the keys you wish to change or add.
 
@@ -85,6 +85,6 @@ const theme = createMuiTheme({
 });
 ```
 
-## References
+## Referencias
 
-Check out the [Transitions](/components/transitions/) page to explore the transition components that are included with Material-UI.
+Revisa la página de [Transitions](/components/transitions/) para explorar los componentes de transición que están incluidos con Material-UI.

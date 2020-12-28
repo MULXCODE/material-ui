@@ -1,8 +1,7 @@
 ---
-title: React-компонент Сетка
+title: Компонент React Grid
 components: Grid
-githubLabel:
-  component: Grid
+githubLabel: 'component: Grid'
 materialDesign: https://material.io/design/layout/understanding-layout.html
 ---
 
@@ -13,6 +12,8 @@ materialDesign: https://material.io/design/layout/understanding-layout.html
 [Сетка](https://material.io/design/layout/responsive-layout-grid.html) создает визуальную согласованность между макетами, позволяя гибко адаптироваться к разнообразным дизайнам. Адаптивный пользовательский интерфейс Material Design основан на сетке с 12 колонками.
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
+
+> ⚠️ Компонент `Сетка` не путать с сеткой данных; он ближе к раскладке сетки. Для передачи данных заголовок перейти к: [компоненту `DataGrid`](/components/data-grid/).
 
 ## Как это работает
 
@@ -83,6 +84,14 @@ https://www.w3.org/TR/css-flexbox-1/#box-model
 
 {{"demo": "pages/components/grid/NestedGrid.js", "bg": true}}
 
+⚠️ Defining an explicit width to a Grid element that is flex container, flex item, and has spacing at the same time lead to unexpected behavior, avoid doing it:
+
+```jsx
+<Grid spacing={1} container item xs={12}>
+```
+
+If you need to do such, remove one of the props.
+
 ## Ограничения
 
 ### Отрицательный margin
@@ -124,9 +133,11 @@ https://www.w3.org/TR/css-flexbox-1/#box-model
 
 ### direction: column | column-reverse
 
-Хотя компонент `Grid` имеет свойство `direction` которое допускает значения `row`, `row-reverse`, `column`и `column-reverse`, тем не менее, некоторые функции не поддерживаются в контейнерах `column` и `column-reverse`. Свойства, определющие количество сеток, которые компонент будет использовать для данной точки останова (`xs`, `см`, `md`, `lg`и `xl`), ориентированы на управление шириной и оказывают **различное** влияние на height в контейнерах `column` и `column-reverse`. При использовании в контейнерах `column` или `column-reverse`, эти свойства могут оказать нежелательные эффекты на ширину элементов `Grid`.
+Свойства `xs`, `sm`, `md`, `lg`, и `xl` **не поддерживаются** внутри контейнеров с `direction="column"` и `direction="column-reverse"`.
 
-## CSS макет сетки
+Определяют количество клеток, которое компонент будет использовать для данной точки останова. Они предназначены для контроля **ширины** с помощью `flex-basis` в `row`-контейнерах, но в `column`-контейнерах они повлияют на высоту. При использовании этих свойств возможен побочный эффект в виде изменения высоты  `Grid`-ячеек.
+
+## Макет CSS Grid
 
 Material-UI сам по себе не предоставляет никакой функциональности CSS Grid, но, как видно ниже, вы можете легко использовать CSS Grid в макете страницы.
 

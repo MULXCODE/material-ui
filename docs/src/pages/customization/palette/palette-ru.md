@@ -91,6 +91,9 @@ const theme = createMuiTheme({
     contrastThreshold: 3,
     // Used by the functions below to shift a color's luminance by approximately
     // two indexes within its tonal palette.
+    tonalOffset: 0.2,
+  },
+});
     contrastThreshold: 3,
     // Used by the functions below to shift a color's luminance by approximately
     // two indexes within its tonal palette.
@@ -170,12 +173,12 @@ declare module "@material-ui/core/styles/createPalette" {
 
 ## Темный режим
 
-Material-UI comes with two palette types, light (the default) and dark. You can make the theme dark by setting `type: 'dark'`. While it's only a single property value change, internally it modifies several palette values.
+Material-UI comes with two palette types, light (the default) and dark. Вы можете сделать тему темной, установив режим `mode: 'dark'`. While it's only a single property value change, internally it modifies several palette values.
 
 ```js
 const darkTheme = createMuiTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
   },
 });
 ```
@@ -205,7 +208,7 @@ function App() {
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
+          mode: prefersDarkMode ? 'dark' : 'light',
         },
       }),
     [prefersDarkMode],

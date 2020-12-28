@@ -1,8 +1,8 @@
 ---
-title: Composant React Table
+title: React Table component
 components: Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel
-githubLabel:
-  component: Table (Tableaux)
+githubLabel: 'component: Table'
+waiAria: 'https://www.w3.org/TR/wai-aria-practices/#table'
 materialDesign: https://material.io/components/data-tables
 ---
 
@@ -10,39 +10,33 @@ materialDesign: https://material.io/components/data-tables
 
 <p class="description">Tables display sets of data. They can be fully customized.</p>
 
-[Tables](https://material.io/design/components/data-tables.html) display information in a way that’s easy to scan, so that users can look for patterns and insights. Ils peuvent être intégrés au contenu principal, tel que les cartes.
-
-Tables can include:
+[Tables](https://material.io/design/components/data-tables.html) display information in a way that’s easy to scan, so that users can look for patterns and insights. Ils peuvent être intégrés au contenu principal, tel que les cartes. They can include:
 
 - Une visualisation correspondante
 - Menu principal
 - Outils pour interroger et manipuler des données
 
-Lorsque des outils sont inclus, ils doivent être placés directement au-dessus ou au-dessous de la table.
-
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## Structure
 
+Un exemple simple et sans fioritures.
+
 Une table de données contient en haut une ligne d’en-tête qui répertorie les noms de colonne, suivis de lignes pour les données.
 
-Des cases à cocher doivent accompagner chaque ligne si l'utilisateur doit sélectionner ou manipuler des données.
+## Tri & Sélection
 
-It utilizes the [`Collapse`](/api/collapse/) component. Cela permet aux lecteurs d'écran d'identifier la valeur d'une cellule par son nom de ligne et de colonne.
+The `Table` component has a close mapping to the native `<table>` elements. This constraint makes building rich data tables challenging.
+
+The [`DataGrid` component](/components/data-grid/) is designed for use-cases that are focused around handling a large amounts of tabular data. While it comes with a more rigid structure, in exchange, you gain more powerful features.
 
 ## Tableau simple
 
-Un exemple simple et sans fioritures.
-
-{{"demo": "pages/components/tables/SimpleTable.js", "bg": true}}
-
-## Tableau dense
-
-Un exemple simple de tableau dense sans fioritures.
+Des cases à cocher doivent accompagner chaque ligne si l'utilisateur doit sélectionner ou manipuler des données.
 
 {{"demo": "pages/components/tables/DenseTable.js", "bg": true}}
 
-## Tri & Sélection
+## Tableau dense
 
 Cet exemple illustre l'utilisation de `Checkbox` et des lignes cliquables pour la sélection, avec une `Toolbar` personnalisée. Il utilise le composant `TableSortLabel` pour aider à styliser les en-têtes de colonne.
 
@@ -52,7 +46,7 @@ La table a reçu une largeur fixe pour illustrer le défilement horizontal. Afin
 
 ## Tableaux Personnalisés
 
-Voici un exemple de personnalisation du composant. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/components/).
+Voici un exemple de personnalisation du composant. Vous pouvez en savoir plus dans la [page de documentation des overrides](/customization/how-to-customize/).
 
 {{"demo": "pages/components/tables/CustomizedTables.js", "bg": true}}
 
@@ -80,9 +74,22 @@ La propriété `Action` du composant `TablePagination` permet l'implémentation 
 
 ## Fixed header
 
-An example of a table with scrollable rows and fixed column headers. It leverages the `stickyHeader` prop (⚠️ no IE 11 support).
+An example of a table with scrollable rows and fixed column headers. It leverages the `stickyHeader` prop.<br /> (⚠️ no IE11 support)
 
 {{"demo": "pages/components/tables/StickyHeadTable.js", "bg": true}}
+
+## Column grouping
+
+You can group column headers by rendering multiple table rows inside a table head:
+
+```jsx
+<TableHead>
+  <TableRow />
+  <TableRow />
+</TableHead>
+```
+
+{{"demo": "pages/components/tables/ColumnGroupingTable.js", "bg": true}}
 
 ## Collapsible table
 
@@ -101,24 +108,6 @@ Un exemple simple avec des colonnes couvrant & lignes.
 Dans l'exemple suivant, nous montrons comment utiliser [react-virtualized](https://github.com/bvaughn/react-virtualized) avec le composant `Table`. Il affiche 200 lignes et peut facilement gérer plus. La virtualisation aide à résoudre les problèmes de performances.
 
 {{"demo": "pages/components/tables/ReactVirtualizedTable.js", "bg": true}}
-
-## Projets complémentaires
-
-Pour des cas d'utilisation plus avancés, vous pourrez peut-être tirer parti des projects suivants:
-
-### material-table
-
-![stars](https://img.shields.io/github/stars/mbrn/material-table.svg?style=social&label=Stars) ![npm downloads](https://img.shields.io/npm/dm/material-table.svg)
-
-[material-table](https://github.com/mbrn/material-table) est une table de données simple et puissante pour React basé sur les tables Material-UI avec quelques fonctionnalités supplémentaires. Ils prennent en charge de nombreux cas d'utilisation différents (éditable, filtrage, regroupement, tri, sélection, i18n, données arborescentes, etc.). Vous devriez y jeter un coup d'oeil.
-
-{{"demo": "pages/components/tables/MaterialTableDemo.js", "bg": true}}
-
-### Autres
-
-- [dx-react-grid-material-ui](https://devexpress.github.io/devextreme-reactive/react/grid/): A data grid for Material-UI with paging, sorting, filtering, grouping and editing features ([paid license](https://js.devexpress.com/licensing/)).
-- [mui-datatables](https://github.com/gregnb/mui-datatables): Responsive data tables for Material-UI with filtering, sorting, search and more.
-- [tubular-react](https://github.com/unosquare/tubular-react): A Material-UI table with local or remote data-source. Featuring filtering, sorting, free-text search, export to CSV locally, and aggregations.
 
 ## Accessibilité
 

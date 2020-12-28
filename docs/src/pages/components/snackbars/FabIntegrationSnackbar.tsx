@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       right: theme.spacing(2),
     },
     snackbar: {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         bottom: 90,
       },
     },
@@ -51,7 +51,7 @@ export default function FabIntegrationSnackbar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" component="div">
               App Bar
             </Typography>
           </Toolbar>

@@ -1,10 +1,8 @@
 ---
 title: Componente React para Autocompletar
 components: TextField, Popper, Autocomplete
-githubLabel:
-  component: Autocompletar
+githubLabel: 'component: Autocomplete'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#combobox'
-packageName: '@material-ui/lab'
 ---
 
 # Autocompletar
@@ -28,7 +26,7 @@ O valor deve ser escolhido a partir de um conjunto predefinido de valores permit
 
 ### Área de exemplos
 
-By default, the component accepts the following options structures:
+Por padrão, o componente aceita as seguintes estruturas de opções:
 
 ```ts
 const filterOptions = createFilterOptions({
@@ -50,7 +48,7 @@ const options = [
 const options = ['The Godfather', 'Pulp Fiction'];
 ```
 
-However, you can use different structures by providing a `getOptionLabel` prop.
+No entanto, você pode usar estruturas diferentes fornecendo uma propriedade `getOptionLabel`.
 
 ### Área de exemplos
 
@@ -102,7 +100,7 @@ Você pode também exibir um diálogo quando o usuário quiser adicionar um novo
 
 ## Agrupamento
 
-You can group the options with the `groupBy` prop. If you do so, make sure that the options are also sorted with the same dimension that they are grouped by, otherwise you will notice duplicate headers.
+Você pode agrupar as opções com a propriedade `groupBy`. Se você fizer isso, certifique-se de que as opções também estejam classificadas com a mesma dimensão que serão agrupadas, caso contrário, você notará cabeçalhos duplicados.
 
 {{"demo": "pages/components/autocomplete/Grouped.js"}}
 
@@ -112,10 +110,10 @@ You can group the options with the `groupBy` prop. If you do so, make sure that 
 
 ## `useAutocomplete`
 
-Para casos de customização avançada nós expomos o hook `useAutocomplete()`. Ele aceita quase as mesmas opções do componente autocompletar exceto todas as propriedades relacionadas a renderização do JSX. O componente autocompletar usa esse hook internamente.
+Para casos de customização avançada, nós expomos o hook `useAutocomplete()`. Ele aceita quase as mesmas opções do componente autocompletar exceto todas as propriedades relacionadas a renderização do JSX. O componente autocompletar usa esse hook internamente.
 
 ```jsx
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
+import useAutocomplete from '@material-ui/core/useAutocomplete';
 ```
 
 - 📦 [4.5 kB gzipado](/size-snapshot).
@@ -130,30 +128,25 @@ Também conhecidos como tags, o usuário pode inserir mais de um valor.
 
 ## Requisições assíncronas
 
-The component supports two different asynchronous use-cases:
+O componente suporta duas situações de uso assíncronas diferentes:
 
-- [Load on open](#load-on-open): it waits for the component to be interacted with to load the options.
-- [Search as you type](#search-as-you-type): a new request is made for each keystroke.
+- [Carregar ao abrir](#load-on-open): espera que o componente seja interagido para carregas as opções.
+- [Pesquisar enquanto digita](#search-as-you-type): um novo pedido é feito para cada tecla pressionada.
 
-### Load on open
+### Carregar ao abrir
 
-It displays a progress state as long as the network request is pending.
+Exibe um estado de progresso enquanto a solicitação de rede estiver pendente.
 
 {{"demo": "pages/components/autocomplete/Asynchronous.js"}}
 
-### Search as you type
+### Pesquisar enquanto digita
 
-If your logic is fetching new options on each keystroke and using the current value of the textbox to filter on the server, you may want to consider throttling requests.
+Se sua lógica é buscar novas opções a cada tecla pressionada e usando o valor atual da caixa de texto para filtrar no servidor, você pode querer considerar a limitação de requisições.
 
-Additionally, you will need to disable the built-in filtering of the `Autocomplete` component by overriding the `filterOptions` prop:
+Além disso, você precisará desabilitar a filtragem integrada do componente `Autocomplete` sobrescrevendo a propriedade `filterOptions`:
 
 ```jsx
-import matchSorter from 'match-sorter';
-
-const filterOptions = (options, { inputValue }) =>
-  matchSorter(options, inputValue);
-
-<Autocomplete filterOptions={filterOptions} />
+<Autocomplete filterOptions={(x) => x} />
 ```
 
 ### Lugares com a API do Google Maps
@@ -221,7 +214,7 @@ A demonstração a seguir dependem do [autosuggest-highlight](https://github.com
 O componente expõe uma fábrica para criar um método de filtro que pode ser fornecido para a propriedade `filterOptions`. Você pode usar ela para modificar o comportamento padrão do filtro.
 
 ```js
-import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import { createFilterOptions } from '@material-ui/core/Autocomplete';
 ```
 
 ### `createFilterOptions(config) => filterOptions`
@@ -261,8 +254,7 @@ Para mecanismos de filtragem mais ricos, como correspondência difusa, recomenda
 ```jsx
 import matchSorter from 'match-sorter';
 
-const filterOptions = (options, { inputValue }) =>
-  matchSorter(options, inputValue);
+const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue);
 
 <Autocomplete filterOptions={filterOptions} />;
 ```
@@ -273,26 +265,46 @@ Pesquise dentro de 10.000 opções geradas aleatoriamente. A lista é virtualiza
 
 {{"demo": "pages/components/autocomplete/Virtualize.js"}}
 
+## Eventos
+
+Se você deseja evitar o comportamento padrão do teclado, você pode definir a propriedade `defaultMuiPrevented` para `true`:
+
+```jsx
+<Autocomplete
+  onKeyDown={(event) => {
+    if (event.key === 'Enter') {
+      // Previne o comportamento padrão do 'Enter'.
+      event.defaultMuiPrevented = false;
+      // seu código manipulador
+    }
+  }}
+/>
+```
+
 ## Limitações
 
 ### autocomplete/autofill
 
 Os navegadores têm heurística para ajudar os usuários a preencherem os campos do formulário. No entanto, isso pode prejudicar a experiência do usuário com o componente.
 
-Por padrão, o componente desabilita o recurso de **autocomplete** (recurso que memoriza informações que o usuário forneceu em sessões anteriores) com o atributo `autoComplete="off"`.
+Por padrão, o componente desabilita o recurso de **autocomplete** (recurso que memoriza informações que o usuário forneceu em sessões anteriores) com o atributo `autoComplete="off"`. Atualmente, o Google Chrome não suporta essa configuração de atributo ([Issue 587466](https://bugs.chromium.org/p/chromium/issues/detail?id=587466)). Uma solução alternativa possível é remover o `id` para que o componente gere um aleatório.
 
 No entanto, além de relembrar valores fornecidos anteriormente, o navegador também pode propor sugestões de **autofill** (preenchimento automático para informações de login, endereço ou detalhes de pagamento). No caso de você querer evitar o recurso de preenchimento automático, tente o seguinte:
 
 - Nomeie o campo sem fornecer informações para o navegador do que ele representa. `id="field1"` ao invés de `id="country"`. Se você deixar o id do vazio, o componente utiliza um id aleatório.
-- Defina `autoComplete="new-password"`:
+- Defina `autoComplete="new-password"` (alguns navegadores irão sugerir uma senha forte para entradas com esta configuração de atributo):
 
   ```jsx
-  inputProps={{
-        ...params.inputProps,
-        autoComplete: 'new-password',
-      }}
-      /&#062;
+  <TextField
+    {...params}
+    inputProps={{
+      ...params.inputProps,
+      autoComplete: 'new-password',
+    }}
+  />
   ```
+
+Leia [este guia na MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion) para mais detalhes.
 
 ### iOS VoiceOver
 

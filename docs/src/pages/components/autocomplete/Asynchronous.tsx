@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface CountryType {
@@ -72,14 +72,11 @@ export default function Asynchronous() {
         <TextField
           {...params}
           label="Asynchronous"
-          variant="outlined"
           InputProps={{
             ...params.InputProps,
             endAdornment: (
               <React.Fragment>
-                {loading ? (
-                  <CircularProgress color="inherit" size={20} />
-                ) : null}
+                {loading ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
               </React.Fragment>
             ),

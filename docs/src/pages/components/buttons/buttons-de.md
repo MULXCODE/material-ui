@@ -1,9 +1,8 @@
 ---
-title: Button React Komponente
+title: React Button component
 components: Button, IconButton, ButtonBase
 materialDesign: https://material.io/components/buttons
-githubLabel:
-  component: Button
+githubLabel: 'component: Button'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#button'
 ---
 
@@ -86,7 +85,7 @@ Icons eignen sich auch für Umschaltflächen, mit denen eine einzelne Auswahl au
 
 ## Benutzerdefinierte Buttons
 
-Hier einige Beispiele zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/components/).
+Hier einige Beispiele zum Anpassen der Komponente. Mehr dazu erfahren Sie auf der [Überschreibungsdokumentationsseite](/customization/how-to-customize/).
 
 {{"demo": "pages/components/buttons/CustomizedButtons.js", "defaultCodeOpen": false}}
 

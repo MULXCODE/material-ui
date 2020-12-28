@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { expect } from 'chai';
-import { createShallow } from 'test/utils';
+import { createClientRender } from 'test/utils';
 import HiddenJs from './HiddenJs';
 
 describe('<HiddenJs />', () => {
-  let shallow;
-
-  before(() => {
-    shallow = createShallow({ dive: true });
-  });
+  const render = createClientRender();
 
   function resolvePropName(upDownOnly, breakpoint) {
     if (upDownOnly === 'only') {
@@ -29,12 +25,13 @@ describe('<HiddenJs />', () => {
       const props = { [prop]: upDownOnly === 'only' ? breakpoint : true };
 
       it(descriptions[upDownOnly], () => {
-        const wrapper = shallow(
+        const { container } = render(
           <HiddenJs width={width} {...props}>
             <div>foo</div>
           </HiddenJs>,
         );
-        expect(wrapper.type()).to.equal(null);
+
+        expect(container.firstChild).to.equal(null);
       });
     });
   }
@@ -50,14 +47,14 @@ describe('<HiddenJs />', () => {
       const props = { [prop]: upDownOnly === 'only' ? breakpoint : true };
 
       it(descriptions[upDownOnly], () => {
-        const wrapper = shallow(
+        const { container, queryByText } = render(
           <HiddenJs width={width} {...props}>
             <div>foo</div>
           </HiddenJs>,
         );
-        expect(wrapper.type()).to.not.equal(null);
-        expect(wrapper.name()).to.equal('div');
-        expect(wrapper.first().text()).to.equal('foo');
+
+        expect(container.firstChild).to.have.tagName('div');
+        expect(queryByText('foo')).to.not.equal(null);
       });
     });
   }
@@ -69,7 +66,8 @@ describe('<HiddenJs />', () => {
     });
 
     describe('down', () => {
-      isHidden(['xs', 'sm', 'md', 'lg', 'xl'], 'Down', 'xs');
+      isHidden(['sm', 'md', 'lg', 'xl'], 'Down', 'xs');
+      isVisible(['xs'], 'Down', 'xs');
     });
 
     describe('only', () => {
@@ -85,8 +83,8 @@ describe('<HiddenJs />', () => {
     });
 
     describe('down', () => {
-      isHidden(['sm', 'md', 'lg', 'xl'], 'Down', 'sm');
-      isVisible(['xs'], 'Down', 'sm');
+      isHidden(['md', 'lg', 'xl'], 'Down', 'sm');
+      isVisible(['xs', 'sm'], 'Down', 'sm');
     });
 
     describe('only', () => {
@@ -102,8 +100,8 @@ describe('<HiddenJs />', () => {
     });
 
     describe('down', () => {
-      isHidden(['md', 'lg', 'xl'], 'Down', 'md');
-      isVisible(['xs', 'sm'], 'Down', 'md');
+      isHidden(['lg', 'xl'], 'Down', 'md');
+      isVisible(['xs', 'sm', 'md'], 'Down', 'md');
     });
 
     describe('only', () => {
@@ -119,8 +117,8 @@ describe('<HiddenJs />', () => {
     });
 
     describe('down', () => {
-      isHidden(['lg', 'xl'], 'Down', 'lg');
-      isVisible(['xs', 'sm', 'md'], 'Down', 'lg');
+      isHidden(['xl'], 'Down', 'lg');
+      isVisible(['xs', 'sm', 'md', 'lg'], 'Down', 'lg');
     });
 
     describe('only', () => {
@@ -135,8 +133,7 @@ describe('<HiddenJs />', () => {
     });
 
     describe('down', () => {
-      isHidden(['xl'], 'Down', 'xl');
-      isVisible(['xs', 'sm', 'md', 'lg'], 'Down', 'xl');
+      isVisible(['xs', 'sm', 'md', 'lg', 'xl'], 'Down', 'xl');
     });
 
     describe('only', () => {

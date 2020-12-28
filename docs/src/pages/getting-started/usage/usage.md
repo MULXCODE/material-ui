@@ -39,10 +39,7 @@ Material-UI is developed mobile-first, a strategy in which we first write code f
 To ensure proper rendering and touch zooming for all devices, add the responsive viewport meta tag to your `<head>` element.
 
 ```html
-<meta
-  name="viewport"
-  content="minimum-scale=1, initial-scale=1, width=device-width"
-/>
+<meta name="viewport" content="initial-scale=1, width=device-width" />
 ```
 
 ### CssBaseline
@@ -61,4 +58,4 @@ Now that you have an idea of the basic setup, it's time to learn more about:
 
 - How to provide [the Material Design font and typography](/components/typography/).
 - How to take advantage of the [theming solution](/customization/theming/).
-- How to [override](/customization/components/) the look and feel of the components.
+- How to [override](/customization/how-to-customize/) the look and feel of the components.

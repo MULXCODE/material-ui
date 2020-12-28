@@ -1,8 +1,7 @@
 ---
 title: Componente React Hidden
 components: Hidden
-githubLabel:
-  component: Hidden
+githubLabel: 'component: Hidden'
 ---
 
 # Hidden
@@ -53,7 +52,7 @@ Usando a propriedade de ponto de quebra `only`, o componente *children* será oc
 
 A propriedade `only` pode ser usada de duas maneiras:
 
-The `only` prop can be used in two ways:
+A propriedade `only` pode ser usada de duas maneiras:
 
 - com um único ponto de quebra
 - com um array de pontos de quebra

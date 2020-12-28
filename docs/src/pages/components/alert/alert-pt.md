@@ -1,9 +1,7 @@
 ---
-title: Componente React para Alerta
+title: Componente React para Alertas
 components: Alert, AlertTitle
-githubLabel:
-  component: Alerta
-packageName: '@material-ui/lab'
+githubLabel: 'component: Alert'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#alert'
 ---
 
@@ -15,11 +13,11 @@ waiAria: 'https://www.w3.org/TR/wai-aria-practices/#alert'
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
 
-## Alerta simples
+## Alertas básicos
 
 O alerta oferece quatro níveis de severidade que se distinguem em diferentes ícones e cores.
 
-{{"demo": "pages/components/alert/SimpleAlerts.js"}}
+{{"demo": "pages/components/alert/BasicAlerts.js"}}
 
 ## Descrição
 
@@ -45,7 +43,7 @@ Você pode utilizar um [componente de transição](/components/transitions/) com
 
 A propriedade `icon` permite que você adicione um ícone no início do componente de alerta. Isto substituirá o ícone padrão de acordo com a severidade especificada.
 
-Você pode alterar a severidade padrão e o mapeamento do ícone com a propriedade `iconMapping`. Isso pode ser definido globalmente utilizando [customização do tema](/customization/globals/#default-props).
+Você pode alterar a severidade padrão e o mapeamento do ícone com a propriedade `iconMapping`. Isso pode ser definido globalmente utilizando [customização do tema](/customization/theme-components/#default-props).
 
 Definir a propriedade ícone como falso removerá o ícone completamente.
 

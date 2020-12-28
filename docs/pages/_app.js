@@ -8,9 +8,10 @@ import NextHead from 'next/head';
 import PropTypes from 'prop-types';
 import acceptLanguage from 'accept-language';
 import { create } from 'jss';
-import rtl from 'jss-rtl';
+import jssRtl from 'jss-rtl';
 import { useRouter } from 'next/router';
 import { StylesProvider, jssPreset } from '@material-ui/styles';
+import { StylesProvider as CoreStylesProvider } from '@material-ui/core';
 import pages from 'docs/src/pages';
 import initRedux from 'docs/src/modules/redux/initRedux';
 import PageContext from 'docs/src/modules/components/PageContext';
@@ -18,11 +19,15 @@ import GoogleAnalytics from 'docs/src/modules/components/GoogleAnalytics';
 import loadScript from 'docs/src/modules/utils/loadScript';
 import { ThemeProvider } from 'docs/src/modules/components/ThemeContext';
 import { pathnameToLanguage, getCookie } from 'docs/src/modules/utils/helpers';
-import { ACTION_TYPES, CODE_VARIANTS } from 'docs/src/modules/constants';
+import { ACTION_TYPES, CODE_VARIANTS, LANGUAGES } from 'docs/src/modules/constants';
+import { useUserLanguage } from 'docs/src/modules/utils/i18n';
+import StyledEngineProvider, { cacheLtr } from 'docs/src/modules/utils/StyledEngineProvider';
+
+export { cacheLtr };
 
 // Configure JSS
 const jss = create({
-  plugins: [...jssPreset().plugins, rtl()],
+  plugins: [...jssPreset().plugins, jssRtl()],
   insertionPoint: process.browser ? document.querySelector('#insertion-point-jss') : null,
 });
 
@@ -40,18 +45,18 @@ acceptLanguage.languages(['en', 'zh', 'pt', 'ru']);
 function LanguageNegotiation() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const userLanguage = useSelector((state) => state.options.userLanguage);
+  const userLanguage = useUserLanguage();
 
   React.useEffect(() => {
     const { userLanguage: userLanguageUrl, canonical } = pathnameToLanguage(router.asPath);
     const preferedLanguage =
-      getCookie('userLanguage') !== 'noDefault' && userLanguage === 'en'
-        ? acceptLanguage.get(navigator.language)
-        : userLanguage;
+      LANGUAGES.find((lang) => lang === getCookie('userLanguage')) ||
+      acceptLanguage.get(navigator.language) ||
+      userLanguage;
 
-    if (preferedLanguage !== userLanguage) {
+    if (userLanguageUrl === 'en' && userLanguage !== preferedLanguage) {
       window.location = preferedLanguage === 'en' ? canonical : `/${preferedLanguage}${canonical}`;
-    } else if (userLanguageUrl !== userLanguage) {
+    } else if (userLanguage !== userLanguageUrl) {
       dispatch({ type: ACTION_TYPES.OPTIONS_CHANGE, payload: { userLanguage: userLanguageUrl } });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -208,7 +213,7 @@ async function registerServiceWorker() {
   if (
     'serviceWorker' in navigator &&
     process.env.NODE_ENV === 'production' &&
-    window.location.host.indexOf('material-ui.com') <= 0
+    window.location.host.indexOf('material-ui.com') !== -1
   ) {
     // register() automatically attempts to refresh the sw.js.
     const registration = await navigator.serviceWorker.register('/sw.js');
@@ -227,7 +232,7 @@ function loadDependencies() {
   dependenciesLoaded = true;
 
   loadCSS(
-    'https://fonts.googleapis.com/icon?family=Material+Icons',
+    'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Two+Tone',
     document.querySelector('#material-icon-font'),
   );
 }
@@ -314,9 +319,13 @@ function AppWrapper(props) {
       </NextHead>
       <ReduxProvider store={redux}>
         <PageContext.Provider value={{ activePage, pages, versions: pageProps.versions }}>
-          <StylesProvider jss={jss}>
-            <ThemeProvider>{children}</ThemeProvider>
-          </StylesProvider>
+          <CoreStylesProvider injectFirst>
+            <StylesProvider jss={jss}>
+              <ThemeProvider>
+                <StyledEngineProvider>{children}</StyledEngineProvider>
+              </ThemeProvider>
+            </StylesProvider>
+          </CoreStylesProvider>
         </PageContext.Provider>
         <LanguageNegotiation />
         <Analytics />

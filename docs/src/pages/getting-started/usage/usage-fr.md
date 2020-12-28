@@ -39,15 +39,12 @@ L'expérience d'utilisation de Material-UI peut être améliorée avec une poign
 Pour que le rendu et le zoom tactile soient corrects pour tous les périphériques, ajoutez la balise meta viewport à votre élément `<head>`. Material-UI is developed mobile-first, a strategy in which we first write code for mobile devices, and then scale up components as necessary using CSS media queries.
 
 ```html
-<meta
-  name="viewport"
-  content="minimum-scale=1, initial-scale=1, width=device-width"
-/>
+<meta name="viewport" content="initial-scale=1, width=device-width" />
 ```
 
 ### CssBaseline
 
-Material-UI fournit un composant [CssBaseline](/components/css-baseline/) facultatif. It fixes some inconsistencies across browsers and devices while providing slightly more opinionated resets to common HTML elements.
+Material-UI fournit un composant [CssBaseline](/components/css-baseline/) facultatif. Cela corrige les incohérences entre les navigateurs et les périphériques tout en réinitialisant le style des éléments HTML les plus courants.
 
 ## Documentation versionnée
 
@@ -59,4 +56,4 @@ Maintenant que vous avez une idée de la configuration de base, il est temps d'e
 
 - Comment fournir [la police et la typographie Material Design](/components/typography/) .
 - Comment tirer parti de la [solution de thème](/customization/theming/).
-- Comment [modifier](/customization/components/), l'apparence des composants.
+- Comment [modifier](/customization/how-to-customize/), l'apparence des composants.

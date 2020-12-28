@@ -1,8 +1,7 @@
 ---
-title: Breadcrumbs
+title: Компонент React Breadcrumbs
 components: Breadcrumbs, Link, Typography
-githubLabel:
-  component: Хлебные крошки
+githubLabel: 'component: Breadcrumbs'
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#breadcrumb'
 ---
 
@@ -38,7 +37,7 @@ Keep the last breadcrumb interactive.
 
 ## Пользовательские хлебные крошки
 
-Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/breadcrumbs/CustomizedBreadcrumbs.js"}}
 

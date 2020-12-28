@@ -1,8 +1,7 @@
 ---
-title: List React Komponente
+title: React List component
 components: Collapse, Divider, List, ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText, ListSubheader
-githubLabel:
-  component: List (liste)
+githubLabel: 'component: List'
 materialDesign: https://material.io/components/lists
 ---
 
@@ -88,7 +87,9 @@ This feature relies on CSS sticky positioning. Unfortunately it's [not implement
 
 {{"demo": "pages/components/lists/PinnedSubheaderList.js", "bg": true}}
 
-## Eingerückte Liste
+## Inset List Item
+
+The `inset` prop enables a list item that does not have a leading icon or avatar to align correctly with items that do.
 
 {{"demo": "pages/components/lists/InsetList.js", "bg": true}}
 

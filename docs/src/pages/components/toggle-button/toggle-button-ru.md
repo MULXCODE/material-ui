@@ -1,10 +1,8 @@
 ---
 title: Toggle Button React component
 components: ToggleButton, ToggleButtonGroup
-githubLabel:
-  component: ToggleButton
+githubLabel: 'component: ToggleButton'
 materialDesign: 'https://material.io/components/buttons#toggle-button'
-packageName: '@material-ui/lab'
 ---
 
 # Toggle Buttons
@@ -17,29 +15,33 @@ To emphasize groups of related [Toggle buttons](https://material.io/components/b
 
 ## Exclusive selection
 
-Text justification toggle buttons present options for left, right, center, full, and justified text with only one item available for selection at a time. Selecting one option deselects any other.
+С исключительным выделением выбор одной опции снимает выделение с остальных.
+
+В этом примере кнопки переключения представляют варианты выравнивания текста left, center, right и fully justified text (отключено), с возможностью выбора лишь одного элемента.
 
 {{"demo": "pages/components/toggle-button/ToggleButtons.js"}}
 
 ## Multiple selection
 
-Logically-grouped options, like bold, italic, and underline, allow multiple options to be selected.
+Множественное выделение позволяет выбрать несколько вариантов из логически связанных опций, таких как bold, italic, и underline.
 
 {{"demo": "pages/components/toggle-button/ToggleButtonsMultiple.js"}}
 
 ## Размеры
 
-Fancy larger or smaller buttons? Use the `size` prop.
+Fancy larger or smaller buttons? Use the `size` property.
 
 {{"demo": "pages/components/toggle-button/ToggleButtonSizes.js"}}
 
 ## Vertical buttons
 
+Кнопки можно выстроить вертикально задав свойству `orientation` значение "vertical".
+
 {{"demo": "pages/components/toggle-button/VerticalToggleButtons.js"}}
 
 ## Enforce value set
 
-If you want to enforce at least one button to be active, you can adapt your handleChange function.
+Если вы хотите, чтобы по крайней мере одна кнопка была активной, то можете адаптировать под себя функцию handleChange.
 
 ```jsx
 const handleFormat = (event, newFormats) => {
@@ -63,11 +65,17 @@ const handleAlignment = (event, newAlignment) => {
 
 ## Customized toggle button
 
-Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находится пример кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/toggle-button/CustomizedDividers.js", "bg": true}}
 
 ## Доступность
 
+### ARIA
+
 - ToggleButtonGroup has `role="group"`. You should provide an accessible label with `aria-label="label"`, `aria-labelledby="id"` or `<label>`.
 - ToggleButton sets `aria-pressed="<bool>"` according to the button state. You should label each button with `aria-label`.
+
+### Keyboard
+
+В настоящее время кнопки переключения расположены в порядке DOM. Для перемещения между ними используйте клавишу табуляции. Поведение кнопки следует стандартной семантике клавиатуры.

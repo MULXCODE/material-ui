@@ -11,7 +11,7 @@ import { useTheme } from '@material-ui/core/styles';
 export default function ResponsiveDialog() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,8 +37,8 @@ export default function ResponsiveDialog() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

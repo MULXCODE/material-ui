@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/core/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 
 // ISO 3166-1 alpha-2
-// ⚠️ No support for IE 11
+// ⚠️ No support for IE11
 function countryToFlag(isoCode: string) {
   return typeof String.fromCodePoint !== 'undefined'
     ? isoCode
         .toUpperCase()
-        .replace(/./g, (char) =>
-          String.fromCodePoint(char.charCodeAt(0) + 127397),
-        )
+        .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
     : isoCode;
 }
 
@@ -49,7 +47,6 @@ export default function CountrySelect() {
         <TextField
           {...params}
           label="Choose a country"
-          variant="outlined"
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill

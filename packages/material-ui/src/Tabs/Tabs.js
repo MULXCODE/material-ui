@@ -70,9 +70,9 @@ export const styles = (theme) => ({
   },
   /* Styles applied to the `ScrollButtonComponent` component. */
   scrollButtons: {},
-  /* Styles applied to the `ScrollButtonComponent` component if `scrollButtons="auto"` or scrollButtons="desktop"`. */
-  scrollButtonsDesktop: {
-    [theme.breakpoints.down('xs')]: {
+  /* Styles applied to the `ScrollButtonComponent` component if `allowScrollButtonsMobile={true}`. */
+  scrollButtonsHideMobile: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -90,6 +90,7 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
     classes,
     className,
     component: Component = 'div',
+    allowScrollButtonsMobile = false,
     indicatorColor = 'secondary',
     onChange,
     orientation = 'horizontal',
@@ -207,7 +208,7 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
       [size]: tabMeta ? tabMeta[size] : 0,
     };
 
-    // IE 11 support, replace with Number.isNaN
+    // IE11 support, replace with Number.isNaN
     // eslint-disable-next-line no-restricted-globals
     if (isNaN(indicatorStyle[start]) || isNaN(indicatorStyle[size])) {
       setIndicatorStyle(newIndicatorStyle);
@@ -283,10 +284,7 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
 
     const scrollButtonsActive = displayScroll.start || displayScroll.end;
     const showScrollButtons =
-      scrollable &&
-      ((scrollButtons === 'auto' && scrollButtonsActive) ||
-        scrollButtons === 'desktop' ||
-        scrollButtons === 'on');
+      scrollable && ((scrollButtons === 'auto' && scrollButtonsActive) || scrollButtons === true);
 
     conditionalElements.scrollButtonStart = showScrollButtons ? (
       <ScrollButtonComponent
@@ -295,7 +293,7 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
         onClick={handleStartScrollClick}
         disabled={!displayScroll.start}
         className={clsx(classes.scrollButtons, {
-          [classes.scrollButtonsDesktop]: scrollButtons !== 'on',
+          [classes.scrollButtonsHideMobile]: !allowScrollButtonsMobile,
         })}
         {...TabScrollButtonProps}
       />
@@ -308,7 +306,7 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
         onClick={handleEndScrollClick}
         disabled={!displayScroll.end}
         className={clsx(classes.scrollButtons, {
-          [classes.scrollButtonsDesktop]: scrollButtons !== 'on',
+          [classes.scrollButtonsHideMobile]: !allowScrollButtonsMobile,
         })}
         {...TabScrollButtonProps}
       />
@@ -336,7 +334,7 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
   });
 
   const updateScrollButtonState = useEventCallback(() => {
-    if (scrollable && scrollButtons !== 'off') {
+    if (scrollable && scrollButtons !== false) {
       const { scrollTop, scrollHeight, clientHeight, scrollWidth, clientWidth } = tabsRef.current;
       let showStartScroll;
       let showEndScroll;
@@ -566,6 +564,12 @@ Tabs.propTypes = {
    */
   action: refType,
   /**
+   * If `true`, the scroll buttons aren't forced hidden on mobile.
+   * By default the scroll buttons are hidden on mobile and takes precedence over `scrollButtons`.
+   * @default false
+   */
+  allowScrollButtonsMobile: PropTypes.bool,
+  /**
    * The label for the Tabs as a string.
    */
   'aria-label': PropTypes.string,
@@ -574,7 +578,7 @@ Tabs.propTypes = {
    */
   'aria-labelledby': PropTypes.string,
   /**
-   * If `true`, the tabs will be centered.
+   * If `true`, the tabs are centered.
    * This prop is intended for large views.
    * @default false
    */
@@ -622,12 +626,14 @@ Tabs.propTypes = {
    * Determine behavior of scroll buttons when tabs are set to scroll:
    *
    * - `auto` will only present them when not all the items are visible.
-   * - `desktop` will only present them on medium and larger viewports.
-   * - `on` will always present them.
-   * - `off` will never present them.
+   * - `true` will always present them.
+   * - `false` will never present them.
+   *
+   * By default the scroll buttons are hidden on mobile.
+   * This behavior can be disabled with `allowScrollButtonsMobile`.
    * @default 'auto'
    */
-  scrollButtons: PropTypes.oneOf(['auto', 'desktop', 'off', 'on']),
+  scrollButtons: PropTypes /* @typescript-to-proptypes-ignore */.oneOf(['auto', false, true]),
   /**
    * If `true` the selected tab changes on focus. Otherwise it only
    * changes on activation.
@@ -664,7 +670,7 @@ Tabs.propTypes = {
    */
   variant: PropTypes.oneOf(['fullWidth', 'scrollable', 'standard']),
   /**
-   * If `true`, the scrollbar will be visible. It can be useful when displaying
+   * If `true`, the scrollbar is visible. It can be useful when displaying
    * a long vertical list of tabs.
    * @default false
    */

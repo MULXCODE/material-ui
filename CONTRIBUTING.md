@@ -50,7 +50,7 @@ git checkout next
 git pull upstream next
 ```
 
-4. Install the dependencies:
+4. Install the dependencies with yarn (npm isn't supported):
 
 ```sh
 yarn install
@@ -72,6 +72,20 @@ git push -u origin HEAD
 
 The core team is monitoring for Pull Requests. We will review your Pull Request and either merge it, request changes to it, or close it with an explanation.
 
+### Trying changes on the documentation site
+
+The documentation site is built with Material-UI and contains examples of all the components.
+This is a great place to experiment with your changes.
+
+To get started:
+
+```sh
+yarn start
+```
+
+You can now access the documentation site [locally](http://localhost:3000).
+Changes to the docs will hot reload the site.
+
 ### How to increase the chance of being accepted?
 
 CI runs a series of checks automatically when a Pull Request is opened. If you're not
@@ -84,12 +98,12 @@ Make sure the following is true:
 - If a feature is being added:
   - If the result was already achievable with the core library, explain why this feature needs to be added to the core.
   - If this is a common use case, consider adding an example to the documentation.
-- When adding new features or modifying existing, please include tests to confirm the new behavior. You can read more about our test setup in our test [README](https://github.com/mui-org/material-ui/blob/next/test/README.md).
+- When adding new features or modifying existing, please include tests to confirm the new behavior. You can read more about our test setup in our test [README](https://github.com/mui-org/material-ui/blob/HEAD/test/README.md).
 - If props were added or prop types were changed, the TypeScript declarations were updated.
-- When submitting a new component, please add it to the [lab](https://github.com/mui-org/material-ui/tree/next/packages/material-ui-lab).
+- When submitting a new component, please add it to the [lab](https://github.com/mui-org/material-ui/tree/HEAD/packages/material-ui-lab).
 - The branch is not behind its target.
 
-Because we will only merge a Pull Request for which all tests pass. The following items need is true. We will provide assistance if not:
+Because we will only merge a Pull Request for which all tests pass. The following items need to be true. We will provide assistance if not:
 
 - If TypeScript declarations were changed, `yarn typescript` passed.
 - The code is formatted (run `yarn prettier`).
@@ -156,7 +170,7 @@ or `yarn docs:export` usually fail locally as well.
 
 This task is mostly responsible for monitoring the bundle size. It will only report
 the size if the change exceeds a certain threshold. If it fails there's usually
-something wrong with the how the packages or docs were built.
+something wrong with the way the packages or docs were built.
 
 #### codecov/project
 
@@ -178,26 +192,7 @@ is why it is disabled when tests are run locally by default. The rationale being
 that in almost all cases including or excluding elements from a query-set depending
 on their a11y-tree membership makes no difference. The queries where this does
 make a difference explicitly include this check e.g. `getByRole('button', { hidden: false })` (see [byRole documentation](https://testing-library.com/docs/dom-testing-library/api-queries#byrole) for more information).
-To see if your test (`test:browser` or `test:unit`) behaves the same between CI and local environment set the environment variable `CI` to `'true'`.
-
-### Trying the changes on the documentation site
-
-The documentation site is built with Material-UI and contains examples of all the components.
-This is a great place to experiment with your changes.
-
-To get started:
-
-```sh
-yarn
-yarn docs:dev
-```
-
-You can now access the documentation site [locally](http://localhost:3000).
-Changes to the docs will hot reload the site. If you make changes to TypeScript files
-in the docs run `yarn docs:typescript --watch` in a separate terminal.
-
-Where possible, please add tests for any changes you make.
-Tests can be run with `yarn test`.
+To see if your test (`test:browser` or `test:unit`) behaves the same between CI and local environment, set the environment variable `CI` to `'true'`.
 
 ### Updating the component API documentation
 
@@ -257,11 +252,33 @@ Material-UI documents how to use this library with TypeScript.
 If you are familiar with this language, write the demo in TypeScript, and only, in a \*.tsx file.
 When you're done run `yarn docs:typescript:formatted` to automatically create the JavaScript version.
 
-If you are no familiar with that language, write the demo in JavaScript, a core contributor might help you to migrate it to TypeScript.
+If you are not familiar with that language, write the demo in JavaScript, a core contributor might help you to migrate it to TypeScript.
 
 #### 4. You are done 🎉!
 
 In case you missed something, [we have a real example that can be used as a summary report](https://github.com/mui-org/material-ui/pull/19582/files).
+
+## How can I use a change that wasn't released yet?
+
+[Codesandbox CI](https://codesandbox.io/docs/ci) is used to publish a working version of the packages for each pull request, "a preview".
+
+In practice, you can check the Codesandbox CI status of a pull request to get the URL needed to install these preview packages:
+
+```diff
+diff --git a//package.json b//package.json
+index 791a7da1f4..a5db13b414 100644
+--- a/package.json
++++ b/package.json
+@@ -61,7 +61,7 @@
+   "dependencies": {
+     "@babel/runtime": "^7.4.4",
+     "@material-ui/styled-engine": "^5.0.0-alpha.16",
+-    "@material-ui/core": "^5.0.0-alpha.15",
++    "@material-ui/core": "https://pkg.csb.dev/mui-org/material-ui/commit/371c952b/@material-ui/core",
+     "@material-ui/system": "^5.0.0-alpha.16",
+```
+
+Alternatively, you can open the Netlify preview of the documentation, and open any demo in Codesandbox. The documentation automatically configures the dependencies to use the preview packages.
 
 ## Translations
 

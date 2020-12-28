@@ -1,8 +1,7 @@
 ---
-title: Componente React para Slider
-components: Slider
-githubLabel:
-  component: Slider
+title: Componente React Slider
+components: Slider, SliderUnstyled
+githubLabel: 'component: Slider'
 materialDesign: https://material.io/components/sliders
 waiAria: 'https://www.w3.org/TR/wai-aria-practices/#slider'
 ---
@@ -69,7 +68,7 @@ Neste exemplo, um campo de entrada permite que um valor seja definido.
 
 ## Sliders customizados
 
-Aqui estão alguns exemplos de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/components/).
+Aqui estão alguns exemplos de customização do componente. Você pode aprender mais sobre isso na [página de documentação de sobrescritas](/customization/how-to-customize/).
 
 {{"demo": "pages/components/slider/CustomizedSlider.js"}}
 
@@ -95,9 +94,15 @@ A faixa pode ser invertida com `track="inverted"`.
 
 ## Escala não linear
 
-Você pode usar a propriedade `scale` para representar o `value` em uma escala diferente. Por exemplo, na demonstração seguinte, o valor *x* representa a potência de *10^x*.
+Você pode usar a propriedade `scale` para representar o `value` em uma escala diferente.
+
+Na seguinte demonstração, o valor _x_ representa o valor _2^x_. Acrescentar em _x_ aumenta o valor representado por fator de  _2_.
 
 {{"demo": "pages/components/slider/NonLinearSlider.js"}}
+
+## Slider sem estilo
+
+{{"demo": "pages/components/slider/UnstyledSlider.js"}}
 
 ## Acessibilidade
 

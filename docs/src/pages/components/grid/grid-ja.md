@@ -1,8 +1,7 @@
 ---
-title: Grid コンポーネント
+title: React Grid component
 components: Grid
-githubLabel:
-  component: Grid
+githubLabel: 'component: Grid'
 materialDesign: https://material.io/design/layout/understanding-layout.html
 ---
 
@@ -13,6 +12,8 @@ materialDesign: https://material.io/design/layout/understanding-layout.html
 [grid](https://material.io/design/layout/responsive-layout-grid.html) は、レイアウト間の視覚的な一貫性を実現しながら、さまざまなデザインでの柔軟性を可能にします。 [grid](https://material.io/design/layout/responsive-layout-grid.html) は、レイアウト間の視覚的な一貫性を実現しながら、さまざまなデザインでの柔軟性を可能にします。 Material DesignのレスポンシブUIは12列のグリッドレイアウトに基づいています。 Material DesignのレスポンシブUIは12列のグリッドレイアウトに基づいています。
 
 {{"component": "modules/components/ComponentLinkHeader.js"}}
+
+> ⚠️ The `Grid` component shouldn't be confused with a data grid; it is closer to a layout grid. For a data grid head to [the `DataGrid` component](/components/data-grid/).
 
 ## 仕組み
 
@@ -83,6 +84,14 @@ https://www.w3.org/TR/css-flexbox-1/#box-model
 
 {{"demo": "pages/components/grid/NestedGrid.js", "bg": true}}
 
+⚠️ Defining an explicit width to a Grid element that is flex container, flex item, and has spacing at the same time lead to unexpected behavior, avoid doing it:
+
+```jsx
+<Grid spacing={1} container item xs={12}>
+```
+
+If you need to do such, remove one of the props.
+
 ## 制限事項
 
 ### Negative margin
@@ -124,7 +133,9 @@ https://www.w3.org/TR/css-flexbox-1/#box-model
 
 ### direction: column | column-reverse
 
-`Grid`コンポーネントは`row`, `row-reverse`, `column`, `column-reverse`のいずれかの値を持つ`direction`プロパティを持っています。 しかし、`column`および`column-reverse`コンテナではサポートされていない機能がいくつかあります。 コンポーネントは、所与のブレークポイントに使用するグリッドの数定義するプロパティ （`Xs`、 `Sm`、 `Md`、 `Lg`、及び `Xl`）幅の制御に焦点を当てている と実行 しない `column` および `column-reverse` コンテナ内の高さにも同様の影響があります。 `column` または `column-reverse` コンテナ内で使用された場合、これらのプロパティは `Grid` 要素の幅に望ましくない影響を与える可能性があります。
+The `xs`, `sm`, `md`, `lg`, and `xl` props are **not supported** within `direction="column"` and `direction="column-reverse"` containers.
+
+They define the number of grids the component will use for a given breakpoint. They are intended to control **width** using `flex-basis` in `row` containers but they will impact height in `column` containers. If used, these props may have undesirable effects on the height of the `Grid` item elements.
 
 ## CSS Grid Layout
 

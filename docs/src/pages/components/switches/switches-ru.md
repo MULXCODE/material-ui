@@ -1,8 +1,7 @@
 ---
-title: React-компонент Переключатель
+title: Компонент React Switch
 components: Switch, FormControl, FormGroup, FormLabel, FormControlLabel
-githubLabel:
-  component: Switch (переключатель)
+githubLabel: 'component: Switch'
 materialDesign: 'https://material.io/components/selection-controls#switches'
 ---
 
@@ -32,7 +31,7 @@ materialDesign: 'https://material.io/components/selection-controls#switches'
 
 ## Кастомизация переключателей
 
-Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/components/).
+Ниже находятся примеры кастомизации компонента. You can learn more about this in the [overrides documentation page](/customization/how-to-customize/).
 
 {{"demo": "pages/components/switches/CustomizedSwitches.js"}}
 

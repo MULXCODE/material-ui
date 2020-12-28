@@ -1,4 +1,4 @@
-# Spacing（间距）
+# Spacing 间距
 
 <p class="description">使用 theme.spacing() 助手来打造 UI 元素之间的一致的间距。</p>
 
@@ -7,7 +7,7 @@ Material-UI 默认使用的是 [设计指南上建议的 8px 缩放系数](https
 ```js
 const theme = createMuiTheme();
 
-theme.spacing(2) // = 8 * 2
+theme.spacing(2); // `${8 * 2}px` = '16px'
 ```
 
 ## 自定义间距
@@ -21,14 +21,14 @@ const theme = createMuiTheme({
   spacing: 4,
 });
 
-theme.spacing(2) // = 4 * 2
+theme.spacing(2); // `${4 * 2}px` = '8px'
 ```
 
 - 一个函数
 
 ```js
 const theme = createMuiTheme({
-  spacing: factor => `${0.25 * factor}rem`, // (Bootstrap strategy)
+  spacing: (factor) => `${0.25 * factor}rem`, // (Bootstrap strategy)
 });
 
 theme.spacing(2); // = 0.25 * 2rem = 0.5rem = 8px
@@ -41,7 +41,7 @@ const theme = createMuiTheme({
   spacing: [0, 4, 8, 16, 32, 64],
 });
 
-theme.spacing(2); // = 8
+theme.spacing(2); // = '8px'
 ```
 
 ## 多个参数

@@ -6,7 +6,7 @@ import { unstable_useEnhancedEffect as useEnhancedEffect } from '@material-ui/co
  *  Modified slightly to suit our purposes.
  */
 
-// To replace with .findIndex() once we stop IE 11 support.
+// To replace with .findIndex() once we stop IE11 support.
 function findIndex(array, comp) {
   for (let i = 0; i < array.length; i += 1) {
     if (comp(array[i])) {
@@ -129,14 +129,14 @@ export function DescendantProvider(props) {
 
   const [items, set] = React.useState([]);
 
-  const registerDescendant = React.useCallback(({ element, ...rest }) => {
+  const registerDescendant = React.useCallback(({ element, ...other }) => {
     set((oldItems) => {
       let newItems;
       if (oldItems.length === 0) {
         // If there are no items, register at index 0 and bail.
         return [
           {
-            ...rest,
+            ...other,
             element,
             index: 0,
           },
@@ -163,7 +163,7 @@ export function DescendantProvider(props) {
         // elements come or go from our component.
 
         const newItem = {
-          ...rest,
+          ...other,
           element,
           index,
         };
